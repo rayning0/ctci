@@ -1,0 +1,70 @@
+See Gayle McDowell's explanation of Big O: https://www.youtube.com/watch?v=v4cd1O4zkGw
+
+SPACE COMPLEXITY: See total size of NEW variables we're allocating. Ignore space taken by inputs.
+
+  - Simple recursive call: O(n) time, O(n) space
+  - pairSumSequence(): O(n) time, O(1) space
+
+TIME COMPLEXITY. Big O runtime (asymptotic):
+
+  - Time to paint fence that's w x h meters: O(wh)
+
+  See Gayle's clear explanation of Quicksort: https://www.youtube.com/watch?v=SLauY6PpjW4
+  Quicksort (https://en.wikipedia.org/wiki/Quicksort, https://www.geeksforgeeks.org/quick-sort/)
+    Best Case: O(n)
+    Worst Case: O(n^2)
+    Expected Case: O(n log n)
+
+  Drop the Constants: O(2n) is same as O(n)
+  Drop non-dominant exponential terms:
+    - O(n^2 + n) is same as O(n^2)
+    - O(n + log n) is same as O(n)
+    - O(5 * 2^n  + 1000 * n^100) is same as O(2^n)
+
+  Ranked worst to best:
+  O(n!) > O(2^n) > O(n^2) > O(n log n) > O(n)<--linear time > O(log n) > O(1)<--constant time
+
+  Multipart algorithms: Add vs. Multiply:
+  - If algorithm is "do A, then when all done, do B", you ADD runtimes: O(A + B)
+  - If algorithm is "do A for each time you do B", you MULTIPLE runtimes: O(A * B)
+
+  Amortized Time:
+    https://medium.com/@satorusasozaki/amortized-time-in-the-time-complexity-of-an-algorithm-6dd9a5d38045
+
+    Amortized time expresses time complexity when an algorithm has the very bad time complexity only once in a while besides the time complexity that happens most of time. Example: An ArrayList, a data structure that contains an array that gets extended when it fills up. Other definition from Stack Overflow is average time taken per operation, if you do many operations.
+
+    When ArrayList hits its array capacity, it creates new array with double the size of old array and copies all old array items to the new array. In ArrayList, two time complexities exist: O(1) for insertion and O(n) to copy old to new bigger array.
+
+    If internal array capacity starts with 1, capacities will be 1, 2, 4, 8, 16,...X when it hits capacity and gets doubled. It takes 1, 2, 4, 8 16,…X items to copy into the new array. So time complexity will be 1 + 2 + 4 + 8 + 16 +… X. If you think backwards from X, this will be X + X/2 + X/4 + X/8… + 1 = approximately 2X.
+
+    Thus: X insertions take O(2X) time, and the amortized time for each insertion is O(1).
+
+    https://en.wikipedia.org/wiki/Amortized_analysis#Dynamic_array
+
+    https://mortoray.com/2014/08/11/what-is-amortized-time/
+    Amortized time looks at an algorithm from the viewpoint of total running time rather than individual operations. We don’t care how long one insert takes, but rather the average time of all the calls to insert.
+
+  Log N Runtimes:
+    - Ex: binary search
+    - Whenever the number of elements in the problem space get HALVED in each loop, it's probably O(log n)
+    - Ex: Finding element in balanced binary search tree takes O(log n)
+    - Whether it's base 2 or base 10 does not matter, because they are proportional to each other.
+
+  Recursive Runtimes:
+    - Ex: Recursive Fibonacci sequence with 2 branches: O(2^n)
+    - When recursive function makes multiple calls, it's O(branches^depth)
+__________
+Ex 1: 2 consecutive loops. O(2n) = O(n) time, O(1) space
+Ex 2: 2 nested loops, 2nd loop starts at index 0: O(n^2) time, O(1) space
+Ex 3: 2 nested loops, 2nd loop starts at index i + 1: O(n^2) time, O(1) space
+Ex 4: 2 nested loops, 2 different arrays: O(ab) time, O(1) space
+Ex 5: 3 nested loops, 3rd loop has constant size: O(ab) time, O(1) space
+Ex 6: Reversing an array: O(n) time, O(1) space
+Ex 7: O(n + p), O(2n), O(n + log n) all same as O(n)
+
+Ex 8: Take array of strings, sort each string, then sort the full array. TRICKY!!!
+  Takes O(as(log s + log a)) time, but I'm not sure about space complexity. Quicksort takes O(log(n)) space.
+
+Ex 9: Sum of value of all nodes in balanced binary search tree: O(n) time, O(1) space
+Ex 10: Is a number prime? O(sqrt(n)) time, O(1) space
+Ex 11: Recursive factorial (n!) function: O(n) time, O(1) space
