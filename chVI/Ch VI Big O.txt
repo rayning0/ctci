@@ -63,9 +63,9 @@ Ex 6: Reversing an array: O(n) time, O(1) space
 Ex 7: O(n + p), O(2n), O(n + log n) all same as O(n)
 
 Ex 8: Take array of strings, sort each string, then sort the full array. TRICKY!!!
-  Takes O(as(log s + log a)) time, but I'm not sure about space complexity. Quicksort takes O(log(n)) space.
+  Time complexity: O(as(log s + log a)). I'm not sure about space complexity. Quicksort takes O(log(n)) space.
+  My best guess of Big O space complexity is O(s + log a): https://linkedin-jr-engineers.slack.com/archives/CKTPDEEN6/p1562963534004400
 
 Ex 9: Sum of value of all nodes in balanced binary search tree: O(n) time, O(1) space
 Ex 10: Is a number prime? O(sqrt(n)) time, O(1) space
 Ex 11: Recursive factorial (n!) function: O(n) time, O(1) space
-
