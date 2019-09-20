@@ -16,7 +16,7 @@ We meet on Skype each Saturday:
 
 Most software engineers study this book to interview at FAANG companies: Facebook, Apple, Amazon, Netflix, Google, Microsoft, etc.
 
-I made 9 Slack channels for us. Please join them:
+I made 12 Slack channels for us. Please join them:
 
 - [#leetcode](https://linkedin-jr-engineers.slack.com/messages/CL9UDQ4LS) LeetCode Problems
 - [#ctci-big-o](https://linkedin-jr-engineers.slack.com/messages/CKTPDEEN6/) Big O Time/Space Complexity. Chapter VI.
