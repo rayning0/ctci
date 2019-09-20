@@ -18,11 +18,13 @@ Most software engineers study this book to interview at FAANG companies: Faceboo
 
 I made 9 Slack channels for us. Please join them:
 
+- [#leetcode](https://linkedin-jr-engineers.slack.com/messages/CL9UDQ4LS) LeetCode Problems
 - [#ctci-big-o](https://linkedin-jr-engineers.slack.com/messages/CKTPDEEN6/) Big O Time/Space Complexity. Chapter VI.
 - [#ctci-ch01](https://linkedin-jr-engineers.slack.com/messages/CL7AFTC6A/) Arrays and Strings
 - [#ctci-ch02](https://linkedin-jr-engineers.slack.com/messages/CL930575L/) Linked Lists
 - [#ctci-ch03](https://linkedin-jr-engineers.slack.com/messages/CL930EVPY/) Stacks and Queues
 - [#ctci-ch04](https://linkedin-jr-engineers.slack.com/messages/CL0HVSS49/) Trees and Graphs
+- [#ctci-ch08](https://linkedin-jr-engineers.slack.com/messages/CMY2R0VBK/) Recursion and Dynamic Programming
 
 - Use the [#pair-programming](https://linkedin-jr-engineers.slack.com/messages/CL6UDFVSR/) channel to ask for help or offer to work together with others.
 - Please [#introduce-yourself](https://linkedin-jr-engineers.slack.com/messages/CDG6ZSWMU/) and talk about your [#job-search](https://linkedin-jr-engineers.slack.com/messages/CDE3RK8QY/). Don't use the [#general](https://linkedin-jr-engineers.slack.com/messages/CDDPLUHQC/) channel to introduce yourself.
