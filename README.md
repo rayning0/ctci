@@ -5,11 +5,11 @@ See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeq
 
 Gayle McDowell's [crowdsourced CTCI solutions](https://github.com/careercup/CtCI-6th-Edition), by programming language.
 
-This group will code through all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. I'll do them in Java, but use any language you wish.
+This group will code through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. Use any language you wish.
 
 We meet on Skype each Saturday:
 
-**12 pm-1 pm PST on Skype**. To join, put your Skype name in a reply to [this Slack post](https://linkedin-jr-engineers.slack.com/archives/CDDPLUHQC/p1563394416120600).
+**12 pm-2 pm PST on Skype**. To join, put your Skype name in a reply to [this Slack post](https://linkedin-jr-engineers.slack.com/archives/CDDPLUHQC/p1563394416120600).
 
 - Please [install Skype](https://www.skype.com/en/get-skype/), create your account, and add me. My Skype name is **rayning3**.
 - Please add your Skype name [in your Slack profile](https://get.slack.help/hc/en-us/articles/204092246-Edit-your-profile), so we can find you. Skype lets [up to 50 people](https://blogs.skype.com/news/2019/04/04/call-up-to-50-people-at-once-with-skype) in 1 call.
