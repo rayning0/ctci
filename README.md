@@ -5,7 +5,7 @@ See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeq
 
 Gayle McDowell's [crowdsourced CTCI solutions](https://github.com/careercup/CtCI-6th-Edition), by programming language.
 
-This group will code through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. Use any language you wish.
+This group will code through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. Use any language you wish. We’ll try to solve 1 company code challenge per hour. To post code challenges for our group to solve, put them in our private Skype Slack channel.
 
 We meet on Skype each Saturday:
 
