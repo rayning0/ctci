@@ -7,7 +7,7 @@ See my 2.5 hour YouTube video interview: **[How to be competitive for software j
 
 Gayle McDowell's [crowdsourced CTCI solutions](https://github.com/careercup/CtCI-6th-Edition), by programming language.
 
-This group will code through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. Use any language you wish. We’ll try to solve 1 company code challenge per hour. To post code challenges for our group to solve, put them in our private Skype Slack channel.
+This group will code through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. Use any language you wish. We’ll try to solve 1 company code challenge per hour. To post code challenges for our group to solve, put them in our **[private Skype Slack channel](https://linkedin-jr-engineers.slack.com/archives/GN87TNSH0)**.
 
 **We meet 12 pm-2 pm PST on Skype each Saturday:**
 
@@ -16,7 +16,7 @@ This group will code through company code challenge problems and all 189 coding 
 
 Most software engineers study this book to interview at FAANG companies: Facebook, Apple, Amazon, Netflix, Google, Microsoft, etc.
 
-I made 12 Slack channels for us. Please join them:
+I made 13 Slack channels for us. Please join them:
 
 - [#leetcode](https://linkedin-jr-engineers.slack.com/messages/CL9UDQ4LS) LeetCode Problems
 - [#project-euler](https://linkedin-jr-engineers.slack.com/archives/CQJ63PMEJ) Project Euler Problems
