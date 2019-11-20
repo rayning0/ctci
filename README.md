@@ -21,7 +21,7 @@ I made 13 Slack channels for us. Please join them:
 - [#leetcode](https://linkedin-jr-engineers.slack.com/messages/CL9UDQ4LS) LeetCode Problems
 - [#project-euler](https://linkedin-jr-engineers.slack.com/archives/CQJ63PMEJ) Project Euler Problems
 - [#ctci-big-o](https://linkedin-jr-engineers.slack.com/messages/CKTPDEEN6/) Big O Time/Space Complexity. Chapter VI.
-- [#ctci-ch01](https://linkedin-jr-engineers.slack.com/messages/CL7AFTC6A/) Arrays and Strings
+- [#ctci-ch01](https://linkedin-jr-engineers.slack.com/messages/CL7AFTC6A/) Arrays, Strings, and Hashes
 - [#ctci-ch02](https://linkedin-jr-engineers.slack.com/messages/CL930575L/) Linked Lists
 - [#ctci-ch03](https://linkedin-jr-engineers.slack.com/messages/CL930EVPY/) Stacks and Queues
 - [#ctci-ch04](https://linkedin-jr-engineers.slack.com/messages/CL0HVSS49/) Trees and Graphs
