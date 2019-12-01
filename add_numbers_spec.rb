@@ -60,8 +60,13 @@ describe '#add' do
   it 'adds 2 small numbers' do
     expect(add('512.349', '25.67')).to eq 538.019
     expect(add('25.67', '512.349')).to eq 538.019
-    expect(add('23423.97655', '0.3668558')).to eq 23424.3434058
+  end
 
+  it 'adds 2 medium sized numbers' do
+    expect(add('23423.97655', '0.3668558')).to eq 23424.3434058
+  end
+
+  it 'adds 2 super big numbers, beyond normal size limits' do
     a = '95745735635754675467.4452345234546'
     b = '5464564596999.5534733'
     puts "sum of BigDecimals: #{BigDecimal(a) + BigDecimal(b)}"
