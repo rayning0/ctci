@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "name": "Run RSpec - all",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "program": "/Users/rgan/.rvm/gems/ruby-2.6.3/bin/rspec",
+      "args": [
+        "--pattern",
+        "${workspaceRoot}/*_spec.rb"
+      ]
+    },
+    {
+      "name": "Debug RSpec - open spec file",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "useBundler": true,
+      "pathToBundler": "/Users/rgan/.rvm/rubies/ruby-2.6.3/bin/bundle",
+      "pathToRDebugIDE": "/Users/rgan/.rvm/gems/ruby-2.6.3/bin/rdebug-ide",
+      "debuggerPort": "1235",
+      "program": "/Users/rgan/.rvm/gems/ruby-2.6.3/bin/rspec",
+      "args": [
+        "${file}"
+      ]
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Example12",
+      "request": "launch",
+      "mainClass": "Example12"
+    }
+  ]
+}
