@@ -4,11 +4,13 @@ To join our [Slack CTCI study group](https://linkedin-jr-engineers.slack.com), *
 
 **We meet 12 pm-2 pm PST on Zoom each Saturday. Please pay me $1 before each meeting**, on Venmo (https://venmo.com/Raymond-Gan-1) or PayPal (rayning@yahoo.com, use "send to a friend" to avoid a fee). I'll add you to the meeting after you've paid.
 
-See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeqkw/about), with video of our beginner group meetings.
+See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeqkw/about) for video of our group meetings.
 
 See my 2.5 hour YouTube video interview: **[How to be competitive for software jobs](https://youtu.be/WqFOTeiSeEY)**, which covers **[my 5 LinkedIn articles for bootcamp grads](https://www.linkedin.com/in/raymond-gan-0ba8011/detail/recent-activity/posts/)**.
 
-This group codes through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. We’ll try to solve at least 1 company code challenge per meeting. To post code challenges for our group to solve, put them in our **[private Zoom Slack channel](https://linkedin-jr-engineers.slack.com/archives/GN87TNSH0)**. Use any computer language you wish. 
+This group codes through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. We’ll try to solve 1+ company code challenge per meeting. To post code challenges for our group to solve, put them in our **[private Zoom Slack channel](https://linkedin-jr-engineers.slack.com/archives/GN87TNSH0)**. Use any computer language you wish.
+
+In January 2020, we'll start covering this course: **[Grokking the Coding Interview](https://www.educative.io/courses/grokking-the-coding-interview)**, as I explain [on this post](https://linkedin-jr-engineers.slack.com/archives/CDDPLUHQC/p1576004249125300). To buy the course at a group discount, tell me you're interested.
 
 Gayle McDowell's [crowdsourced CTCI solutions](https://github.com/careercup/CtCI-6th-Edition), by programming language.
 
