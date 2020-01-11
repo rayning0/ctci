@@ -2,7 +2,7 @@
 
 To join our [Slack CTCI study group](https://linkedin-jr-engineers.slack.com), **give me your email, [install Zoom](https://zoom.us/download), and create a [Zoom account](https://zoom.us/signup)**.
 
-**We meet 12 pm-2 pm PST on Zoom each Saturday. Please pay me $1 before each meeting**, on Venmo (https://venmo.com/Raymond-Gan-1) or PayPal (rayning@yahoo.com, use "send to a friend" to avoid a fee). I'll add you to the meeting after you've paid.
+**We meet 11 am-1 pm PST on Zoom each Sunday. Please pay me $1 before each meeting**, on Venmo (https://venmo.com/Raymond-Gan-1) or PayPal (rayning@yahoo.com, use "send to a friend" to avoid a fee). I'll add you to the meeting after you've paid.
 
 See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeqkw/about) for video of our group meetings.
 
