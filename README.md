@@ -1,6 +1,6 @@
 # Answers/Notes to [Cracking the Coding Interview, 6th Ed.](http://www.crackingthecodinginterview.com)
 
-To join our [Slack CTCI study group](https://linkedin-jr-engineers.slack.com), **give me your email, [install Zoom](https://zoom.us/download), and create a [Zoom account](https://zoom.us/signup). Join Slack after I invite you by email. Then I'll add you to our private SLack channel**.
+To join our [Slack CTCI study group](https://linkedin-jr-engineers.slack.com), **give me your email, [install Zoom](https://zoom.us/download), and create a [Zoom account](https://zoom.us/signup). Join Slack after I invite you by email.** Then I'll add you to our private Slack channel.
 
 **We meet 11 am-1 pm PST on Zoom each Sunday. Please pay me $1 before each meeting**, on Venmo (https://venmo.com/Raymond-Gan-1) or PayPal (rayning@yahoo.com, use "send to a friend" to avoid a fee). I'll add you to the meeting after you've paid.
 
