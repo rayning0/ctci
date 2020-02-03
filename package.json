@@ -1,0 +1,8 @@
+{
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "jest": "^25.1.0"
+  }
+}
