@@ -52,7 +52,8 @@
       "name": "Jest Current File",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "args": [
-        "${fileBasenameNoExtension}",
+        "--runTestsByPath",
+        "${relativeFile}",
         "--config",
         "jest.config.js"
       ],
