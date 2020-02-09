@@ -1,6 +1,7 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/7D5NNZWQ8Wr
 // Given array, find average of all contiguous subarrays of size ‘K’ in it.
 
+// Time and space complexity: O(n).
 function find_averages_of_subarrays(K, arr) {
   const result = []
   let currentSum = 0

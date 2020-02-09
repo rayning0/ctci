@@ -2,11 +2,11 @@
 // Given array of positive numbers and positive number s, find length of smallest
 // contiguous subarray whose sum >= s. Return 0 if no such subarray exists.
 
+// Time complexity: O(n). Space complexity: O(1).
 function solution(s, arr) {
   let minLength = arr.length + 1
   let [sum, length] = [0, 0]
 
-  // Time complexity: O(n). Space complexity: O(1).
   for (let i = 0; i < arr.length; i++) {
     if (sum >= s) {
       minLength = Math.min(minLength, length)
