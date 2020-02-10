@@ -5,8 +5,13 @@
 
 // Space Complexity: O(k), since we store a max of ‘k + 1’ characters in the HashMap.
 
+// Time complexity: O(n). Space complexity: O(k).
 function solution(str, k) {
   let [maxLength, start] = [0, 0]
+
+  // A Hashmap in JavaScript is an Object.
+  // Difference between Map and Object in JavaScript:
+  // https://medium.com/front-end-weekly/es6-map-vs-object-what-and-when-b80621932373
   let freq = {} // frequency hash: # of times each character is in string
 
   for (let end = 0; end < str.length; end++) {

@@ -4,6 +4,10 @@
 // Once you've started you can’t skip a tree. (Fruits picked must be contiguous.)
 // Give max total # of fruits in both baskets.
 
+// Time complexity: O(n + n) = O(n)
+// Space complexity: O(1). We have max of 3 types of fruits in freq hashmap.
+
+// Time complexity: O(n). Space complexity: O(1).
 function solution(arr) {
   let [maxTotalFruits, start] = [0, 0]
   let freq = {} // frequency hash: # of fruits by basket
