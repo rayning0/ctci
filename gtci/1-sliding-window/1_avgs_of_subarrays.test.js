@@ -4,25 +4,19 @@
 // Time and space complexity: O(n).
 function find_averages_of_subarrays(K, arr) {
   const result = []
-  let currentSum = 0
-  let start = 0
+  let [currentSum, windowStart] = [0, 0]
 
-  for (let i = 0; i < arr.length; i++) {
-    currentSum += arr[i]
-    if (i >= K - 1) {
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    currentSum += arr[windowEnd]
+    if (windowEnd >= K - 1) {
       result.push(currentSum / K)
-      currentSum -= arr[start]
-      start++
+      currentSum -= arr[windowStart]
+      windowStart++
     }
   }
 
   return result
 }
-
-// 1. define start/end of sliding window
-// 2. increase i by 1
-// 3. add arr[i] to currentSum
-// 4. if i >= K-1, currentSum -= arr[start], then start++
 
 describe("Find the average of all contiguous subarrays of size K", () => {
   it("K = 5 and array = [1, 3, 2, 6, -1, 4, 1, 8, 2]", () => {

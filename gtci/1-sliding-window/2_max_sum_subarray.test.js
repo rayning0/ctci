@@ -4,14 +4,14 @@
 
 // Time complexity: O(n). Space complexity: O(1).
 function solution(k, arr) {
-  let [maxSum, sum, start] = [0, 0, 0]
+  let [maxSum, sum, windowStart] = [0, 0, 0]
 
-  for (let i = 0; i < arr.length; i++) {
-    sum += arr[i]
-    if (i >= k - 1) {
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    sum += arr[windowEnd]
+    if (windowEnd >= k - 1) {
       maxSum = Math.max(maxSum, sum)
-      sum -= arr[start]
-      start++
+      sum -= arr[windowStart]
+      windowStart++
     }
   }
 
