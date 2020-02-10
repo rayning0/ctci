@@ -6,7 +6,7 @@
 // Space Complexity: O(k), since we store a max of ‘k + 1’ characters in the HashMap.
 
 function solution(str, k) {
-  let [maxLength, sum, start] = [0, 0, 0]
+  let [maxLength, start] = [0, 0]
   let freq = {} // frequency hash: # of times each character is in string
 
   for (let end = 0; end < str.length; end++) {
