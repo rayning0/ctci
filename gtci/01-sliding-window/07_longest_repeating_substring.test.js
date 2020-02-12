@@ -2,6 +2,8 @@
 // Given string with lowercase letters, if you may replace no more than k letters
 // with any letter, find length of longest repeating substring after replacement.
 
+// Time complexity: O(n). Space complexity: O(1), because freq may have
+// up to max of 26 letters as keys O(26), or just O(1).
 function solution(str, k) {
   let [maxLength, start, maxFreq] = [0, 0, 0]
   let freq = {}
