@@ -4,13 +4,15 @@ To join our [Slack CTCI study group](https://linkedin-jr-engineers.slack.com), *
 
 **We meet 11 am-1 pm PST on Zoom each Sunday. Please pay me $1 before each meeting**, on Venmo (https://venmo.com/Raymond-Gan-1) or PayPal (rayning@yahoo.com, use "send to a friend" to avoid a fee). I'll add you to the meeting after you've paid.
 
-See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeqkw/about) for video of our group meetings.
+---------------
+In January 2020, we began solving the 150 coding questions from this course: **[Grokking the Coding Interview](https://www.educative.io/courses/grokking-the-coding-interview)**, as I explain [here](https://www.linkedin.com/posts/raymond-gan-0ba8011_grokking-the-coding-interview-patterns-for-activity-6630206560280944641-HO8Q) and [here](https://linkedin-jr-engineers.slack.com/archives/CDDPLUHQC/p1576004249125300). Buy the course for $79 to see it all. It's optional to buy the course. **[See all my coding answers for it](https://github.com/rayning0/ctci/tree/master/gtci)**.
+
+---------------
+See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeqkw/about) for video of our group meetings. I don't update this much. You should come to our meetings.
 
 See my 2.5 hour YouTube video interview: **[How to be competitive for software jobs](https://youtu.be/WqFOTeiSeEY)**, which covers **[my 5 LinkedIn articles for bootcamp grads](https://www.linkedin.com/in/raymond-gan-0ba8011/detail/recent-activity/posts/)**.
 
 This group codes through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. We’ll try to solve 1+ company code challenge per meeting. To post code challenges for our group to solve, put them in our **[private Zoom Slack channel](https://linkedin-jr-engineers.slack.com/archives/GN87TNSH0)**. Use any computer language you wish.
-
-In January 2020, we'll start covering this course: **[Grokking the Coding Interview](https://www.educative.io/courses/grokking-the-coding-interview)**, as I explain [on this post](https://linkedin-jr-engineers.slack.com/archives/CDDPLUHQC/p1576004249125300). To buy the course at a group discount, tell me you're interested.
 
 Gayle McDowell's [crowdsourced CTCI solutions](https://github.com/careercup/CtCI-6th-Edition), by programming language.
 
@@ -18,6 +20,7 @@ Most software engineers study this book to interview at FAANG companies: Faceboo
 
 I made these Slack channels for us. Please join them all:
 
+- [#system-design-interviews](https://linkedin-jr-engineers.slack.com/archives/CTTP68RPZ) System Design Interviews
 - [#leetcode](https://linkedin-jr-engineers.slack.com/messages/CL9UDQ4LS) LeetCode Problems
 - [#hackerrank](https://linkedin-jr-engineers.slack.com/archives/CR8EP9AMU) HackerRank Problems
 - [#project-euler](https://linkedin-jr-engineers.slack.com/archives/CQJ63PMEJ) Project Euler Problems
@@ -79,4 +82,4 @@ In the future, as I add new code to my /ctci repo, you just `cd` to YOUR /ctci f
 
 If you don't have a `.bash_profile`, create this file in your home directory. After editing it, run the file by doing [`source ~/.bash_profile`](https://stackoverflow.com/questions/4608187/how-to-reload-bash-profile-from-the-command-line).
 
-By Raymond Gan
+**By Raymond Gan**
