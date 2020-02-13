@@ -1,9 +1,68 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/N8vB7OVYo2D
-// Given string and a pattern, say if string contains any permutation of the pattern.
+// Given string and a pattern, find if string contains any permutation of the pattern.
+
+// Time complexity: O(n + m). n = str length. m = pattern length.
+// Space complexity: O(m) since in worst case, all pattern's distinct chars may be in HashMap
+function solution(str, pattern) {
+  let [start, matched] = [0, 0]
+  let patternFreq = {}
+
+  for (let i = 0; i < pattern.length; i++) {
+    patternFreq[pattern[i]] ? patternFreq[pattern[i]]++ : patternFreq[pattern[i]] = 1
+  }
+
+  for (let end = 0; end < str.length; end++) {
+    rightChar = str[end]
+
+    if (rightChar in patternFreq) {
+      patternFreq[rightChar]--
+
+      // If matched all copies of 1 char from pattern
+      if (patternFreq[rightChar] == 0) {
+        matched++
+      }
+    }
+
+    // If match all distinct chars from pattern, we're done!
+    if (matched == Object.keys(patternFreq).length) {
+      return true
+    }
+
+    // If right side of window > pattern length, shrink window for next loop
+    if (end >= pattern.length - 1) {
+      leftChar = str[start]
+      start++
+
+      // If character leaving window was part of pattern:
+      // 1. Add it back to frequency HashMap
+      // 2. Subtract 1 from matched
+      if (leftChar in patternFreq) {
+        if (patternFreq[leftChar] === 0) {
+          matched--
+        }
+        patternFreq[leftChar]++
+      }
+    }
+  }
+
+  return false
+}
+
+describe("solution()", () => {
+  it("finds if string contains any permutation of a pattern", () => {
+    expect(solution("oicbedbcaf", "abc")).toEqual(true)
+    expect(solution("oidbcaf", "abc")).toEqual(true)
+    expect(solution("odicf", "dc")).toEqual(false)
+    expect(solution("bcdxabcdy", "bcdyabcdx")).toEqual(true)
+    expect(solution("aaacb", "abc")).toEqual(true)
+  })
+})
+
+//----My Slow Answer--------
 
 // Time complexity: O(n * m). n = str size. m = pattern size.
 // Space complexity: O(m)
-function solution(str, pattern) {
+function slow_solution(str, pattern) {
   let [hasPermutation, start, maxLength] = [false, 0, 0]
   let [patternFreq, oldPatternFreq] = [{}, {}]
 
@@ -19,7 +78,7 @@ function solution(str, pattern) {
       patternFreq[rightChar]--
     } else {
       start = end + 1
-      Object.assign(patternFreq, oldPatternFreq) // Problem: This is O(m)!
+      Object.assign(patternFreq, oldPatternFreq) // Weakness: This is O(m)!
     }
 
     const length = end - start + 1
@@ -34,16 +93,7 @@ function solution(str, pattern) {
   return hasPermutation
 }
 
-describe("solution()", () => {
-  it("finds if string contains any permutation of a pattern", () => {
-    expect(solution("oicbedbcaf", "abc")).toEqual(true)
-    expect(solution("oidbcaf", "abc")).toEqual(true)
-    expect(solution("odicf", "dc")).toEqual(false)
-    expect(solution("bcdxabcdy", "bcdyabcdx")).toEqual(true)
-    expect(solution("aaacb", "abc")).toEqual(true)
-  })
-})
-
+// Output to my slow answer:
 // string: oicbedbcaf, pattern: abc
 
 // patternFreq: { "a": 1, "b": 1, "c": 1 }
@@ -99,49 +149,3 @@ describe("solution()", () => {
 // start: 6, end: 8, substring: bca
 // rightChar in pattern
 // maxLength: 3, length: 3
-
-//----COURSE SOLUTION--------
-
-// function find_permutation(str, pattern) {
-//   let windowStart = 0,
-//     matched = 0,
-//     charFrequency = {};
-
-//   for (i = 0; i < pattern.length; i++) {
-//     const chr = pattern[i];
-//     if (!(chr in charFrequency)) {
-//       charFrequency[chr] = 0;
-//     }
-//     charFrequency[chr] += 1;
-//   }
-
-//   // Our goal is to match all the characters from the 'charFrequency' with the current window
-//   // try to extend the range [windowStart, windowEnd]
-//   for (windowEnd = 0; windowEnd < str.length; windowEnd++) {
-//     const rightChar = str[windowEnd];
-//     if (rightChar in charFrequency) {
-//       // Decrement the frequency of matched character
-//       charFrequency[rightChar] -= 1;
-//       if (charFrequency[rightChar] === 0) {
-//         matched += 1;
-//       }
-//     }
-
-//     if (matched === Object.keys(charFrequency).length) {
-//       return true;
-//     }
-
-//     // Shrink the sliding window
-//     if (windowEnd >= pattern.length - 1) {
-//       leftChar = str[windowStart];
-//       windowStart += 1;
-//       if (leftChar in charFrequency) {
-//         if (charFrequency[leftChar] === 0) {
-//           matched -= 1;
-//         }
-//         charFrequency[leftChar] += 1;
-//       }
-//     }
-//   }
-//   return false;
-// }
