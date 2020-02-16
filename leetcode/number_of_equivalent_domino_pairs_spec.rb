@@ -1,17 +1,18 @@
 # https://leetcode.com/problems/number-of-equivalent-domino-pairs/
-# Runtime: 156 ms, faster than 42.86% of Ruby online submissions for Number of Equivalent Domino Pairs.
-# Memory Usage: 10.7 MB, less than 100.00% of Ruby online submissions for Number of Equivalent Domino Pairs.
+# Runtime: 116 ms, faster than 57.14% of Ruby online submissions for Number of Equivalent Domino Pairs.
+# Memory Usage: 11.5 MB, less than 100.00% of Ruby online submissions for Number of Equivalent Domino Pairs.
 
 # Time complexity: O(n). Space complexity: O(n).
 def domino_pairs(dominoes)
-  freq = {}
+  freq = Hash.new(0)
   pairs = 0
 
   dominoes.each do |domino|
     if domino[1] < domino[0]
-      domino[0], domino[1] = domino[1], domino[0]
+      freq[[domino[1], domino[0]]] += 1
+    else
+      freq[domino] += 1
     end
-    freq[domino] ? freq[domino] += 1 : freq[domino] = 1
   end
   # puts "freq: #{freq}"
 
