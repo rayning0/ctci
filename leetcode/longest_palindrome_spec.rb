@@ -1,49 +1,42 @@
-# @param {String} s
-# @return {String}
+# https://leetcode.com/problems/longest-palindromic-substring/
+# Runtime: 972 ms, faster than 60.50% of Ruby online submissions for Longest Palindromic Substring.
+# Memory Usage: 9.3 MB, less than 100.00% of Ruby online submissions for Longest Palindromic Substring.
+# O(n * n) time complexity. O(n) space complexity.
 def longest(s)
-    start = 0
-    maxlength = 0
-    longest_pal = s[0]
-    pals = []
+  maxstring = ''
 
-    return s if s.length <= 1
+  s.size.times do |i|   # 0 to s.size - 1
+    2.times do |j|      # 0 to 1. 0 for odd length palindromes, 1 for even length.
+      left = i
+      right = i + j
 
-    (0..s.size - 2).each do |i|
-      substring2 = s[i..i + 1]
-      substring3 = s[i..i + 2]
-
-      if substring2.reverse == substring2
-        pals << [i, i + 1]
+      while left >= 0 && s[left] == s[right] do
+        left -= 1
+        right += 1
       end
 
-      if substring3.reverse == substring3
-        pals << [i, i + 2]
-      end
-    end
-
-    pals.each do |start, endindex|
-      first, last = start, endindex
-      while s[first] == s[last] && first >= 0 && last < s.length
-        if s[first..last].length > maxlength
-          maxlength = s[first..last].length
-          longest_pal = s[first..last]
-        end
-        first -= 1
-        last += 1
+      substring = s[left + 1..right - 1]
+      # puts substring
+      if substring.size > maxstring.size
+        maxstring = substring
       end
     end
+  end
 
-    longest_pal
+  # puts '------------------------'
+  maxstring
 end
 
 describe '#longest_palindrome' do
-  it 'tests something' do
+  it 'finds longest palindrome substring' do
     expect(longest("aba")).to eq 'aba'
     expect(longest("babad")).to eq 'bab'
     expect(longest("cbbd")).to eq 'bb'
     expect(longest("asdkasdfkxzclxlweieieisweiews")).to eq 'sweiews'
   end
 end
+
+# JavaScript:
 
 # var longestPalindrome = function(s) {
 #   var max = '';
@@ -55,10 +48,59 @@ end
 #         left--;
 #         right++;
 #       }
-#       if ((right - left - 1) > max.length) {
+#       var length = right - left + 1;
+#       if (length - 2 > max.length) {
 #         max = s.substring(left + 1, right);
 #       }
 #     }
 #   }
 #   return max;
 # };
+
+# OUTPUT:
+
+# a
+# aba
+# a
+# ------------------------
+# b
+# bab
+# aba
+# a
+# d
+# ------------------------
+# c
+# b
+# bb
+# b
+# d
+# ------------------------
+# a
+# s
+# d
+# k
+# a
+# s
+# d
+# f
+# k
+# x
+# z
+# c
+# l
+# lxl
+# l
+# w
+# e
+# eie
+# eieie
+# ieiei
+# iei
+# i
+# s
+# w
+# e
+# sweiews
+# e
+# w
+# s
