@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/happy-number/
-# Runtime: 32 ms, faster than 98.08% of Ruby online submissions for Happy Number.
+# Runtime: 28 ms, faster than 98.08% of Ruby online submissions for Happy Number.
 # Memory Usage: 9.2 MB, less than 100.00% of Ruby online submissions for Happy Number.
 
 def is_happy(n)
@@ -7,10 +7,17 @@ def is_happy(n)
 
   while n != 1 do
     sum = 0
-    n.to_s.each_char do |digit|
-      d = digit.to_i
-      sum += d * d
+
+    while n != 0 do
+      last_digit = n % 10
+      sum += last_digit * last_digit
+      n /= 10 # remove last digit
     end
+
+    # n.to_s.each_char do |digit|
+    #   d = digit.to_i
+    #   sum += d * d
+    # end
 
     if sums[sum]
       return false
