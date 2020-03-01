@@ -2,8 +2,10 @@
 # Runtime: 52 ms, faster than 100.00% of Ruby online submissions for Two Sum IV - Input is a BST.
 # Memory Usage: 10.2 MB, less than 100.00% of Ruby online submissions for Two Sum IV - Input is a BST.
 
+# Time complexity: O(n). Space complexity: O(n). n = # of nodes.
 class TreeNode
   attr_accessor :val, :left, :right
+
   def initialize(val)
     @val = val
     @left, @right = nil, nil
