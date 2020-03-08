@@ -62,9 +62,18 @@ end
 
 describe "#cut_off_trees" do
   it 'returns min # of steps to cut all trees' do
-    # expect(cut_off_tree([[1,2,3],[0,0,4],[7,6,5]])).to eq 6
-    # expect(cut_off_tree([[1,2,3],[0,0,0],[7,6,5]])).to eq -1
-    # expect(cut_off_tree([[2,3,4],[0,0,5],[8,7,6]])).to eq 6
-    expect(cut_off_tree([[54581641,64080174,24346381,69107959],[86374198,61363882,68783324,79706116],[668150,92178815,89819108,94701471],[83920491,22724204,46281641,47531096],[89078499,18904913,25462145,60813308]])).to eq 57
+    expect(cut_off_tree([[1,2,3],[0,0,4],[7,6,5]])).to eq 6
+    expect(cut_off_tree([[1,2,3],[0,0,0],[7,6,5]])).to eq -1
+    expect(cut_off_tree([[2,3,4],[0,0,5],[8,7,6]])).to eq 6
+  end
+
+  it 'Does this in order of tree height, from lowest height first. We may walk past tree without cutting it.' do
+    expect(cut_off_tree([
+      [54581641,64080174,24346381,69107959],
+      [86374198,61363882,68783324,79706116],
+      [  668150,92178815,89819108,94701471],
+      [83920491,22724204,46281641,47531096],
+      [89078499,18904913,25462145,60813308]
+    ])).to eq 57
   end
 end
