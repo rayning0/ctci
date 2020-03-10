@@ -1,38 +1,27 @@
 # https://leetcode.com/problems/rotting-oranges/
-# Runtime: 40 ms, faster than 88.17% of Ruby online submissions for Rotting Oranges.
-# Memory Usage: 9.5 MB, less than 100.00% of Ruby online submissions for Rotting Oranges.
+# Runtime: 40 ms, faster than 88.42% of Ruby online submissions for Rotting Oranges.
+# Memory Usage: 9.6 MB, less than 100.00% of Ruby online submissions for Rotting Oranges.
 
 # BFS strategy:
+# 1. Find all rotten oranges and total fresh oranges. Take first cell off queue.
+# 2. While rotten orange queue is NOT empty
+    #      For each cell, search neighbors in 4 directions (right, left, down, up)
+    #      If neighbor == fresh
+        #       5. make it rotten
+        #       6. add to queue [neighbor_row, neighbor_col, depth + 1]
+        #       7. subtract 1 from # of fresh oranges
+# 9. Return depth if fresh == 0
+# 10. Return -1
 
-  # depth = 0
-  # queue, fresh = array of all rotten oranges, # of fresh oranges
-  # While queue not empty
-  #   change = false
-
-  #   Repeat for size of original queue:
-    #   Remove first cell of queue
-    #   For each cell neighbor (4 directions)
-        # if neighbor is fresh
-        #   make neighbor rotten
-        #   add neighbor to queue
-        #   fresh--
-        #   change = true
-    # if change == true, depth++
-
-# return depth if fresh == 0
-# return -1
+FRESH, ROTTEN = 1, 2
 
 # Time complexity: O(n * m). Space complexity: O(n * m).
-def pp(arr)
-  arr.each { |row| p row }
-end
-
 def find_rotten_fresh(arr)
   rotten, fresh = [], 0
   arr.size.times do |row|
     arr[0].size.times do |col|
-      rotten << [row, col] if arr[row][col] == 2
-      fresh += 1 if arr[row][col] == 1
+      rotten << [row, col, 0] if arr[row][col] == ROTTEN
+      fresh += 1 if arr[row][col] == FRESH
     end
   end
   [rotten, fresh]
@@ -41,47 +30,28 @@ end
 def oranges(arr)
   depth = 0
   queue, fresh = find_rotten_fresh(arr) # queue has only ROTTEN tomatoes
+  height, width = arr.size, arr[0].size
+  directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+  max_depth = -1
 
   while !queue.empty? do
-    original_queue_size = queue.size
-    # puts "original_queue_size: #{original_queue_size}. rotten queue: #{queue}"
-    change = false
+    row, col, depth = queue.shift
+    max_depth = [max_depth, depth].max
 
-    original_queue_size.times do
-      row, col = queue.shift
-      # puts "cell[#{row}, #{col}] = #{arr[row][col]}. queue: #{queue}. fresh: #{fresh}"
-      neighbors(row, col, arr).each do |nrow, ncol|
-        # puts "neighbor[#{nrow}, #{ncol}] = #{arr[nrow][ncol]}"
-        if arr[nrow][ncol] == 1
-          arr[nrow][ncol] = 2
-          queue << [nrow, ncol]
-          fresh -= 1
-          change = true
-          # puts "** [#{nrow}, #{ncol}] turns rotten **"
-        end
+    directions.each do |drow, dcol|
+      nrow = row + drow
+      ncol = col + dcol
+
+      if ncol.between?(0, width - 1) && nrow.between?(0, height - 1) && arr[nrow][ncol] == FRESH
+        arr[nrow][ncol] = ROTTEN
+        queue << [nrow, ncol, depth + 1]
+        fresh -= 1
       end
-    end
-
-    if change
-      depth += 1
-      # puts "depth: #{depth}"
-      # pp(arr)
-      # puts
     end
   end
 
   return depth if fresh == 0
   -1
-end
-
-def neighbors(row, col, arr)
-  height, width = arr.size, arr[0].size
-  neighbors = []
-  neighbors << [row, col + 1] if col + 1 < width
-  neighbors << [row, col - 1] if col - 1 >= 0
-  neighbors << [row + 1, col] if row + 1 < height
-  neighbors << [row - 1, col] if row - 1 >= 0
-  neighbors
 end
 
 describe "#oranges" do
