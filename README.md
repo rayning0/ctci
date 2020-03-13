@@ -5,6 +5,11 @@ To join our [Slack CTCI study group](https://linkedin-jr-engineers.slack.com), *
 **We meet 11 am-1 pm PST on Zoom each Sunday. Please pay me $1 before each meeting**, on Venmo (https://venmo.com/Raymond-Gan-1) or PayPal (rayning@yahoo.com, use "send to a friend" to avoid a fee). I'll add you to the meeting after you've paid.
 
 ---------------
+See all my **[LeetCode solutions](https://github.com/rayning0/ctci/tree/master/leetcode)**.
+My **[Codility solutions](https://github.com/rayning0/codility)**.
+My **[Project Euler solutions](https://github.com/rayning0/ProjectEuler-and-Algorithms/tree/master/euler)**.
+My **[HackerRank solutions](https://github.com/rayning0/hackerrank)**.
+
 In January 2020, we began solving the 150 coding questions from this course: **[Grokking the Coding Interview](https://www.educative.io/courses/grokking-the-coding-interview)**, as I explain [here](https://www.linkedin.com/posts/raymond-gan-0ba8011_grokking-the-coding-interview-patterns-for-activity-6630206560280944641-HO8Q) and [here](https://linkedin-jr-engineers.slack.com/archives/CDDPLUHQC/p1576004249125300). Buy the course for $79 to see it all. It's optional to buy the course. **[See all my coding answers for it](https://github.com/rayning0/ctci/tree/master/gtci)**.
 
 ---------------
