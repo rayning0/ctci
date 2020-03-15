@@ -1,4 +1,7 @@
 // https://www.hackerrank.com/challenges/sherlock-and-anagrams/problem
+// Loop through all possible substrings and make substring frequency map.
+// Each substring's frequency has "n choose 2" possible pairs. Loop through each frequency to find sum of all "frequency choose 2".
+
 func sherlockAndAnagrams(s string) int {
     ssmap := make(map[[26]int]int) // substring frequency map
 
