@@ -33,9 +33,7 @@ func isValid(s string) string {
 
     for num, ff := range f2 {
         if ff != maxff {
-            if ff > 1 {
-                return "NO"
-            } else if num == 1 || num == commonFreq + 1 { // also: ff == 1
+            if ff == 1 && (num == 1 || num == commonFreq + 1) {
                 return "YES"
             }
         }
