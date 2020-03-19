@@ -15,9 +15,9 @@ var _whitespace = require("../util/whitespace");
 
 var _identifier = require("../util/identifier");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _location = require("./location");
 
-const literal = /^('|")((?:\\?.)*?)\1/;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class UtilParser extends _tokenizer.default {
   addExtra(node, key, val) {
@@ -111,9 +111,9 @@ class UtilParser extends _tokenizer.default {
 
   expectPlugin(name, pos) {
     if (!this.hasPlugin(name)) {
-      throw this.raise(pos != null ? pos : this.state.start, `This experimental syntax requires enabling the parser plugin: '${name}'`, {
-        missingPluginNames: [name]
-      });
+      throw this.raiseWithData(pos != null ? pos : this.state.start, {
+        missingPlugin: [name]
+      }, `This experimental syntax requires enabling the parser plugin: '${name}'`);
     }
 
     return true;
@@ -121,9 +121,9 @@ class UtilParser extends _tokenizer.default {
 
   expectOnePlugin(names, pos) {
     if (!names.some(n => this.hasPlugin(n))) {
-      throw this.raise(pos != null ? pos : this.state.start, `This experimental syntax requires enabling one of the following parser plugin(s): '${names.join(", ")}'`, {
-        missingPluginNames: names
-      });
+      throw this.raiseWithData(pos != null ? pos : this.state.start, {
+        missingPlugin: names
+      }, `This experimental syntax requires enabling one of the following parser plugin(s): '${names.join(", ")}'`);
     }
   }
 
@@ -135,25 +135,6 @@ class UtilParser extends _tokenizer.default {
     if (this.state.awaitPos !== -1) {
       this.raise(this.state.awaitPos, "Await cannot be used as name inside an async function");
     }
-  }
-
-  strictDirective(start) {
-    for (;;) {
-      _whitespace.skipWhiteSpace.lastIndex = start;
-      start += _whitespace.skipWhiteSpace.exec(this.input)[0].length;
-      const match = literal.exec(this.input.slice(start));
-      if (!match) break;
-      if (match[2] === "use strict") return true;
-      start += match[0].length;
-      _whitespace.skipWhiteSpace.lastIndex = start;
-      start += _whitespace.skipWhiteSpace.exec(this.input)[0].length;
-
-      if (this.input[start] === ";") {
-        start++;
-      }
-    }
-
-    return false;
   }
 
   tryParse(fn, oldState = this.state.clone()) {
@@ -227,7 +208,7 @@ class UtilParser extends _tokenizer.default {
     }
 
     if (doubleProto >= 0) {
-      this.raise(doubleProto, "Redefinition of __proto__ property");
+      this.raise(doubleProto, _location.Errors.DuplicateProto);
     }
   }
 
