@@ -36,6 +36,7 @@ func freqArray(s string) [26]int {
     return freq
 }
 
+// O(n): linear
 // func isAnagram(s, t string) bool {
 //     if len(s) != len(t) {
 //         return false
@@ -55,4 +56,20 @@ func freqArray(s string) [26]int {
 //         }
 //     }
 //     return true
+// }
+
+// import "strings"
+// import "sort"
+
+// // O(n log n)
+// func isAnagram(s, t string) bool {
+//     if len(s) != len(t) {
+//         return false
+//     }
+//     sArray := strings.Split(s, "")
+//     tArray := strings.Split(t, "")
+//     sort.Strings(sArray)
+//     sort.Strings(tArray)
+
+//     return strings.Join(sArray, "") == strings.Join(tArray, "")
 // }
