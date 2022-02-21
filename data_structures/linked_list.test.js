@@ -422,3 +422,83 @@ describe("Linked List function tests", () => {
 // Up recursive ladder: new_head, after pointer reversed: c,b
 // Up recursive ladder: old current = a
 // Up recursive ladder: new_head, after pointer reversed: c,b,a
+__________________________________________________
+// OUTPUT of all functions:
+
+// > l = new LList()
+// LList { head: null }
+// > l.append(5)
+// LList { head: Node { val: 5, next: null } }
+// > l.append(10)
+// LList { head: Node { val: 5, next: Node { val: 10, next: null } } }
+// > l.append(15)
+// LList { head: Node { val: 5, next: Node { val: 10, next: [Node] } } }
+// > l.to_a()
+// [ 5, 10, 15 ]
+
+// > m = new LList()
+// LList { head: null }
+// > m.to_list([1,2,3])
+// LList { head: Node { val: 1, next: Node { val: 2, next: [Node] } } }
+// > m.to_list([1,2,3]).to_a()
+// [ 1, 2, 3 ]
+// > l.size()
+// 3
+// > m
+// LList { head: null }
+// > m.isEmpty()
+// true
+// > l.isEmpty()
+// false
+// > l.prepend(4)
+// LList { head: Node { val: 4, next: Node { val: 5, next: [Node] } } }
+// > l.size()
+// 4
+// > l.findByVal(10)
+// Node { val: 10, next: Node { val: 15, next: null } }
+// > l.findByIndex(4)
+// 'Index out of bounds'
+// > l.findByIndex(3)
+// Node { val: 15, next: null }
+// > l.findByVal(100)
+// 'Value not found'
+// > l.to_a()
+// [ 4, 5, 10, 15 ]
+// > l.insert(0, 20)
+// LList { head: Node { val: 4, next: Node { val: 20, next: [Node] } } }
+// > l.deleteAt(2).to_a()
+// [ 4, 20, 10, 15 ]
+// > l.deleteAt(2).to_a()
+// [ 4, 20, 15 ]
+// > l.deleteVal(4).to_a()
+// [ 20, 15 ]
+// > l.append(5).to_a()
+// [ 20, 15, 5 ]
+// > l.to_a()
+// [ 20, 15, 5 ]
+// > x = l.reverseArray()
+// LList { head: Node { val: 5, next: Node { val: 15, next: [Node] } } }
+// > x.to_a()
+// [ 5, 15, 20 ]
+// > l
+// LList { head: Node { val: 20, next: Node { val: 15, next: [Node] } } }
+// > l.reverse()
+// LList { head: Node { val: 5, next: Node { val: 15, next: [Node] } } }
+// > l.reverse()
+// LList { head: Node { val: 20, next: Node { val: 15, next: [Node] } } }
+// > l.append(1)
+// LList { head: Node { val: 20, next: Node { val: 15, next: [Node] } } }
+// > l.prepend(25)
+// LList { head: Node { val: 25, next: Node { val: 20, next: [Node] } } }
+// > l.to_a()
+// [ 25, 20, 15, 5, 1 ]
+// > l.reverse()
+// LList { head: Node { val: 1, next: Node { val: 5, next: [Node] } } }
+// > l.to_a()
+// [ 1, 5, 15, 20, 25 ]
+// > l.append(30)
+// LList { head: Node { val: 1, next: Node { val: 5, next: [Node] } } }
+// > l.recursiverse().to_a()
+// [ 30, 25, 20, 15, 5, 1 ]
+// > l.recursiverse().to_a()
+// [ 1, 5, 15, 20, 25, 30 ]
