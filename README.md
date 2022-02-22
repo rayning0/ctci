@@ -15,7 +15,7 @@ In January 2020, we began solving the 150 coding questions from this course: **[
 ---------------
 See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeqkw/about) for video of our group meetings. I don't update this much. You should come to our meetings.
 
-See my 2.5 hour YouTube video interview: **[How to be competitive for software jobs](https://youtu.be/WqFOTeiSeEY)**, which covers **[my 5 LinkedIn articles for bootcamp grads](https://www.linkedin.com/in/raymond-gan-0ba8011/detail/recent-activity/posts/)**.
+See my 2.5 hour YouTube video interview: **[How to be competitive for software jobs](https://youtu.be/WqFOTeiSeEY)**, which covers **[my 5 LinkedIn articles for bootcamp grads](https://www.linkedin.com/in/raymond-gan-i-do-not-seek-a-job-0ba8011/recent-activity/posts/)**.
 
 This group codes through company code challenge problems and all 189 coding interview questions in Gayle McDowell's book "Cracking the Coding Interview" together. We’ll try to solve 1+ company code challenge per meeting. To post code challenges for our group to solve, put them in our **[private Zoom Slack channel](https://linkedin-jr-engineers.slack.com/archives/GN87TNSH0)**. Use any computer language you wish.
 
