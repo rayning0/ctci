@@ -237,6 +237,7 @@ class LList {
   // Reverse linked list in place (iterative way). Use 3 pointers: previous, current, next.
   // Good video explanation: https://www.youtube.com/watch?v=myqO52fwY5k
   // https://www.geeksforgeeks.org/reverse-a-linked-list/
+  // https://www.educative.io/courses/coderust-hacking-the-coding-interview/lq2j
   // Complexity: O(n) time, O(1) space
   reverse() {
     let previous = null,
@@ -260,7 +261,8 @@ class LList {
 
   // Reverse linked list in place (recursive way)
   // Best video explanation: https://www.youtube.com/watch?v=Ip4y7Inx7QY
-  // Complexity: O(n) time, O(1) space
+  // Complexity: O(n) time, O(n) space
+  // "The recursive version uses the stack. OS allocates stack memory, and this solution can run out of memory for very large linked lists (think billions of items)."
   recursiverse() {
     this.head = this.recursive(this.head)
     return this
@@ -422,7 +424,7 @@ describe("Linked List function tests", () => {
 // Up recursive ladder: new_head, after pointer reversed: c,b
 // Up recursive ladder: old current = a
 // Up recursive ladder: new_head, after pointer reversed: c,b,a
-__________________________________________________
+// __________________________________________________
 // OUTPUT of all functions:
 
 // > l = new LList()
