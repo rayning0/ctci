@@ -234,6 +234,9 @@ class LList {
     return reversed
   }
 
+// My LeetCode answer to "206. Reverse Linked List":
+// https://leetcode.com/submissions/detail/646430195/
+
   // Reverse linked list in place (iterative way). Use 3 pointers: previous, current, next.
   // Good video explanation: https://www.youtube.com/watch?v=myqO52fwY5k
   // https://www.geeksforgeeks.org/reverse-a-linked-list/
