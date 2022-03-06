@@ -1,6 +1,6 @@
 # Answers/Notes to [Cracking the Coding Interview, 6th Ed.](http://www.crackingthecodinginterview.com)
 
-**See all my LinkedIn [Data Structures & Algorithms posts](https://www.linkedin.com/feed/hashtag/?keywords=raymond_dsa).**
+**See all my LinkedIn [Data Structures & Algorithms posts](https://www.linkedin.com/search/results/all/?keywords=%23raymond_dsa&sid=4YJ).**
 
 We don't have weekly meetings now. If I have time in the future, I may restart this study group.
 
