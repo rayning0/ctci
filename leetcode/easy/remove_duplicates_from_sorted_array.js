@@ -1,12 +1,13 @@
 // https://leetcode.com/problems/remove-duplicates-from-sorted-array/
-// 3 companies asking this question: Facebook, Amazon, Adobe
+// 3 companies asking this: Facebook, Amazon, Adobe
+// Use 2 pointers
 
 // Better Answer:
 // https://leetcode.com/submissions/detail/654421102/
 // Runtime: 76 ms, faster than 92.27% of JavaScript online submissions for Remove Duplicates from Sorted Array.
 // Memory Usage: 44.3 MB, less than 55.52% of JavaScript online submissions for Remove Duplicates from Sorted Array.
 // O(n) time, O(1) space
-// Time to code: 1:39 min
+// Time to write code: 1:39 min
 let removeDuplicates = function(nums) {
     let [i, insertIndex] = [1, 1]
 
@@ -56,7 +57,8 @@ ____________________________________
 // First Try:
 // https://leetcode.com/submissions/detail/654411753/
 // Runtime: 72 ms, beats 95.5% of JS submissions. Memory Usage: 45.7 MB, beats 6.5% of JS submissions
-// Time to code: 1 hour
+// O(n) time, O(1) space
+// Time to write code: 1 hour
 /**
  * @param {number[]} nums
  * @return {number}

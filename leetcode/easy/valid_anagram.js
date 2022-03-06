@@ -1,7 +1,8 @@
 // https://leetcode.com/problems/valid-anagram/
 // https://leetcode.com/submissions/detail/654303346/
-// Time to code: 1:53 min. (Original time to code: 15 min)
-// 3 companies asking this question: Bloomberg, Microsoft, Facebook
+// Time to write code: 1:53 min. (Original time to code: 15 min)
+// O(n) time, O(n) space
+// 3 companies asking this: Bloomberg, Microsoft, Facebook
 
 let isAnagram = function(s, t) {
     if (s.length !== t.length) return false
