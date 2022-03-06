@@ -1,8 +1,8 @@
 # Answers/Notes to [Cracking the Coding Interview, 6th Ed.](http://www.crackingthecodinginterview.com)
 
-To join our [Slack CTCI study group](https://linkedin-jr-engineers.slack.com), **give me your email, [install Zoom](https://zoom.us/download), and create a [Zoom account](https://zoom.us/signup). Join Slack after I invite you by email.** Then I'll add you to our private Slack channel.
+**See all my LinkedIn [Data Structures & Algorithms posts](https://www.linkedin.com/feed/hashtag/?keywords=raymond_dsa).**
 
-**We don't have weekly meetings now. If I have time in the future, I may restart this study group.**
+We don't have weekly meetings now. If I have time in the future, I may restart this study group.
 
 ---------------
 See all my **[LeetCode solutions](https://github.com/rayning0/ctci/tree/master/leetcode)**.
