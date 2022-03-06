@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+// 3 companies asking this question: Facebook, Amazon, Adobe
 
 // Better Answer:
 // https://leetcode.com/submissions/detail/654421102/

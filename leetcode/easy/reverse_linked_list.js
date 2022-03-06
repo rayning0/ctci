@@ -1,5 +1,6 @@
 // https://leetcode.com/problems/reverse-linked-list/
 // See all other linked list functions in detail: https://github.com/rayning0/ctci/blob/master/data_structures/linked_list.test.js
+// 3 companies asking this question: Microsoft, Bloomberg, Amazon
 
 /**
  * Definition for singly-linked list.
