@@ -1,15 +1,15 @@
 // https://leetcode.com/problems/valid-parentheses/
-// https://leetcode.com/submissions/detail/654870080/
+// https://leetcode.com/submissions/detail/654875488/
 // Runtime: 64 ms, faster than 91.72% of JavaScript online submissions for Valid Parentheses.
-// Memory Usage: 42.9 MB, less than 13.93% of JavaScript online submissions for Valid Parentheses.
+// Memory Usage: 42.7 MB, less than 15.41% of JavaScript online submissions for Valid Parentheses.
+// O(n) time, O(n) space
 // Time to write code: 5:13 min
+// 3 companies asking this: Amazon, LinkedIn, Microsoft
 /**
  * @param {string} s
  * @return {boolean}
  */
 let isValid = function(s) {
-    if (s.length === 1) return false
-
     const parens = {'(': ')', '[': ']', '{': '}'}
     sarray = s.split('')
     let stack = [sarray.shift()] // remove first char of string
