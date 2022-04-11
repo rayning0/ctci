@@ -1,5 +1,5 @@
 // https://leetcode.com/problems/rotate-array/
-// https://leetcode.com/submissions/detail/678062438/
+// https://leetcode.com/submissions/detail/678233989/
 // 3 companies asking it: Amazon, Microsoft, Facebook
 /**
  * @param {number[]} nums
@@ -7,7 +7,7 @@
  * @return {void} Do not return anything, modify nums IN-PLACE instead!!!
  */
 // Solution 1:
-// SIMPLEST ANSWER!!!
+// Simplest answer.
 // O(n) time, O(n) space
 let rotate = function(nums, k) {
     let temp = [...nums]
@@ -39,6 +39,7 @@ let rotate = function(nums, k) {
 }
 
 // Solution 3. Do 3 reverses.
+// BEST ANSWER.
 // O(n) time, O(1) space
 let rotate = function(nums, k) {
     nums.reverse()
@@ -47,11 +48,10 @@ let rotate = function(nums, k) {
     rev(nums, k, nums.length - 1)
 }
 
+// Reverse array between start + end indices
 function rev(nums, start, end) {
     while (start < end) {
-        let temp = nums[start]
-        nums[start] = nums[end]
-        nums[end] = temp
+        [nums[start], nums[end]] = [nums[end], nums[start]]
         start++
         end--
     }
