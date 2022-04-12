@@ -8,6 +8,7 @@
 // Best answer: 2 pointers
 // O(n) time, O(1) space
 // Companies: Facebook, Microsoft, Amazon
+// Time to code: 18:39 min. Longest time was figuring out regex.
 let isPalindrome = function(s) {
     // Regex reference: https://regex101.com
     // \W Matches anything other than a letter, digit or underscore. Same as [^a-zA-Z0-9_]. Thus add "_" to answer.
