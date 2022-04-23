@@ -2,6 +2,8 @@
 
 **See all my LinkedIn [Data Structures & Algorithms posts](https://www.linkedin.com/search/results/all/?keywords=%23raymonddsa&sid=4YJ).**
 
+Join our Slack group **[LinkedIn Junior Engineers](https://join.slack.com/t/linkedin-jr-engineers/shared_invite/zt-17t4zlj9g-h8tsrjeINIS1Ay00e1FOWA)**.
+
 We don't have weekly meetings now. If I have time in the future, I may restart this study group.
 
 ---------------
