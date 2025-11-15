@@ -1,7 +1,8 @@
 # https://leetcode.com/problems/contains-duplicate/description/?envType=problem-list-v2&envId=plakya4j
 
-# Plan: Use hash to track freq of each num. If we've stored num before in hash, return true.
-# If we loop to end of array without seeing num, return false.
+# Use hash to track freq of each num. If we've seen num before in hash, return true.
+# If loop to end of array without seeing num, return false.
+
 # Time: O(n), Space: O(n)
 def contains_duplicate(nums)
   hash = {}

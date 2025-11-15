@@ -6,6 +6,7 @@
 # Then go through string t, letter by letter.
 # If t letter's freq in s > 0, subtract 1 from its freq hash. Else return false.
 # If successfully get through all t letters, return true.
+
 # Time: O(n + m), where n = length of s, m = length of t
 # Space: O(1)
 def is_anagram(s, t)

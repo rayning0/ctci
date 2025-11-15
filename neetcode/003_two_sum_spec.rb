@@ -15,7 +15,7 @@ def two_sum(nums, target)
     seen[num] = i
   end
 
-  []
+  [] # no answer
 end
 
 describe "#two_sum" do
