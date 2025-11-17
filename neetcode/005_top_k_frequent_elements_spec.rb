@@ -87,10 +87,13 @@
 # Total Time: O(n) + O(n) + O(u) + O(n) + O(k) = O(n) since u ≤ n and k ≤ n
 # Total Space: O(u) + O(n) + O(k) = O(n) (freq hash + bucket array + answer)
 def top_k_frequent(nums, k)
-  freq = Hash.new(0)
-  nums.each do |num|
-    freq[num] += 1
-  end
+  # freq = Hash.new(0)
+  # nums.each do |num|
+  #   freq[num] += 1
+  # end
+
+  freq = nums.tally
+  freq.default = 0
 
   # Make frequency bucket. Bucket index is "count" from freq hash, # of times each num appears.
   # In each array element, put array with all nums that repeat "count" times.

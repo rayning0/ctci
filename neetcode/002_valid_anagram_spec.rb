@@ -11,15 +11,18 @@
 # Space: O(1)
 def is_anagram(s, t)
   return false if s.length != t.length
-  freq = Hash.new(0)
 
-  s.each_char do |letter|
-    freq[letter] += 1
-  end
+  # freq = Hash.new(0)
+  # s.each_char do |char|
+  #   freq[char] += 1
+  # end
 
-  t.each_char do |letter|
-    if freq[letter] > 0
-      freq[letter] -= 1
+  freq = s.each_char.tally
+  freq.default = 0
+
+  t.each_char do |char|
+    if freq[char] > 0
+      freq[char] -= 1
     else
       return false
     end
