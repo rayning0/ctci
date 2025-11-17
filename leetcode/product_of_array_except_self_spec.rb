@@ -2,6 +2,15 @@
 # Runtime: 64 ms, faster than 83.43% of Ruby online submissions for Product of Array Except Self.
 # Memory Usage: 13.1 MB, less than 100.00% of Ruby online submissions for Product of Array Except Self.
 
+# Ex: nums = [5, 6, 2, 10]
+
+#         (1)       5,             6,         2,       10,      (1)
+# prefix:           1            1*5=5   1*5*6=30  1*5*6*2=60      =  [1,  5, 30, 60]
+# postfix:       6*2*10*1=120  2*10*1=20   10*1        1           = [120, 20, 1,  1]
+# ________________________________________________________
+# prefix * postfix: 1*120=120   5*20=100 30*10=300   60*1=60
+# Ans: [120, 100, 300, 60]
+
 def product_except_self(nums)
     answer = Array.new(nums.size)
     leftprod, rightprod = 1, 1
