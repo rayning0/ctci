@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/?envType=problem-list-v2&envId=plakya4j
-# two sum ii: Like two sum, but integer array is sorted. "1-indexed" array: first index is 1, not 0.
+# two sum ii: Like two sum, but integer array is SORTED. "1-indexed" array: first index is 1, not 0.
 
 # Plan: Use 2 pointers for indices, left and right. Sum nums[left] + nums[right].
 # Loop while left < right:
