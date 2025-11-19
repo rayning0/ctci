@@ -2,15 +2,14 @@
 
 # Time: O(log n), Space: O(1)
 def search(nums, target)
-  left, right = 0, nums.size - 1
+  l, r = 0, nums.size - 1
 
-  while left <= right # need "<=" to solve odd sized arrays
-    mid = (left + right) / 2
-
-    if nums[mid] < target
-      left += 1
-    elsif nums[mid] > target
-      right -= 1
+  while l <= r # need "<=" to solve odd sized arrays
+    mid = (l + r) / 2
+    if nums[mid] > target
+      r -= 1
+    elsif nums[mid] < target
+      l += 1
     else
       return mid
     end
