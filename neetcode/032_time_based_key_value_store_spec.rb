@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/time-based-key-value-store/description/?envType=problem-list-v2&envId=plakya4j
-
+# Key point: "All the timestamps of set are strictly increasing"!
+# Thus they're ALREADY sorted as we insert more entries with set().
 # Use binary search
 # Space: O(m * n), m = total keys, n = # of vals linked to a key
 class TimeMap
@@ -15,57 +16,51 @@ class TimeMap
 =end
 
 # Time: O(1)
-# As you set new timestamps for same key, must keep them sorted! Maybe use maxheap?
-# {key => {ts1 => val1, ts2 => val2, ts3 => val3, ...}}
+# Since "All the timestamps of set are strictly increasing"!
+# As we set new timestamps for same key, they're ALREADY sorted.
+# {key => [[ts1, val1], [ts2 , val2], ...]}
   def set(key, value, timestamp)
     if @hash[key]
-      @hash[key][timestamp] = value
+      @hash[key] << [timestamp, value]
     else
-      @hash[key] = {timestamp => value}
+      @hash[key] = [[timestamp, value]]
     end
   end
 
 # Time: O(log n)
-# get(String key, int timestamp) Return most recent value of key if set() was
+# get(String key, int timestamp) most recent value of key if set() was
 # previously called on it and most recent timestamp for that key (prev_timestamp <= timestamp).
 # If no values for key, return ''
   def get(key, timestamp)
-    return '' if !@hash.key?(key)
+    return '' if !@hash[key]
 
-    timestamps = @hash[key].keys.sort # This uses O(n log n) and violates O(log n) requirement!
-    closest_ts = closest_search(timestamps, timestamp)
+    entries = @hash[key] # [[ts1, val1], [ts2 , val2], ...]
+    closest = closest_entry(entries, timestamp)
 
-    closest_ts ? @hash[key][closest_ts] : ''
+    closest ? closest[1] : ''
   end
 
-  # find closest timestamp <= target
-  def closest_search(nums, target)
-    # handle out of bounds timestamps
-    return nums.last if target > nums.last
-    return nil if target < nums.first
-
+  # Since entries already sorted by timestamp, we may use binary search.
+  # Find closest entry with timestamp <= target.
+  # entries = [[ts1, val1], [ts2 , val2], ...]
+  def closest_entry(entries, timestamp)
     # binary search
-    l, r = 0, nums.size - 1
+    l, r = 0, entries.size - 1
     mid = 0
+    closest_entry = nil
+
     while l <= r
       mid = (l + r) / 2
 
-      if nums[mid] > target
-        r -= 1
-      elsif nums[mid] < target
-        l += 1
-      elsif nums[mid] == target
-        return target
+      if entries[mid][0] > timestamp # no entries with later timestamp could be solution
+        r = mid - 1
+      elsif entries[mid][0] <= timestamp
+        closest_entry = entries[mid]
+        l = mid + 1
       end
     end
 
-    # can't find exact target, so give closest timestamp < target
-    next_val = nums[mid + 1]
-    if next_val && next_val < target
-      next_val
-    else
-      nums[mid - 1]
-    end
+    closest_entry
   end
 end
 
@@ -90,16 +85,16 @@ describe '#TimeMap class' do
     expect(time_map.get("alice", 3)).to eq 'sad'
   end
 
-  it '#closest_search' do
+  it '#closest_entry' do
     time_map = TimeMap.new
-    nums = [1, 4, 6]
-    expect(time_map.closest_search(nums, 0)).to eq nil
-    expect(time_map.closest_search(nums, 1)).to eq 1
-    expect(time_map.closest_search(nums, 2)).to eq 1
-    expect(time_map.closest_search(nums, 3)).to eq 1
-    expect(time_map.closest_search(nums, 4)).to eq 4
-    expect(time_map.closest_search(nums, 5)).to eq 4
-    expect(time_map.closest_search(nums, 6)).to eq 6
-    expect(time_map.closest_search(nums, 10)).to eq 6
+    entries = [[1, 'ray'], [4, 'gan'], [6, 'man']]
+    expect(time_map.closest_entry(entries, 0)).to eq nil
+    expect(time_map.closest_entry(entries, 1)).to eq [1, 'ray']
+    expect(time_map.closest_entry(entries, 2)).to eq [1, 'ray']
+    expect(time_map.closest_entry(entries, 3)).to eq [1, 'ray']
+    expect(time_map.closest_entry(entries, 4)).to eq [4, 'gan']
+    expect(time_map.closest_entry(entries, 5)).to eq [4, 'gan']
+    expect(time_map.closest_entry(entries, 6)).to eq [6, 'man']
+    expect(time_map.closest_entry(entries, 10)).to eq [6, 'man']
   end
 end
