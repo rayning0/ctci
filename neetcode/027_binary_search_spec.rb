@@ -7,9 +7,9 @@ def search(nums, target)
   while l <= r # need "<=" to solve odd sized arrays
     mid = (l + r) / 2
     if nums[mid] > target
-      r -= 1
+      r = mid - 1
     elsif nums[mid] < target
-      l += 1
+      l = mid + 1
     else
       return mid
     end
