@@ -48,6 +48,7 @@
 # end
 
 # 3. Even better: MinHeap with size limit
+# Delete all lower freq nums from heap. Only max freq nums remain.
 
 # Time: O(n log k), Space: O(n)
 # - Build freq hash: O(n)
@@ -70,7 +71,7 @@
 #   min_heap = MinHeap.new
 #   freq.each do |num, count|
 #     min_heap << [count, num]
-#     min_heap.pop if min_heap.size > k # deletes all lower freq nums
+#     min_heap.pop if min_heap.size > k # deletes all lower freq nums from heap
 #   end
 
 #   k.times.map { min_heap.pop[1] }

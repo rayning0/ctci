@@ -4,16 +4,22 @@
 
 # 1. HashMap
 # Time: O(n + m), Space: O(1) since have at most 26 "lowercase English letters"
+from collections import Counter
+
+
 def validAnagram(s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
 
-    freqS, freqT = {}, {}
-    for i in range(len(s)):
-        # dict.get(key, default) gives value of hashmap if key exists, else gives default
-        # Most common way to make frequency hashmap:
-        freqS[s[i]] = freqS.get(s[i], 0) + 1
-        freqT[t[i]] = freqT.get(t[i], 0) + 1
+    freqS, freqT = Counter(s), Counter(t)
+
+    # freqS, freqT = {}, {}
+    # for i in range(len(s)):
+    #     # dict.get(key, default) gives value of hashmap if key exists, else gives default
+    #     # Most common way to make frequency hashmap:
+    #     freqS[s[i]] = freqS.get(s[i], 0) + 1
+    #     freqT[t[i]] = freqT.get(t[i], 0) + 1
+
     return freqS == freqT
 
 

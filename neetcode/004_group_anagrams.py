@@ -1,6 +1,21 @@
 # https://leetcode.com/problems/group-anagrams/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/problems/anagram-groups/solution
 
+# If don't use defaultdict():
+# def groupAnagrams(strs: list[str]) -> list[list[str]]:
+#     hash = {}
+#     for s in strs:
+#         count = [0] * 26
+#         for c in s:
+#             count[ord(c) - ord("a")] += 1
+
+#         if tuple(count) not in hash:
+#             hash[tuple(count)] = []
+#         hash[tuple(count)].append(s)
+
+#     return list(hash.values())
+
+
 from collections import defaultdict
 
 
@@ -9,14 +24,12 @@ def groupAnagrams(strs: list[str]) -> list[list[str]]:
     # key = freq count array, val = [list of strings matching it]
     hash = defaultdict(list)  # default value = []
 
-    # When you create a defaultdict, you specify a default_factory (a callable).
+    # When you create defaultdict, you specify a default_factory (a callable).
 
     # If the key exists: its value is returned.
     # If the key does not exist: default_factory is called to generate a default value.
 
-    # int: returns 0
-    # list: returns []
-    # str: returns ""
+    # int: returns 0, list: returns [], str: returns ""
 
     for s in strs:
         count = [0] * 26  # freq count array for s
