@@ -1,4 +1,4 @@
-# https://leetcode.com/problems/top-k-frequent-elements/
+# https://leetcode.com/problems/top-k-frequent-elements/description/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/solutions/top-k-frequent-elements
 
 from collections import Counter
@@ -89,3 +89,29 @@ if __name__ == "__main__":
     assert topKFrequent([7, 7], 1) == [7]
     assert topKFrequent([1, 2, 1, 2, 1, 2, 3, 1, 3, 2], 2) == [1, 2]
     print("All tests passed!")
+
+# WRONG!
+# for n in nums.reverse():
+#     print(n)
+
+# nums.reverse() returns None. Can't loop over it!
+
+# RIGHT:
+# for n in reversed(nums):
+#     print(n)
+
+# reversed() and reverse() are used to reverse the order of elements, but differ in their application, return value, and whether they modify the original object.
+
+# 1. list.reverse() Method:
+# Applicability: Only for Python lists. Can't with with other iterables like strings or tuples.
+# Changes list in-place. Directly changes the order of elements in original list object.
+# Returns None. It does not create new list or return reversed version; it simply changes existing list.
+
+# 2. reversed():
+# Built-in function for any iterable object: lists, tuples, strings, range, etc.
+# Non-destructive: reversed() doesn't change original iterable. Instead, returns a reversed iterator object.
+# Returns an iterator that yields the elements of the original iterable in reverse order. To get a new list or tuple, you need to explicitly convert iterator (e.g., using list() or tuple()).
+
+# Use list.reverse() when you must reverse a list and no longer need the original order, and you want to save memory by modifying the list directly.
+
+# Use reversed() when you must iterate over an iterable in reverse order without changing original, or when working with non-list iterables like strings or tuples.

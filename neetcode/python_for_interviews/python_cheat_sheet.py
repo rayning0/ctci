@@ -114,8 +114,24 @@ float("inf")
 # negative infinity
 float("-inf")
 
-# ARRAYS
-# Arrays (called lists in python)
+# ARRAYS/LISTS
+# Arrays (or "lists" in python)
+You can't do this!
+arr = []
+arr[0] = 5
+arr[1] = 6
+
+Python lists don't auto-expand on index assignment. You must either initialize the list with the required size or use append() to add!
+arr = [0] * 2
+arr[0] = 5
+arr[1] = 6
+
+OR
+
+arr = []
+arr.append(5)
+arr.append(6)
+
 arr = [1, 2, 3]
 print(arr)
 
@@ -202,6 +218,33 @@ for n1, n2 in zip(nums1, nums2):
 nums = [1, 2, 3]
 nums.reverse() = [3, 2, 1] # like nums.reverse! in Ruby
 print(nums)
+
+# WRONG!
+for n in nums.reverse():
+    print(n)
+
+nums.reverse() returns None. Can't loop over it!
+
+# RIGHT:
+for n in reversed(nums):
+    print(n)
+
+# reversed() and reverse() are used to reverse the order of elements, but differ in their application, return value, and whether they modify the original object.
+
+# 1. list.reverse() Method:
+# Applicability: Only for Python lists. Can't with with other iterables like strings or tuples.
+# Changes list in-place. Directly changes the order of elements in original list object.
+# Returns None. It does not create new list or return reversed version; it simply changes existing list.
+
+# 2. reversed():
+# Built-in function for any iterable object: lists, tuples, strings, range, etc.
+# Non-destructive: reversed() doesn't change original iterable. Instead, returns a reversed iterator object.
+# Returns an iterator that yields the elements of the original iterable in reverse order. To get a new list or tuple, you need to explicitly convert iterator (e.g., using list() or tuple()).
+
+Use list.reverse() when you must reverse a list and no longer need the original order, and you want to save memory by modifying the list directly.
+
+Use reversed() when you must iterate over an iterable in reverse order without changing original, or when working with non-list iterables like strings or tuples.
+
 
 # Sorting
 arr = [5, 4, 7, 3, 8]
