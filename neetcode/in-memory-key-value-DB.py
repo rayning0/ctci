@@ -17,39 +17,6 @@
 
 # Within a transaction, the data is transient, unless the commit() function is invoked. Outside of transaction, any change of data is applied immediately to database.
 
-# Example 1:
-
-# begin()
-# set("foo", "bar")
-# get("foo") -> "bar"
-# begin()
-# get("foo") -> "bar"
-# set("foo", "baz")
-# get("foo") -> "baz"
-# rollback()
-# get("foo") -> "bar"
-# commit()
-# get("foo") -> "bar"
-
-# Example 2:
-
-# begin()
-# set("foo", "bar")
-# begin()
-# set("foo", "baz")
-# commit()
-# get("foo") -> "baz"
-
-# Example 3:
-# set("foo", "baz")
-# begin()
-# get("foo") -> "baz"
-# set("foo", "bar")
-# commit()
-# begin()
-# delete("foo")
-# etc...
-
 
 class KeyValueDB:
     """
