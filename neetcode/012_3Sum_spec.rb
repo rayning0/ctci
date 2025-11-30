@@ -9,7 +9,7 @@
 # Video explanations: https://youtube.com/watch?v=IIxoo93bmPQ
 # https://www.youtube.com/watch?v=jzZsG8n2R9A
 
-# Time: O(n*n), Space: O(n)
+# Time: O(n^2), Space: O(n)
 def three_sum(nums)
   ans = []
   nums.sort!
