@@ -265,7 +265,59 @@ arr.sort(key = lambda x: len(x))
 arr.sort(key = lambda x: len(x), reverse = True) # sort by reverse string length
 ['alice', 'jane', 'bob', 'doe']
 
-# List comprehension
+# 1. Use list.sort() when:
+# You are working with a list.
+# You don't need to preserve the original order of the list.
+# Memory efficiency is a critical concern, especially with large lists.
+# For in-place modification of lists when you don't need the original order
+
+# 2. Use sorted() when:
+# You need to sort any iterable (not just lists).
+# You need to preserve the original iterable's order.
+# You prefer a more functional approach that produces new data rather than modifying existing data.
+# For generating new sorted list from any iterable while preserving original, giving greater flexibility.
+
+# Sort hash by keys, then values
+scores = {
+  "Bob": 85,
+  "Eve": 92,
+  "Alice": 78,
+  "David": 92,
+  "Charlie": 85
+}
+
+> scores.sort() <--- WRONG! Hash isn't list. Must use sorted().
+
+> sorted_keys = sorted(scores)
+> print(f"Sorted by keys: {sorted_keys}")
+['Alice', 'Bob', 'Charlie', 'David', 'Eve']
+
+# Sort by values first (ascending score), then keys (ascending names) for any tied scores.
+> sort_by_score_then_name = sorted(scores.items(), key=lambda item: (item[1], item[0]))
+[('Alice', 78), ('Bob', 85), ('Charlie', 85), ('David', 92), ('Eve', 92)]
+
+# Sort by values first (descending score), then keys (ascending names) for ties
+> sort_by_score_desc_then_name = sorted(scores.items(), key=lambda item: (-item[1], item[0]))
+[('David', 92), ('Eve', 92), ('Bob', 85), ('Charlie', 85), ('Alice', 78)]
+
+# OR
+# def sort_key(item):
+#     word, count = item
+#     return (-count, word)
+
+# sort_by_score_desc_then_name = sorted(scores.items(), key=sort_key)
+
+## List comprehension
+
+# instead of saying:
+for name, count in sort_by_score_desc_then_name[:3]
+    name
+
+# you can say:
+> [name for name, count in sort_by_score_desc_then_name[:3]] <--- [:k] gives first k items from list
+['David', 'Eve', 'Bob']
+
+
 arr = [i for i in range(5)] = [0, 1, 2, 3, 4]
 arr = [2*i for i in range(5)] = [0, 2, 4, 6, 8]
 
