@@ -398,7 +398,10 @@ myMap["alice"] = 80
 print(myMap["alice"]) = 80
 
 print("alice" in myMap) = True
+
 myMap.pop("alice") = 80
+or del myMap["alice"]  <--- either way deletes key "alice"
+
 print("alice" in myMap) = False
 
 myMap = { "alice": 90, "bob": 70 }
