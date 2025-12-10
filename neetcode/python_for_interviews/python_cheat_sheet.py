@@ -321,6 +321,30 @@ for name, count in sort_by_score_desc_then_name[:3]
 arr = [i for i in range(5)] = [0, 1, 2, 3, 4]
 arr = [2*i for i in range(5)] = [0, 2, 4, 6, 8]
 
+## 3 ways to filter list:
+1. list comprehension:
+
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens = [num for num in nums if num % 2 == 0]
+
+2. filter():
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens = list(filter(lambda num: num % 2 == 0, nums))
+
+def is_even(num):
+    return num % 2 == 0
+
+iterator = filter(is_even, nums)
+evens = list(iterator)
+
+3. for loop:
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens = []
+for num in nums:
+    if num % 2 == 0:
+        evens.append(num)
+
+
 # 2-D lists
 arr = [[0] * 4 for i in range(2)] = [[0, 0, 0, 0], [0, 0, 0, 0]] # <--- 4 = cols, 2 = rows
 arr[1][2]     = 3 => arr = [[0, 0, 0, 0], [0, 0, 3, 0]]
