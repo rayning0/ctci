@@ -265,6 +265,12 @@ arr.sort(key = lambda x: len(x))
 arr.sort(key = lambda x: len(x), reverse = True) # sort by reverse string length
 ['alice', 'jane', 'bob', 'doe']
 
+> intervals = [[7,10], [2,4], [1, 11]]
+> intervals.sort(key = lambda x: x[0]) # sort by 1st element in array
+[[1, 11], [2, 4], [7, 10]]
+> intervals.sort(key = lambda x: x[1]) # sort by 2nd element in array
+[[2, 4], [7, 10], [1, 11]]
+
 # 1. Use list.sort() when:
 # You are working with a list.
 # You don't need to preserve the original order of the list.
