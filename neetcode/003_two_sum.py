@@ -1,6 +1,9 @@
 # https://leetcode.com/problems/two-sum/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/problems/two-integer-sum/solution
 
+# Plan: Use hashmap where key = num, val = index.
+# If diff in hashmap, return indices of diff and num.
+
 # Time: O(n), Space: O(n)
 def twoSum(nums: list[int], target: int) -> list[int]:
     seen = {}
@@ -8,8 +11,8 @@ def twoSum(nums: list[int], target: int) -> list[int]:
         diff = target - num
         if diff in seen:
             return [seen[diff], i]
-        else:
-            seen[num] = i
+        seen[num] = i
+    return []
 
 
 if __name__ == "__main__":
