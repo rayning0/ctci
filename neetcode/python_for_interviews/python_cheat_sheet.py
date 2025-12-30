@@ -95,6 +95,7 @@ print(int(-3/2))
 
 # To match other languages:
 import math
+from typing import Any
 
 math.fmod(-10, 3) = -1
 math.floor(3 / 2) = 1
@@ -657,3 +658,46 @@ class MyClass:
 obj = MyClass([1, 2, 3])
 obj.getLength() = 3
 obj.getDoubleLength = 6
+
+# 4 ways to make freq hash of a list:
+
+nums = [2, 1, 3, 2, 3, 0, 2]
+freq = {}
+
+for n in nums:
+    if n in freq:
+        freq[n] += 1
+    else:
+        freq[n] = 1
+
+freq = {2: 3, 1: 1, 3: 2, 0: 1}
+
+OR (** Preferred Way **)
+
+for n in nums:
+    # dict.get(key, default) ---
+    # if key exists, give value of hashmap, else gives default
+    freq[n] = freq.get(n, 0) + 1
+
+freq = {2: 3, 1: 1, 3: 2, 0: 1}
+
+OR
+
+from collections import Counter
+freq = Counter(nums)
+
+freq = Counter({2: 3, 3: 2, 1: 1, 0: 1})
+
+OR
+
+from collections import defaultdict
+freq = defaultdict(int)
+for n in nums:
+    freq[n] += 1
+
+freq = defaultdict(<class 'int'>, {2: 3, 1: 1, 3: 2, 0: 1})
+
+# defaultdict automatically gives default value to keys that don't exist
+# defaultdict(int) default val = 0
+# defaultdict(list) default val = []
+# defaultdict(str) default val = ""
