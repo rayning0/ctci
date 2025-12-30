@@ -4,24 +4,20 @@
 
 # Time: O(n), Space: O(1)
 def maxProfit(prices: list[int]) -> int:
-    if len(prices) == 1:  # no way to get profit from 1 price
-        return 0
+    l, max_profit = 0, 0
 
-    l, r = 0, 1
-    max_profit = 0
-
-    while r < len(prices):
-        if prices[l] < prices[r]:
+    for r in range(1, len(prices)):
+        if prices[l] > prices[r]:
+            l = r
+        else:
             profit = prices[r] - prices[l]
             max_profit = max(max_profit, profit)
-        else:
-            l = r
 
-        r += 1
     return max_profit
 
 
 if __name__ == "__main__":
+    assert maxProfit([2]) == 0
     assert maxProfit([2, 1, 4]) == 3
     assert maxProfit([7, 1, 5, 3, 6, 4]) == 5
     assert maxProfit([7, 6, 4, 3, 1]) == 0
