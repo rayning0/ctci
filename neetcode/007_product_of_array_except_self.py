@@ -1,31 +1,42 @@
 # https://leetcode.com/problems/product-of-array-except-self/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/solutions/product-of-array-except-self
 
-#      1   [4,     5,         10,         15  ]  1 = nums
+#          [4,     5,         10,         15  ]    = nums
 #     [     1      1*4        1*4*5     1*4*5*10 ] = left product (prefix)
 #     [ 1*5*10*15  1*10*15    1*15         1     ] = right product (suffix)
 # __________________________________________________
 # Multiply down vertically:
 # Res=[1*5*10*15  1*4*10*15   1*4*5*15  1*4*5*10 ]
 
+# def productExceptSelf(nums: list[int]) -> list[int]:
+#     size = len(nums)
+#     left, right = [1] * size, [1] * size
+
+#     for i in range(1, size):  # left index from 1 to size - 1
+#         left[i] = left[i - 1] * nums[i - 1]
+
+#     for j in range(size - 2, -1, -1):  # right index from size - 2 (1 before end) to 0
+#         right[j] = right[j + 1] * nums[j + 1]
+
+#     # list comprehension
+#     return [left[i] * right[i] for i in range(size)]
+#     # return [l * r for l, r in zip(left, right)] <--- could use zip()
+
 # Time: O(n), Space: O(n)
 def productExceptSelf(nums: list[int]) -> list[int]:
     size = len(nums)
-    left, right = [1] * size, [1] * size
+    left, right = 1, 1
+    prefix, suffix = [1] * size, [1] * size
 
-    for i in range(1, size):  # left index from 1 to size - 1
-        left[i] = left[i - 1] * nums[i - 1]
+    for i in range(1, size):
+        left *= nums[i - 1]
+        prefix[i] = left
 
-    for j in range(size - 2, -1, -1):  # right index from size - 2 (1 before end) to 0
-        right[j] = right[j + 1] * nums[j + 1]
+    for i in range(size - 2, -1, -1):
+        right *= nums[i + 1]
+        suffix[i] = right
 
-    # res = [0] * size
-    # for i in range(size):
-    #     res[i] = left[i] * right[i]
-
-    # list comprehension
-    return [left[i] * right[i] for i in range(size)]
-    # return [l * r for l, r in zip(left, right)] <--- could use zip()
+    return [prefix[i] * suffix[i] for i in range(size)]
 
 
 if __name__ == "__main__":
