@@ -1,19 +1,13 @@
 # https://leetcode.com/problems/top-k-frequent-elements/description/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/solutions/top-k-frequent-elements
 
-from collections import Counter
-
-
 # 1. Naive answer: Make freq hash of nums. Make array of [count, num].
 # Sort it by count. Take last k elements.
-# Time: O(n log n), Space: O(n)
+# Time: O(n log n), Space: O(n + k)
 # def topKFrequent(nums: list[int], k: int) -> list[int]:
-
-#     freq = Counter(nums)
-#       ...OR...
 #     freq = {}
-#     # for n in nums:
-#     #     freq[n] = freq.get(n, 0) + 1
+#     for n in nums:
+#         freq[n] = freq.get(n, 0) + 1
 
 #     arr = []
 #     for num, count in freq.items():
@@ -27,40 +21,33 @@ from collections import Counter
 
 # 2. Better: MinHeap with size limit
 # Delete all lower freq nums from heap. Only max freq nums remain.
-# Time: O(n log k), Space: O(n)
+# Time: O(n log k), Space: O(n + k)
 # import heapq
 
-
 # def topKFrequent(nums: list[int], k: int) -> list[int]:
+#     freq = {}
 #     minHeap = []
-#     freq = Counter(nums)
+#     for n in nums:
+#         freq[n] = freq.get(n, 0) + 1
 
-#     for num, count in freq.items():
-#         heapq.heappush(minHeap, [count, num])
+#     for n, count in freq.items():
+#         heapq.heappush(minHeap, [count, n])
 #         if len(minHeap) > k:
 #             heapq.heappop(minHeap)  # delete all lower freq nums from heap
-
-#     return [item[1] for item in minHeap]
-# OR return [num for count, num in minHeap]
+#     return [n for count, n in minHeap]
+# OR  return [item[1] for item in minHeap]
 
 
 # 3. Best! Bucket Sort
 # Time: O(n), Space: O(n)
 def topKFrequent(nums: list[int], k: int) -> list[int]:
-    freq = Counter(nums)
-    #     OR
-    # freq = {}
-    # for n in nums:
-    #   freq[n] = freq.get(n, 0) + 1
-    #     OR
-    # freq = {}
-    # for n in nums:
-    #   if n in freq:
-    #       freq[n] += 1
-    #   else:
-    #       freq[n] = 0
+    freq = {}
+    for n in nums:
+        freq[n] = freq.get(n, 0) + 1
 
     # Make list of counts: index = count, value = [nums with that count]
+    # Use list comprehension to create separate lists (not shared references!)
+    # bucket = [[]] * (len(nums) + 1) <--- WRONG!!!
     bucket = [[] for i in range(len(nums) + 1)]
     # add 1 to size so we count freq from 1 to len(nums)
 
@@ -68,26 +55,34 @@ def topKFrequent(nums: list[int], k: int) -> list[int]:
         bucket[count].append(num)
 
     res = []
-    # Loop backwards through counts (highest to lowest count)
+    # Loop backwards, from highest to lowest count
     for vals in reversed(bucket):
         res += vals  # concatenates lists
         if len(res) >= k:
             # returns first k elements
             return res[:k]
 
-    # for i in range(len(bucket) - 1, 0, -1):
-    #     for num in bucket[i]:
-    #         res.append(num)
-    #         if (len(res)) == k:
-    #             return res
+
+# for i in range(len(bucket) - 1, -1, -1):
+#     for num in bucket[i]:
+#         res.append(num)
+#         if (len(res)) == k:
+#             return res
 
 
 # Tests
 if __name__ == "__main__":
     assert topKFrequent([1, 1, 1, 2, 2, 3], 2) == [1, 2]
+    # freq = {1: 3, 2: 2, 3: 1}
+    # bucket = [[], [3], [2], [1], [], [], []]
+
+    assert topKFrequent([1, 2, 1, 2, 1, 2, 3, 1, 3, 2], 2) == [1, 2]
+    # freq = {1: 4, 2: 4, 3: 2}
+    # bucket = [[], [], [3], [], [1, 2], [], [], [], [], [], []]
+
     assert topKFrequent([1], 1) == [1]
     assert topKFrequent([7, 7], 1) == [7]
-    assert topKFrequent([1, 2, 1, 2, 1, 2, 3, 1, 3, 2], 2) == [1, 2]
+
     print("All tests passed!")
 
 # WRONG!
