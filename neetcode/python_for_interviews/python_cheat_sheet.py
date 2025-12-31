@@ -230,6 +230,11 @@ nums.reverse() returns None. Can't loop over it!
 for n in reversed(nums):
     print(n)
 
+OR
+
+for i in range(len(nums) - 1, -1, -1):
+    print(nums[i])
+
 # reversed() and reverse() are used to reverse the order of elements, but differ in their application, return value, and whether they modify the original object.
 
 # 1. list.reverse() Method:
