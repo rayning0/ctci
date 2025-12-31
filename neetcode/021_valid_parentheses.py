@@ -11,7 +11,7 @@ def isValid(s: str) -> bool:
         if c in rparen:
             # 1. if stack length > 0 and last stack item is matching left paren, pop it off
             # Ex: stack = "[]{(" and c = ")"
-            if len(stack) > 0 and stack[-1] == rparen[c]:
+            if len(stack) > 0 and rparen[c] == stack[-1]:
                 # "if stack" also means "if len(stack) > 0"
                 stack.pop()
 
@@ -26,10 +26,7 @@ def isValid(s: str) -> bool:
         else:
             stack.append(c)
 
-    if len(stack) == 0:
-        # "if not stack" also means "if len(stack) == 0"
-        return True
-    return False
+    return stack == []
 
 
 # Tests
