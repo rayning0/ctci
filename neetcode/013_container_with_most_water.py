@@ -3,17 +3,16 @@
 # 2 pointers
 
 # Time: O(n), Space: O(1)
-def maxArea(heights: list[int]) -> int:
-    l, r = 0, len(heights) - 1
+def maxArea(height: list[int]) -> int:
+    l, r = 0, len(height) - 1
     max_area = 0
 
     while l < r:
         width = r - l
-        height = min(heights[l], heights[r])
-        area = width * height
-        max_area = max(max_area, area)
+        ht = min(height[l], height[r])
+        max_area = max(max_area, width * ht)
 
-        if heights[l] < heights[r]:
+        if height[l] < height[r]:
             l += 1
         else:
             r -= 1
