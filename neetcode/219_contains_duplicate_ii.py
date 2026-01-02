@@ -3,13 +3,14 @@
 # Hashmap
 # Time: O(n), Space: O(n)
 def containsNearbyDuplicate(nums: list[int], k: int) -> bool:
-    hash = {}
+    seen = {}
     for j in range(len(nums)):
-        # if nums[j] in hash, we already saw nums[j] at earlier i != j
-        # hash[nums[j]] is this earlier i.
-        if nums[j] in hash and abs(hash[nums[j]] - j) <= k:
+        # if nums[j] in seen, we already saw it at earlier i != j
+        # KEY: seen[nums[j]] is really this earlier i!
+        if nums[j] in seen and abs(seen[nums[j]] - j) <= k:
             return True
-        hash[nums[j]] = j
+        seen[nums[j]] = j
+
     return False
 
 
