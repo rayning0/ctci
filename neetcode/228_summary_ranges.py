@@ -9,14 +9,14 @@ def summaryRanges(nums: list[int]) -> list[str]:
     # outer loop walks the whole range
     while i < len(nums):
         start = nums[i]
-        # loop thru all consecutive nums of subrange. we pick (i + 1) so
-        # final i is "end" of subrange, not 1 beyond it!
-        while i + 1 < len(nums) and nums[i + 1] == nums[i] + 1:
+        # loop thru all consecutive nums of subrange. check we don't go beyond end.
+        while i < len(nums) - 1 and nums[i + 1] == nums[i] + 1:
             i += 1
         end = nums[i]
 
         if start == end:
-            res.append(str(start))
+            res.append(f"{start}")
+            # OR res.append(str(start))
         else:
             res.append(f"{start}->{end}")
         i += 1
@@ -30,11 +30,3 @@ if __name__ == "__main__":
     assert summaryRanges([5]) == ["5"]
     assert summaryRanges([]) == []
     print("All tests passed!")
-
-# 	1.	Set start = first number
-# (start of the current range)
-# 	2.	Loop through the array:
-# 	•	If the next number is not consecutive,
-# → push the finished range into the result
-# → start a new range
-# 	3.	After the loop, close the final range.
