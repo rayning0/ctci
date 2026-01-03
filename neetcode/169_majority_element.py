@@ -1,20 +1,19 @@
 # https://leetcode.com/problems/majority-element/description/?envType=company&envId=netflix&favoriteSlug=netflix-all
 # https://neetcode.io/problems/majority-element/question?list=neetcode250
 
-from collections import Counter
+# from collections import Counter
 
 
 # Time: O(n), Space: O(n)
 def majorityElement(nums: list[int]) -> int:
+    # freq = Counter(nums)
+
+    freq = {}
     maxCount = len(nums) // 2
-    freq = Counter(nums)
 
-    # freq = {}
-    # for n in nums:
-    #     freq[n] = freq.get(n, 0) + 1
-
-    for n, count in freq.items():
-        if count > maxCount:
+    for n in nums:
+        freq[n] = freq.get(n, 0) + 1
+        if freq[n] > maxCount:
             return n
 
 
