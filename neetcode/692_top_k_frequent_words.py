@@ -5,14 +5,14 @@ from collections import Counter
 import heapq
 
 
-# Brute Force is simplest
+# Brute Force
 # Time: O(n log n), Space: O(n)
 def topKFrequent(words: list[str], k: int) -> list[str]:
     freq = Counter(words)
 
     # Sort by frequency (descending), then by word (ascending/lexicographical)
     # Use -count for descending order, word for ascending lexicographical order
-    sorted_freq = sorted(freq.items(), key=lambda item: (-item[1], item[0]))
+    sorted_freq = sorted(freq.items(), key=lambda x: (-x[1], x[0]))
 
     # ...OR...
     # def sort_key(item):
@@ -24,35 +24,44 @@ def topKFrequent(words: list[str], k: int) -> list[str]:
     return [word for word, count in sorted_freq[:k]]
 
 
-# Min heap is best Big O time, but hard to remember
+# Min heap gets best Big O time!
 # Time: O(n log k), Space: O(n)
 def topKFrequentHeap(words: list[str], k: int) -> list[str]:
     """
-    Min heap approach: More efficient when k << n.
-    Manually maintain a min heap of size k using heappush/heappop.
-
-    Key insight: We use (-count, word) as the heap key. When we need to remove
-    an item (heap size > k), we want to remove the one with smallest count OR
-    (same count AND largest word). This is the "largest" item by tuple comparison.
-    Since heapq only gives us access to the smallest (root), we find and remove
-    the worst item manually when needed.
+    Simplest heap approach: Use nsmallest with correct key.
     """
     freq = Counter(words)
+    sorted_freq = heapq.nsmallest(k, freq.items(), key=lambda x: (-x[1], x[0]))
+    return [word for word, count in sorted_freq]
 
-    heap = []
-    for word, count in freq.items():
-        heapq.heappush(heap, (-count, word))
-        if len(heap) > k:
-            # Find the worst item to remove: smallest count or (same count, largest word)
-            # In tuple terms: largest (-count, word) by comparison
-            worst = max(heap)
-            heap.remove(worst)
-            heapq.heapify(heap)  # Re-heapify after removal
 
-    # Sort final result: by -count (descending count), then word (ascending)
-    result = sorted(heap)
-    return [word for count, word in result]
+# Breakdown of heapq.nsmallest(k, freq.items(), key=lambda x: (-x[1], x[0])):
 
+# 1. freq.items() → [('i', 2), ('love', 2), ('leetcode', 1), ('coding', 1)]
+# Iterable of (word, count) tuples
+
+# 2. key=lambda x: (-x[1], x[0])
+# x = each (word, count) tuple
+# x[0] = word, x[1] = count
+# Transforms to (-count, word) for comparison only
+
+# 3. Key transformation (for comparison):
+# ('i', 2) → key = (-2, 'i')
+# ('love', 2) → key = (-2, 'love')
+# ('leetcode', 1) → key = (-1, 'leetcode')
+# ('coding', 1) → key = (-1, 'coding')
+
+# 4. nsmallest(k=2, ...) finds 2 smallest by key:
+# Compares keys: (-2, 'i'), (-2, 'love'), (-1, 'leetcode'), (-1, 'coding')
+# Smallest 2: (-2, 'i') and (-2, 'love')
+
+# 5. Returns original items (not keys!):
+# Returns: [('i', 2), ('love', 2)]
+# Already sorted by the key function
+
+# 6. Extract words:
+# [word for word, count in sorted_freq] → ['i', 'love']
+# Result: The k most frequent words, sorted by frequency (descending) then word (ascending).
 
 if __name__ == "__main__":
     # Test original function
