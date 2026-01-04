@@ -59,19 +59,19 @@ def containsNearbyAlmostDuplicate(
 
         bindex = window.bisect_left(low)
 
-        # bisect_left() finds index where new element can be inserted at value while keeping sort order of window.
+        # bisect_left() finds index where new element can be inserted at value while keeping sort order of window. Same as binary search.
         # - If value already there: index returned will be to left of any existing entries of that value. index points to first element in window >=  value.
         # - If value not there: index points to where value would be inserted to keep window sorted. All items to left of returned index < value, and all items to right >= value.
         # Time: O(log n)
 
         # ---Manual algorithm for bisect_left(). It runs too slowly in LeetCode.---
-        # wl, wr = 0, len(window)
-        # while wl < wr:
+        # wl, wr = 0, len(window) - 1
+        # while wl <= wr:
         #     mid = (wl + wr) // 2
         #     if window[mid] < low:
         #         wl = mid + 1
         #     else:
-        #         wr = mid
+        #         wr = mid - 1
         # bindex = wl
 
         if bindex < len(window) and window[bindex] <= high:
