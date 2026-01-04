@@ -6,12 +6,13 @@ def merge(intervals: list[list[int]]) -> list[list[int]]:
     ints = sorted(intervals)
     res = []
     for int in ints:
-        # if res == [] or if NO OVERLAP! Ex: res = [[2,6]], int = [8,10]
-        # Meaning: If 2nd val of last item of res < 1st value of int
+        # if res == [] or if NO overlap between last interval + new interval.
+        # Ex: res = [[2,6]], int = [8,10]
+        # 2nd val of last interval < 1st value of new interval
         if not res or res[-1][1] < int[0]:
             res.append(int)
         else:  # OVERLAP! Ex: [[1,3]], int = [2,6] => New res = [[1, 6]]
-            # Change 2nd val of last item of res to max of it and 2nd val of int. Ex: max(3, 6) = 6.
+            # Change 2nd val of last interval to max of it and 2nd val of new interval. max(3, 6) = 6.
             res[-1][1] = max(res[-1][1], int[1])
 
     return res
