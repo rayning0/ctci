@@ -7,20 +7,22 @@
 # are dynamically typed
 n = 0
 print("n =", n)
-# >>> n = 0
+>>> n = 0
 
 n = "abc"
 print("n =", n)
+>>> n = abc
 
 # String interpolation
 name = 'World'
 program = 'Python'
-print(f'Hello {name}! This is {program}')
+print(f'Hello {name}! This is {program}') # may be single or double quotes
+>>> Hello World! This is Python
 
 a = 12
 b = 3
 print(f'12 multiply 3 is {a * b}.')
-
+>>> 12 multiply 3 is 36.
 
 # >>> n = abc
 
@@ -32,7 +34,7 @@ n, m, z = 0.125, "abc", False
 n = 4
 n = None
 print("n =", n)
-# >>> n = None
+>>> n = None
 
 # IF-STATEMENTS
 
@@ -46,9 +48,12 @@ elif n == 2:
 else:
     n += 2
 
+Output for n: 3
+
+# LOGICAL OPERATORS: and, or, not.
+# Python runs operations in this order: not, and, or.
 # Parentheses needed for multi-line conditions.
-# and = &&
-# or  = ||
+
 n, m = 1, 2
 if (n > 2 and n != m) or n == m:
     n += 1
@@ -60,70 +65,111 @@ while n < 5:
     print(n)
     n += 1
 
-# Looping from i = 0 to i = 4
+# Looping from i = 0 to 4
 for i in range(5):
     print(i)
 
-# Looping from i = 2 to i = 5
+# Looping from i = 2 to 5
 for i in range(2, 6):
     print(i)
 
-# Looping from i = 5 to i = 2
+# Looping from i = 5 to 2
 for i in range(5, 1, -1):
     print(i)
+
+# Loop through collection:
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print(fruit)
+
+# Loop through collection with index:
+for i in range(len(fruits)):
+    print(i, fruits[i])
+
+# Loop through collection with index and value:
+for i, fruit in enumerate(fruits):
+    print(i, fruit)
+
+# Output:
+# 0 apple
+# 1 banana
+# 2 cherry
+
+colors = ["red", "yellow", "purple"]
+
+# Loop through multiple collections simultaneously:
+for fruit, color in zip(fruits, colors):
+    print(fruit, color)
+
+# Output:
+# apple red
+# banana yellow
+# cherry purple
 
 # MATH
 
 # Division is decimal by default
-print(5/2)
-2.5
+5/2
+>>> 2.5
 
-# Double slash rounds down
-print(5 // 2)
-2
+# Double slash mean "floor division." Results round DOWN to nearest integer.
+ 3 // 2  = 1 #  1.5 rounds down to 1
+-3 // 2 = -2 # -1.5 rounds down to -2
 
-# Most languages round towards 0 by default. Here, negative numbers round down.
-print(-3 // 2)
--2
+# A workaround to round towards 0: Use decimal division, then convert to int
+int(-3/2)
+>>> -1
+int(1.9)
+>>> 1
+int(-1.9)
+>>> -1
 
-# A workaround for rounding towards 0: Use decimal division, then convert to int
-print(int(-3/2))
--1
+# Remember: a = (a // b) * b + (a % b)
 
-10 % 3 = 1
--10 % 3 = 2 # negative values for mod are a surprise
+ 10 // 3 =  3     |  10 % 3 = 1
+-10 // 3 = -4     | -10 % 3 = 2, 10 % -3 = -2 <--- remainder has same sign as divisor
+
 
 # To match other languages:
 import math
-from typing import Any
 
 math.fmod(-10, 3) = -1
-math.floor(3 / 2) = 1
+math.floor(3 / 2) = 1   # same as 3 // 2
 math.ceil(3 / 2) = 2
-math.floor(-3 / 2) = -2
+math.floor(-3 / 2) = -2 # same as -3 // 2
 math.sqrt(2)
-math.pow(2, 3) = 8.0 #  <---- always gives float output
+math.pow(2, 3) = 8.0    # always gives float output
 2 ** 3 = 8
 
 math.pow(2, 200)
 1.6069380442589903e+60
-2**200
+
+2**200 # precise
 1606938044258990275541962092341162602522202993782792835301376
 
-# positive infinity
-float("inf")
-# negative infinity
-float("-inf")
+# Why doesn't it overflow? Python integers are arbitrary precision integers ("big integers"). They are implemented using a dynamically sized array of digits, allowing them to represent arbitrarily large numbers without overflow.
 
-# ARRAYS/LISTS
-# Arrays (or "lists" in python)
-You can't do this!
-arr = []
-arr[0] = 5
-arr[1] = 6
+# A Python int is actually an object that stores:
+# - The sign (positive or negative)
+# - The number of "digits" needed
+# - The digits themselves
 
-Python lists don't auto-expand on index assignment. You must either initialize the list with the required size or use append() to add!
-arr = [0] * 2
+# But Python floats DO overflow. Python floats are IEEE 754 double precision floating-point numbers, implemented with 64-bit binary representation, which can only represent a finite range of numbers (15-17 decimal digits of precision).
+
+# 64 bits total:
+# 1 sign bit
+# 11 exponent bits
+# 52 fraction bits
+
+2.0**1024
+>>> OverflowError: (34, 'Result too large')
+
+# ARRAYS (or "LISTS" in python)
+
+# Python lists don't auto-expand on index assignment. You must either initialize list with its required size or use append() to add!
+arr = [0] * 3
+>>> [0, 0, 0]
+
 arr[0] = 5
 arr[1] = 6
 
@@ -132,24 +178,25 @@ OR
 arr = []
 arr.append(5)
 arr.append(6)
+>>> [5, 6]
 
 arr = [1, 2, 3]
 print(arr)
 
-# Can be used as a stack
+# Using list as a stack
 arr.append(4)
 arr.append(5)
-print(arr)
+>>> [1, 2, 3, 4, 5]
 
 arr.pop()
-print(arr)
+>>> [1, 2, 3, 4]
 
 arr.insert(1, 7)
-print(arr)
+>>> [1, 7, 2, 3, 4]
 
 arr[0] = 0
-arr[3] = 0
-print(arr)
+arr[3] = 1
+>>> [0, 7, 2, 1, 4]
 
 # Initialize arr of size n with default value of 1
 n = 5
@@ -157,34 +204,41 @@ arr = [1] * n = [1, 1, 1, 1, 1]
 print(arr)
 print(len(arr)) = 5
 
-# Careful: -1 is not out of bounds, it's the last value
+# Index -1 is not out of bounds. It's the last array element.
 arr = [1, 2, 3]
-print(arr[-1]) = 3
+arr[-1]
+>>> 3
 
-# Indexing -2 is the second to last value, etc.
-print(arr[-2]) = 2
+# Indexing -2 is second to last value, etc.
+arr[-2]
+>>> 2
 
 # Sublists (aka slicing)
 arr = [1, 2, 3, 4]
-print(arr[1:3]) = [2, 3]
+arr[1:3]
+>>> [2, 3]
 
-# Similar to for-loop ranges, last index is non-inclusive
-print(arr[0:4]) = [1, 2, 3, 4]
+# Like for-loop ranges, last index is not included
+arr[0:4]
+>>> [1, 2, 3, 4]
 
-# But no out of bounds error
-print(arr[0:10]) = [1, 2, 3, 4]
+# But no out of bounds error if last index > list length
+arr[0:10]
+>>> [1, 2, 3, 4]
 
 # Unpacking
 a, b, c = [1, 2, 3] # pattern matching
 print(a, b, c)
+>>> 1 2 3
 
-# Be careful though
-# a, b = [1, 2, 3] # error
+# Pattern matching: number of variables must equal number of values
+a, b = [1, 2, 3]
+>>> ValueError: too many values to unpack (expected 2, got 3)
 
-# Loop through arrays
+# Loop through arrays...
 nums = [1, 2, 3]
 
-# Using index
+# With index
 for i in range(len(nums)):
     print(nums[i])
 1
@@ -214,11 +268,12 @@ for n1, n2 in zip(nums1, nums2):
 1 2
 3 4
 5 6
+____________________
+# reverse() and reversed()
 
-# Reverse
 nums = [1, 2, 3]
-nums.reverse() = [3, 2, 1] # like nums.reverse! in Ruby
-print(nums)
+nums.reverse() # same as nums.reverse! in Ruby
+>>> [3, 2, 1]
 
 # WRONG!
 for n in nums.reverse():
@@ -226,7 +281,7 @@ for n in nums.reverse():
 
 nums.reverse() returns None. Can't loop over it!
 
-# RIGHT:
+# RIGHT: "reversed()" returns an iterator, so we CAN loop over it
 for n in reversed(nums):
     print(n)
 
@@ -235,34 +290,66 @@ OR
 for i in range(len(nums) - 1, -1, -1):
     print(nums[i])
 
-# reversed() and reverse() are used to reverse the order of elements, but differ in their application, return value, and whether they modify the original object.
+# reversed() and reverse() are used to reverse the order of elements, but differ in application, return value, and if they modify the original object.
 
-# 1. list.reverse() Method:
-# Applicability: Only for Python lists. Can't with with other iterables like strings or tuples.
-# Changes list in-place. Directly changes the order of elements in original list object.
-# Returns None. It does not create new list or return reversed version; it simply changes existing list.
+# 1. list.reverse() method:
+# Only for Python lists. Can't use with with other iterables like strings or tuples.
+# Changes list in-place. Directly changes order of elements in original list object.
+# Returns "None". It does not create new list or return reversed version; it simply changes existing list.
 
 # 2. reversed():
-# Built-in function for any iterable object: lists, tuples, strings, range, etc.
+# Built-in function for any iterable (lists, tuples, strings, range, etc.).
 # Non-destructive: reversed() doesn't change original iterable. Instead, returns a reversed iterator object.
-# Returns an iterator that yields the elements of the original iterable in reverse order. To get a new list or tuple, you need to explicitly convert iterator (e.g., using list() or tuple()).
+# Returns an iterator that yields the elements of original iterable in reverse order. To get a new list or tuple, you must explicitly convert iterator (e.g., using list() or tuple()).
 
-Use list.reverse() when you must reverse a list and no longer need the original order, and you want to save memory by modifying the list directly.
+Use list.reverse() when you must reverse a list and no longer need its original order, and you want to save memory by modifying the list directly.
 
-Use reversed() when you must iterate over an iterable in reverse order without changing original, or when working with non-list iterables like strings or tuples.
+nums = [1,2,3]
+x = nums.reverse()
+nums
+>>> [3, 2, 1]
+print(x)
+>>> None
 
+Use reversed() when you must ITERATE over an iterable in reverse order without changing original, or when working with non-list iterables like strings or tuples.
 
-# Sorting
+nums = [1,2,3]
+r = reversed(nums)
+r
+>>> <list_reverseiterator object at 0x7f5117847310>
+list(r)
+>>> [3, 2, 1]
+
+reversed() works on more than lists:
+
+s = "hello"
+r = reversed(s)
+list(r)
+>>> ['o', 'l', 'l', 'e', 'h']
+
+t = (1, 2, 3) # tuples are immutable, so reversed() returns a new tuple
+for x in reversed(t):
+    print(x)
+3
+2
+1
+
+list(reversed(t))
+>>> (3, 2, 1)
+
+____________________
+# sort() and sorted()
+
 arr = [5, 4, 7, 3, 8]
-arr.sort() = [3, 4, 5, 7, 8] # like arr.sort! in Ruby
-print(arr)
+arr.sort() # same as arr.sort! in Ruby
+>>> [3, 4, 5, 7, 8]
 
-arr.sort(reverse=True) = [8, 7, 5, 4, 3]
-print(arr)
+arr.sort(reverse=True)
+>>> [8, 7, 5, 4, 3]
 
 arr = ["bob", "alice", "jane", "doe"]
-arr.sort() = ['alice', 'bob', 'doe', 'jane']
-print(arr)
+arr.sort()
+>>> ['alice', 'bob', 'doe', 'jane']
 
 # Custom sort (by length of string)
 arr.sort(key = lambda x: len(x))
@@ -271,11 +358,11 @@ arr.sort(key = lambda x: len(x))
 arr.sort(key = lambda x: len(x), reverse = True) # sort by reverse string length
 ['alice', 'jane', 'bob', 'doe']
 
-> intervals = [[7,10], [2,4], [1, 11]]
-> intervals.sort(key = lambda x: x[0]) # sort by 1st element in array
-[[1, 11], [2, 4], [7, 10]]
-> intervals.sort(key = lambda x: x[1]) # sort by 2nd element in array
-[[2, 4], [7, 10], [1, 11]]
+intervals = [[7,10], [2,4], [1, 11]]
+intervals.sort(key = lambda x: x[0]) # sort by 1st element in array
+>>> [[1, 11], [2, 4], [7, 10]]
+intervals.sort(key = lambda x: x[1]) # sort by 2nd element in array
+>>> [[2, 4], [7, 10], [1, 11]]
 
 # 1. Use list.sort() when:
 # You are working with a list.
@@ -289,7 +376,7 @@ arr.sort(key = lambda x: len(x), reverse = True) # sort by reverse string length
 # You prefer a more functional approach that produces new data rather than modifying existing data.
 # For generating new sorted list from any iterable while preserving original, giving greater flexibility.
 
-# Sort hash by keys, then values
+# Sort hash (aka "dict") by keys, then values
 scores = {
   "Bob": 85,
   "Eve": 92,
@@ -298,96 +385,125 @@ scores = {
   "Charlie": 85
 }
 
-> scores.sort() <--- WRONG! Hash isn't list. Must use sorted().
+scores.sort() # WRONG! Hash isn't list. Must use sorted().
 
-> sorted_keys = sorted(scores)
-> print(f"Sorted by keys: {sorted_keys}")
-['Alice', 'Bob', 'Charlie', 'David', 'Eve']
+sorted_keys = sorted(scores)
+sorted_keys
+>>> ['Alice', 'Bob', 'Charlie', 'David', 'Eve']
 
 # Sort by values first (ascending score), then keys (ascending names) for any tied scores.
-> sort_by_score_then_name = sorted(scores.items(), key=lambda item: (item[1], item[0]))
-[('Alice', 78), ('Bob', 85), ('Charlie', 85), ('David', 92), ('Eve', 92)]
+sort_by_score_then_name = sorted(scores.items(), key=lambda item: (i[1], i[0]))
+>>> [('Alice', 78), ('Bob', 85), ('Charlie', 85), ('David', 92), ('Eve', 92)]
 
 # Sort by values first (descending score), then keys (ascending names) for ties
-> sort_by_score_desc_then_name = sorted(scores.items(), key=lambda item: (-item[1], item[0]))
-[('David', 92), ('Eve', 92), ('Bob', 85), ('Charlie', 85), ('Alice', 78)]
+sort_by_score_desc_then_name = sorted(scores.items(), key=lambda item: (-i[1], i[0]))
+>>> [('David', 92), ('Eve', 92), ('Bob', 85), ('Charlie', 85), ('Alice', 78)]
 
-# OR
-# def sort_key(item):
-#     word, count = item
-#     return (-count, word)
+# OR same thing, using function:
 
-# sort_by_score_desc_then_name = sorted(scores.items(), key=sort_key)
+def sort_key(item):
+    word, count = item
+    return (-count, word)
 
-## List comprehension
+sort_by_score_desc_then_name = sorted(scores.items(), key=sort_key)
+>>> [('David', 92), ('Eve', 92), ('Bob', 85), ('Charlie', 85), ('Alice', 78)]
 
-# instead of saying:
-for name, count in sort_by_score_desc_then_name[:3]
+__________________________
+# List Comprehension
+
+[i for i in range(5)]
+>>> [0, 1, 2, 3, 4]
+
+[2*i for i in range(5)]
+>>> [0, 2, 4, 6, 8]
+
+# instead of:
+for name, count in sort_by_score_desc_then_name[:3]:
     name
 
 # you can say:
-> [name for name, count in sort_by_score_desc_then_name[:3]] <--- [:k] gives first k items from list
-['David', 'Eve', 'Bob']
-
-
-arr = [i for i in range(5)] = [0, 1, 2, 3, 4]
-arr = [2*i for i in range(5)] = [0, 2, 4, 6, 8]
+[name for name, count in sort_by_score_desc_then_name[:3]] # [:k] gives first k items from list
+>>> ['David', 'Eve', 'Bob']
 
 ## 3 ways to filter list:
 1. list comprehension:
 
 nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 evens = [num for num in nums if num % 2 == 0]
+>>> [2, 4, 6, 8, 10]
 
 2. filter():
+
 nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 evens = list(filter(lambda num: num % 2 == 0, nums))
+>>> [2, 4, 6, 8, 10]
+
+# OR same thing, using function:
 
 def is_even(num):
     return num % 2 == 0
 
 iterator = filter(is_even, nums)
 evens = list(iterator)
+>>> [2, 4, 6, 8, 10]
 
 3. for loop:
+
 nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 evens = []
 for num in nums:
     if num % 2 == 0:
         evens.append(num)
+>>> [2, 4, 6, 8, 10]
 
+# 2D lists
 
-# 2-D lists
-arr = [[0] * 4 for i in range(2)] = [[0, 0, 0, 0], [0, 0, 0, 0]] # <--- 4 = cols, 2 = rows
-arr[1][2]     = 3 => arr = [[0, 0, 0, 0], [0, 0, 3, 0]]
-arr[row][col]
+# Make 2D list, all 0's, with rows x cols
+arr = [[0] * rows for i in range(cols)]
+
+arr = [[0] * 4 for i in range(2)] # 4 = cols, 2 = rows
+>>> [[0, 0, 0, 0], [0, 0, 0, 0]]
+
+arr[1][2] = 3 # arr[r][c]
+>>> [[0, 0, 0, 0], [0, 0, 3, 0]]
 
 # This won't work
 # arr = [[0] * 4] * 4 <---- each of these 4 rows will be same! Changing 1 col in 1 row changes same col in all 4 rows!
 
+__________________________
 # STRINGS are like arrays, but they are IMMUTABLE!
+
 s = "abc" # <--- may be single ('') or double quotes ("")
-s[0:2] = "ab"
+s[0:2] = s[:2] = "ab"
+s[1:3] = s[1:] = "bc"
+s[2:4] = s[2:] = "c"
 s[0] = "A" # <--- gives ERROR: 'str' object does not support item assignment
 
-# So this creates a new string
+# This creates a new string
 s = "abc"
 s += "def"
 print(s) = "abcdef"
 
 # Valid numeric strings can be converted
-print(int("123") + int("123")) = 246
+int("123") + int("123")
+>>> 246
 
-# And numbers can be converted to strings
-print(str(123) + str(123)) = "123123"
+# Numbers can be converted to strings
+str(123) + str(123)
+>>> "123123"
 
-# In rare cases you may need the ASCII value of a char
-print(ord("a")) = 97
-print(ord("b")) = 98
+# ASCII value of a char
+ord('A')
+>>> 65
+ord('a')
+>>> 97
+ord('b')
+>>> 98
 
-# Combine a list of strings (with an empty string delimitor)
-strings = ["ab", "cd", "ef"]
-print(" ".join(strings)) = "ab cd ef"
+# Combine list of strings (with an empty string delimiter)
+strings = ['ab', 'cd', 'ef']
+' '.join(strings)
+>>> 'ab cd ef'
 
 # QUEUES
 from collections import deque # this is "double-ended", or items may be added/removed from either front/rear
