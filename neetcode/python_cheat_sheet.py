@@ -504,101 +504,146 @@ ord('b')
 strings = ['ab', 'cd', 'ef']
 ' '.join(strings)
 >>> 'ab cd ef'
-
+_____________________
 # QUEUES
-from collections import deque # this is "double-ended", or items may be added/removed from either front/rear
+
+# This is "double-ended." Items may be added/removed from either front/rear
+from collections import deque
 
 queue = deque()
-queue.append(1) => deque([1])
-queue.append(2) => deque([1, 2])
-queue.popleft() => removes 1 from left => queue = dequeue([2])
+queue.append(1)
+>>> deque([1])
+queue.append(2)
+>>> deque([1, 2])
+queue.popleft() # removes "1" from left
+>>> deque([2])
+queue.appendleft(1) # adds "1" to left
+>>> deque([1, 2])
+queue.pop() # removes "2" from right
+>>> deque([1])
+_____________________
+# HASHSETS (sets): like arrays, but unordered + unique values
 
-queue.appendleft(1) => adds 1 back from left => deque([1, 2])
-queue.pop() => removes 2 from right => deque([1])
-
-# HASHSETS
 mySet = set()
 
 mySet.add(1)
+>>> {1}
 mySet.add(2)
-print(mySet) = {1, 2}
-print(len(mySet)) = 2
+>>> {1, 2}
+mySet.add(1) # adding duplicate value does nothing
+>>> {1, 2}
+len(mySet)
+>>> 2
 
-print(1 in mySet) = True
-print(2 in mySet) = True
-print(3 in mySet) = False
+1 in mySet
+>>> True
+2 in mySet
+>>> True
+3 in mySet
+>>> False
 
-mySet.remove(2) = {1}
-print(2 in mySet) = False
+mySet.remove(2)
+>>> {1}
+2 in mySet
+>>> False
 
-# list to set
-print(set([1, 2, 3])) = {1, 2, 3}
+# change list to set
+set([1, 2, 3])
+>>> {1, 2, 3}
 
 # Set comprehension
-mySet = { i for i in range(5) } = {0, 1, 2, 3, 4}
+mySet = { i for i in range(5) }
+>>> {0, 1, 2, 3, 4}
+_____________________
+# HASHMAPS (dicts): key-value pairs. Keys are unique and unordered
 
-# HASHMAPS
-
-# HashMap (aka dict)
 myMap = {}
-myMap["alice"] = 88
-myMap["bob"] = 77
-print(myMap) = {'alice': 88, 'bob': 77}
-print(len(myMap)) = 2
+myMap['alice'] = 88
+myMap['bob'] = 77
+myMap
+>>> {'alice': 88, 'bob': 77}
+len(myMap)
+>>> 2
 
-myMap["alice"] = 80
-print(myMap["alice"]) = 80
+myMap['alice'] = 80
+myMap['alice']
+>>> 80
 
-print("alice" in myMap) = True
+'alice' in myMap
+>>> True
 
-myMap.pop("alice") = 80
-or del myMap["alice"]  <--- either way deletes key "alice"
+myMap.pop('alice')
+>>> 80
+myMap
+>>> {'bob': 77}
 
-print("alice" in myMap) = False
+OR
+
+del myMap['alice']  # either way deletes key "alice"
+
+'alice' in myMap
+>>> False
 
 myMap = { "alice": 90, "bob": 70 }
-print(myMap) = {'alice': 90, 'bob': 70}
+myMap
+>>> {'alice': 90, 'bob': 70}
 
 # Dict comprehension
 myMap = { i: 2*i for i in range(3) } = {0: 0, 1: 2, 2: 4}
 
 # Looping through maps
 myMap = { "alice": 90, "bob": 70 }
-for key in myMap:
-    print(key, myMap[key])
-alice 90
-bob 70
-
-for val in myMap.values():
-    print(val)
-90
-70
 
 for key, val in myMap.items():
     print(key, val)
-alice 90
-bob 70
 
-# TUPLES
-# like arrays, but immutable
+>>> alice 90
+>>> bob 70
+
+for key in myMap:
+    print(key, myMap[key])
+
+>>> alice 90
+>>> bob 70
+
+for val in myMap.values():
+    print(val)
+
+>>> 90
+>>> 70
+_____________________
+# TUPLES: like arrays, but immutable
 
 tup = (1, 2, 3)
-tup[0] = 1
-tup[-1] = 3
+tup[0]
+>>> 1
+tup[-1]
+>>> 3
 
+# Can't modify tuples
 tup[0] = 5 <--- error
 
-# can be used as key for hash map/set
-myMap = { (1,2): 3 }
-myMap[(1,2)] = 3
+# Tuples may be key for map
+myMap = {(1, 2): 3}
+myMap[(1,2)]
+>>> 3
 
+# Lists may NOT be keys. Only immutable objects may be keys.
+myMap[[3,4]] = 5 # Error: cannot use 'list' as a dict key (unhashable type: 'list')
+myMap['Ray'] = 10 # OK: string is immutable
+
+# We may add tuple to set ONLY if tuple's items are immutable: integers, strings, other valid tuples.
+# If tuple has any mutable items: lists, dictionaries, sets, etc. it may NOT be added to set.
 mySet = set()
 mySet.add((1, 2))
-print((1, 2) in mySet) = True
 
-# Lists can't be keys
-myMap[[3,4]] = 5 <--- error
+(1, 2) in mySet
+>>> True
 
+mySet.add([2, 3]) # Error: unhashable type: 'list'
+mySet.add({2: 3}) # Error: unhashable type: 'dict'
+mySet.add((1, (2, 3))) # OK: tuple is immutable
+_____________________
 # HEAPS: under the hood, they're arrays
 
 import heapq
