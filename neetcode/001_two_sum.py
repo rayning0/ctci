@@ -7,12 +7,12 @@
 # Time: O(n), Space: O(n)
 def twoSum(nums: list[int], target: int) -> list[int]:
     seen = {}
-    for i, num in enumerate(nums):
-        diff = target - num
+    for i, n in enumerate(nums):
+        diff = target - n
         if diff in seen:
             return [seen[diff], i]
-        seen[num] = i
-    return []
+        else:
+            seen[n] = i
 
 
 if __name__ == "__main__":
