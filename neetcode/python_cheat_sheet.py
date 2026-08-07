@@ -652,10 +652,16 @@ minHeap = []
 heapq.heappush(minHeap, 3)
 heapq.heappush(minHeap, 2)
 heapq.heappush(minHeap, 4)
-minHeap = [2, 3, 4]
+>>> [2, 3, 4]
 
-# Min value always at index 0
+# Min value is always at index 0 of heap
 minHeap[0] = 2
+
+while minHeap:
+    print(heapq.heappop(minHeap))
+2
+3
+4
 
 while len(minHeap):
     print(heapq.heappop(minHeap))
@@ -663,7 +669,7 @@ while len(minHeap):
 3
 4
 
-# No max heaps by default. Instead, use min heap and multiply by -1 when push & pop.
+# Before Python 3.14: No max heaps by default. Instead, use min heap and multiply each element by -1 when push & pop.
 maxHeap = []
 heapq.heappush(maxHeap, -3)
 heapq.heappush(maxHeap, -2)
@@ -680,8 +686,8 @@ while len(maxHeap):
 3
 2
 
-# Now Python 3.14 has maxHeap functions!!
-# Each new item pushed into maxHeap automatically resorts to keep max item at 0 element
+# Python 3.14 has maxHeap functions (heappush_max, heappop_max, heapify_max)
+# Each new item pushed into maxHeap automatically keeps max item at 0 element
 maxHeap = []
 heapq.heappush_max(maxHeap, 3) # Push the value item onto the max-heap heap, maintaining max-heap invariant.
 heapq.heappush_max(maxHeap, 2)
@@ -689,20 +695,20 @@ heapq.heappush_max(maxHeap, 4)
 maxHeap = [4, 2, 3]
 maxHeap[0] = 4
 while len(maxHeap):
-    print(heapq.heappop_max(maxHeap)) # Pop and return the largest item from the max-heap heap
+    print(heapq.heappop_max(maxHeap)) # Pop and return largest item from max heap
 4
 3
 2
 
 
 # Build heap from initial values
+
 arr = [2, 1, 8, 4, 5]
 heapq.heapify(arr)
-arr = [1, 2, 8, 4, 5]
+arr = [1, 2, 8, 4, 5] # min heap
 
 while arr:
     print(heapq.heappop(arr))
-
 1
 2
 4
@@ -711,14 +717,15 @@ while arr:
 
 arr = [2, 1, 8, 4, 5]
 heapq.heapify_max(arr)
-arr = [8, 5, 2, 4, 1]
-
+arr = [8, 5, 2, 4, 1] # max heap
+_____________________________
 # FUNCTIONS
 
 def myFunc(n, m):
     return n * m
 
-myFunc(3, 4) = 12
+myFunc(3, 4)
+>>> 12
 
 # Nested/inner functions can access outer variables
 def outer(a, b):
@@ -728,8 +735,8 @@ def outer(a, b):
         return a + b + c
     return inner()
 
-outer('a', 'b') = 'abc'
-outer(1, 2) <--- error!
+outer('a', 'b')
+>>> 'abc'
 
 arr = [8, 5, 2, 4, 1]
 
@@ -740,18 +747,30 @@ def double(arr, val):
         for i, n in enumerate(arr):
             arr[i] *= 2
 
-        # only changes val in helper scope
-        # val *= 2 <-- Error! UnboundLocalError: cannot access local variable 'val' where it is not associated with a value
+        # this tries to change val in helper() scope, but val is undefined!
+        # val *= 2 # Error! Cannot access local variable 'val' where it is not associated with a value
 
-        # changes val outside helper scope
+        # with "nonlocal" keyword, val now refers to val in outer function scope. now it can be changed
         nonlocal val
         val *= 2
+
     helper()
     print(arr, val)
 
-print(arr, 5) = [16, 10, 4, 8, 2] 10
-________
-# If you use the nonlocal keyword, the variable will belong to the outer function:
+print(arr, 5)
+>>> [16, 10, 4, 8, 2] 10
+
+def myfunc1():
+  x = "Jane"
+  def myfunc2():
+    x = "hello"
+  myfunc2()
+  return x
+
+myfunc1()
+>>> "Jane"
+
+# Nonlocal keyword on x means it belongs to outer myfunc1() scope:
 def myfunc1():
   x = "Jane"
   def myfunc2():
@@ -760,7 +779,8 @@ def myfunc1():
   myfunc2()
   return x
 
-print(myfunc1()) = "hello"
+myfunc1()
+>>> "hello"
 ________
 # Python follows the LEGB rule when looking up variable names, and searches for them in this order:
 
@@ -782,31 +802,45 @@ def outer():
 outer()
 print("Global:", x)
 
-Inner: local
-Outer: enclosing
-Global: global
+>>> Inner: local
+>>> Outer: enclosing
+>>> Global: global
+________
+# Decorator Functions: A decorator wraps a function, changing its behavior.
+# It takes another function as input and returns a new function.
+# https://realpython.com/primer-on-python-decorators/
 
-# Decorator Functions
-# Decorators let you add extra behavior to a function, without changing the function's code.
-# A decorator is a function that takes another function as input and returns a new function.
+def decorator(func):
+    def wrapper():
+        print("Something happens before calling function")
+        func()
+        print("Something happens after calling function")
+    return wrapper
 
-def changecase(func):
-  def myinner():
-    return func().upper()
-  return myinner
+def say_whee():
+    print("Whee!")
 
-@changecase
-def myfunction(): # <--- myfunction() is decorated with changecase()
-  return "Hello Sally"
+say_whee = decorator(say_whee)
 
-@changecase
-def otherfunction(): # <--- otherfunction() is decorated with changecase()
-  return "I am speed!"
+say_whee()
+>>> Something happens before calling function
+>>> Whee!
+>>> Something happens after calling function
 
-print(myfunction()) = "HELLO SALLY"
-print(otherfunction()) = "I AM SPEED!"
+# Add syntactical sugar to apply decorator to function:
 
+@decorator # means same as "say_whee = decorator(say_whee)"
+def say_whee():
+    print("Whee!")
+
+say_whee()
+>>> Something happens before calling function
+>>> Whee!
+>>> Something happens after calling function
+_____________________________
 # CLASSES
+# https://realpython.com/python3-object-oriented-programming/
+# https://realpython.com/python-classes/
 
 class MyClass:
     # constructor
@@ -815,20 +849,24 @@ class MyClass:
         self.size = len(nums)
 
     # self keyword required as param
-    def getLength(self):
+    def get_length(self):
         return self.size
 
-    def getDoubleLength(self):
-        return 2 * self.getLength()
+    def get_double_length(self):
+        return 2 * self.get_length()
 
 obj = MyClass([1, 2, 3])
-obj.getLength() = 3
-obj.getDoubleLength = 6
-
+obj.get_length()
+>>> 3
+obj.get_double_length()
+>>> 6
+_____________________________
 # 4 ways to make freq hash of a list:
 
 nums = [2, 1, 3, 2, 3, 0, 2]
 freq = {}
+
+# 1. Easy to remember, but slow to type
 
 for n in nums:
     if n in freq:
@@ -836,34 +874,86 @@ for n in nums:
     else:
         freq[n] = 1
 
-freq = {2: 3, 1: 1, 3: 2, 0: 1}
+freq
+>>> {2: 3, 1: 1, 3: 2, 0: 1}
 
-OR (** Preferred Way **)
+# 2. ** Preferred Way **
 
 for n in nums:
     # dict.get(key, default) ---
-    # if key exists, give value of hashmap, else gives default
+    # if key exists, give value of hashmap, else give default value (0 here)
     freq[n] = freq.get(n, 0) + 1
 
-freq = {2: 3, 1: 1, 3: 2, 0: 1}
+freq
+>>> {2: 3, 1: 1, 3: 2, 0: 1}
 
-OR
+# 3. Counter. If you only need to count frequencies.
 
 from collections import Counter
 freq = Counter(nums)
 
-freq = Counter({2: 3, 3: 2, 1: 1, 0: 1})
+freq
+>>> Counter({2: 3, 3: 2, 1: 1, 0: 1})
 
-OR
+Counter('mississippi')
+>>> Counter({'i': 4, 's': 4, 'p': 2, 'm': 1})
+
+# Useful method: most_common(k). Useful for "Top K Frequent Elements."
+freq.most_common(1)
+>>> [(2, 3)]
+
+freq.most_common(2)
+>>> [(2, 3), (3, 2)]
+
+
+# 4. defaultdict
 
 from collections import defaultdict
 freq = defaultdict(int)
 for n in nums:
     freq[n] += 1
 
-freq = defaultdict(<class 'int'>, {2: 3, 1: 1, 3: 2, 0: 1})
+freq
+>>> defaultdict(<class 'int'>, {2: 3, 1: 1, 3: 2, 0: 1})
 
 # defaultdict automatically gives default value to keys that don't exist
 # defaultdict(int) default val = 0
 # defaultdict(list) default val = []
 # defaultdict(str) default val = ""
+
+# When is advantage to use defaultdict?
+
+# a. Grouping: To group elements by key + don't want to check if key exists, plus no need to set default values.
+
+Instead of:
+
+groups = {}
+for word in words:
+    key = len(word)
+
+    if key not in groups:
+        groups[key] = []
+    groups[key].append(word)
+
+You can do:
+
+groups = defaultdict(list)
+for word in words:
+    groups[len(word)].append(word) # much clearer
+
+# b. Graph adjacency lists
+
+Instead of:
+
+graph = {}
+for u, v in edges:
+    if u not in graph:
+        graph[u] = []
+
+    graph[u].append(v)
+
+You can do:
+
+graph = defaultdict(list)
+for u, v in edges:
+    graph[u].append(v)
