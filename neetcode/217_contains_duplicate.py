@@ -2,16 +2,29 @@
 # https://neetcode.io/problems/duplicate-integer/solution
 
 # Time: O(n), Space: O(n)
-# In Python 3.9+, use "list", not "List", in type hints.
-# Then no need to import "List" from "typing".
 def containsDuplicate(nums: list[int]) -> bool:
     seen = set()
-    for num in nums:
-        if num in seen:
+    for n in nums:
+        if n in seen:
             return True
-        seen.add(num)
+        else:
+            seen.add(n)
     return False
 
+# hashset (set) is better than a hashmap (dict). Comparing both approaches:
+
+# Memory: sets only track membership; dicts store key-value pairs. You don't need the value.
+# Semantics: membership checks are clearer with a set.
+# Code: seen.add(n) is simpler than seen[n] = True.
+
+# Space complexity: O(n) — same worst case, but sets use less memory per element
+# set is more appropriate for membership tracking.
+
+if __name__ == "__main__":
+    assert containsDuplicate([1, 2, 3, 1])
+    assert not containsDuplicate([1, 2, 3, 4])
+    assert containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])
+    print("All tests passed!")
 
 # Simple tests using assert (no imports needed)
 # if __name__ == "__main__": runs code only when the script is run
@@ -31,19 +44,3 @@ def containsDuplicate(nums: list[int]) -> bool:
 # - Tests run when you execute the file directly
 # - Tests don't run when the file is imported elsewhere
 # - Keeps the module reusable without side effects
-
-if __name__ == "__main__":
-    assert containsDuplicate([1, 2, 3, 1])
-    assert not containsDuplicate([1, 2, 3, 4])
-    assert containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])
-    print("All tests passed!")
-
-
-# hashset (Python set) is better than a hashmap (dict). Comparing both approaches:
-
-# Memory: sets only track membership; dicts store key-value pairs. You don't need the value.
-# Semantics: membership checks are clearer with a set.
-# Code: seen.add(n) is simpler than seen[n] = True.
-
-# Space complexity: O(n) — same worst case, but sets use less memory per element
-# set is more appropriate for membership tracking.
