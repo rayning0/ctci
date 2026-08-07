@@ -4,15 +4,12 @@
 # Time: O(n), Space: O(n)
 def containsNearbyDuplicate(nums: list[int], k: int) -> bool:
     seen = {}
-    for j in range(len(nums)):
-        # if nums[j] in seen, we already saw it at earlier i != j
-        # KEY: seen[nums[j]] is really this earlier i!
-        if nums[j] in seen and abs(seen[nums[j]] - j) <= k:
+    for i, n in enumerate(nums):
+        if n in seen and abs(i - seen[n]) <= k:
             return True
-        seen[nums[j]] = j
-
+        else:
+            seen[n] = i
     return False
-
 
 if __name__ == "__main__":
     assert containsNearbyDuplicate([1, 2, 3, 1], 3)
