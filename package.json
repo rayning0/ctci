@@ -8,5 +8,9 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.11.1": true
   }
 }
