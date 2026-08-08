@@ -1,7 +1,13 @@
 # https://leetcode.com/problems/group-anagrams/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/problems/anagram-groups/solution
 
-# 2 strings are anagrams only if their character counts (respective number of occurrences of each character) are the same. We can transform each string s into a character count, count, made of 26 non-negative integers representing the number of a's, b's, c's, etc. These counts are keys for our hash map.
+# 2 strings are anagrams only if they have the same character frequencies.
+# For each string s, make character freq list "count":
+# 26 integers that count number of a's, b's, c's, etc. in each string.
+
+# Then make hashmap:
+# key = character freq list, value = list of all strings with that character freq.
+# Since lists may NOT be keys, must convert "count" list to tuple as key.
 
 # Ex: strs = ['aab', 'aba', 'baa', 'abbccc']
 # hash = {
@@ -17,27 +23,27 @@
 #         for c in s:
 #             count[ord(c) - ord("a")] += 1
 
-#         if tuple(count) not in hash:
-#             hash[tuple(count)] = []
-#         hash[tuple(count)].append(s)
+#         key = tuple(count)
+#         if key not in hash:
+#             hash[key] = []
+#         hash[key].append(s)
 
 #     return list(hash.values())
 
 
 from collections import defaultdict
 
-
-# Time: O(m * n), Space: O(m)
+# Time: O(m*n), Space: O(m)
+# m = # of strings, n = length of longest string
 def groupAnagrams(strs: list[str]) -> list[list[str]]:
     # key = freq count array, val = [list of strings matching it]
     hash = defaultdict(list)  # default value = []
 
     # When you create defaultdict, you specify a default_factory (a callable).
 
-    # If the key exists: its value is returned.
-    # If the key does not exist: default_factory is called to generate a default value.
-
-    # int: returns 0, list: returns [], str: returns ""
+    # If key exists: its value is returned.
+    # If key does not exist: default_factory is called to generate a default value:
+    # list: returns [], str: returns "", int: returns 0
 
     for s in strs:
         count = [0] * 26  # freq count array for s
@@ -47,7 +53,7 @@ def groupAnagrams(strs: list[str]) -> list[list[str]]:
 
         # Can't use mutable 'list' as a dict key. list is unhashable!
         # Wrong: hash[count].append(s)
-        # Must use immutable type, like tuple, as key
+        # Must use immutable type (tuple) as key
         hash[tuple(count)].append(s)
 
     # hash.values() returns dict_values, not a list.
