@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/majority-element/description/?envType=company&envId=netflix&favoriteSlug=netflix-all
 # https://neetcode.io/problems/majority-element/question?list=neetcode250
 
+# 1. Frequency solution. Easiest to remember!
 # Time: O(n), Space: O(n)
 def majorityElement(nums: list[int]) -> int:
     freq = {}
@@ -12,7 +13,7 @@ def majorityElement(nums: list[int]) -> int:
             return n
 
 
-# Even better! Boyer-Moore Voting Algorithm
+# 2. Smaller space usage: Boyer-Moore Voting Algorithm
 # Time: O(n), Space: O(1)
 # Video: https://www.youtube.com/watch?v=7pnhv842keE
 
@@ -21,19 +22,19 @@ def majorityElement(nums: list[int]) -> int:
 # The final element left uncancelled is the majority!
 # "count" is not frequency of candidate. It's the candidate's lead after cancellations.
 
-# def majorityElement(nums: list[int]) -> int:
-#     candidate = count = 0
+def majorityElement(nums: list[int]) -> int:
+    candidate = count = 0
 
-#     for n in nums:
-#         if count == 0:
-#             candidate = n
+    for n in nums:
+        if count == 0:
+            candidate = n
 
-#         if n == candidate:
-#             count += 1
-#         else:
-#             count -= 1
+        if n == candidate:
+            count += 1
+        else:
+            count -= 1
 
-#     return candidate
+    return candidate
 
 
 if __name__ == "__main__":
