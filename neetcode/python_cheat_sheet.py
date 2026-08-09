@@ -697,6 +697,9 @@ while len(maxHeap):
 3
 2
 
+My solution here practically uses this in "Top K Frequent Words" to simulate a max heap:
+https://github.com/rayning0/ctci/blob/4dbcec6044f67a83b14febea8280bae33a4aa928/neetcode/692_top_k_frequent_words.py#L31
+
 # Python 3.14 has maxHeap functions (heappush_max, heappop_max, heapify_max)
 # Each new item pushed into maxHeap automatically keeps max item at 0 element
 maxHeap = []

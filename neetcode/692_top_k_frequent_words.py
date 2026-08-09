@@ -24,44 +24,52 @@ def topKFrequent(words: list[str], k: int) -> list[str]:
     return [word for word, count in sorted_freq[:k]]
 
 
-# Min heap gets best Big O time!
-# Time: O(n log k), Space: O(n)
+# Min heap gets better Big O time!
+# Because this pushes every unique word on heap, its Big-O time is
+# Time: O(n + m log m + k log m) → O(n + m log m). m = # of unique words
+# Space: O(n)
 def topKFrequentHeap(words: list[str], k: int) -> list[str]:
     """
-    Simplest heap approach: Use nsmallest with correct key.
+    Simplest heap approach:
     """
-    freq = Counter(words)
-    sorted_freq = heapq.nsmallest(k, freq.items(), key=lambda x: (-x[1], x[0]))
-    return [word for word, count in sorted_freq]
+    freq = Counter(words) # O(n)
+    heap = []
+    ans = []
+
+    for word, count in freq.items():
+        heapq.heappush(heap, (-count, word)) # O(m log m)
+
+    for _ in range(k):
+        count, word = heapq.heappop(heap) # O(k log m)
+        ans.append(word)
+
+    return ans
 
 
-# Breakdown of heapq.nsmallest(k, freq.items(), key=lambda x: (-x[1], x[0])):
+# Breakdown of heap approach:
 
-# 1. freq.items() → [('i', 2), ('love', 2), ('leetcode', 1), ('coding', 1)]
-# Iterable of (word, count) tuples
+# 1. Counter(words) creates word/count pairs:
+#    {'i': 2, 'love': 2, 'leetcode': 1, 'coding': 1}
 
-# 2. key=lambda x: (-x[1], x[0])
-# x = each (word, count) tuple
-# x[0] = word, x[1] = count
-# Transforms to (-count, word) for comparison only
+# 2. Push each word as (-count, word).
+#    Negative count makes higher-frequency words come out first:
+#    Frequency 2 becomes -2. Since -2 is smaller, it pops out first.
+#    Technically it's a min heap, but it simulates like a max heap by frequency.
 
-# 3. Key transformation (for comparison):
-# ('i', 2) → key = (-2, 'i')
-# ('love', 2) → key = (-2, 'love')
-# ('leetcode', 1) → key = (-1, 'leetcode')
-# ('coding', 1) → key = (-1, 'coding')
+#    For equal counts, Python compares words alphabetically.
 
-# 4. nsmallest(k=2, ...) finds 2 smallest by key:
-# Compares keys: (-2, 'i'), (-2, 'love'), (-1, 'leetcode'), (-1, 'coding')
-# Smallest 2: (-2, 'i') and (-2, 'love')
 
-# 5. Returns original items (not keys!):
-# Returns: [('i', 2), ('love', 2)]
-# Already sorted by the key function
+# 3. The heap contains:
+#    (-2, 'i'), (-2, 'love'), (-1, 'leetcode'), (-1, 'coding')
 
-# 6. Extract words:
-# [word for word, count in sorted_freq] → ['i', 'love']
-# Result: The k most frequent words, sorted by frequency (descending) then word (ascending).
+# 4. heapq.heappop(heap) removes the smallest tuple:
+#    (-2, 'i') -> append 'i'
+#    (-2, 'love') -> append 'love'
+
+# 5. Repeat k times and return the words:
+#    ['i', 'love']
+
+
 
 if __name__ == "__main__":
     # Test original function
