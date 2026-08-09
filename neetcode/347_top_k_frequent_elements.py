@@ -42,67 +42,55 @@
 # Time: O(n), Space: O(n)
 def topKFrequent(nums: list[int], k: int) -> list[int]:
     freq = {}
+    buckets = [] # Never say buckets = ans = []!
+    ans = []
+
     for n in nums:
         freq[n] = freq.get(n, 0) + 1
 
-    # Make list of counts: index = count, value = [nums with that count]
-    # Use list comprehension to create separate lists (not shared references!)
-    # bucket = [[]] * (len(nums) + 1) <--- WRONG!!!
-    bucket = [[] for i in range(len(nums) + 1)]
-    # add 1 to size so we count freq from 1 to len(nums)
+    # buckets is list of lists by frequency:
+    # buckets[4] = [1, 2] = all nums with freq of 4
+    # buckets has length len(nums) + 1, since nums could be all 1 number with frequency len(nums)
+    for _ in range(len(nums) + 1):
+        buckets.append([])
+    # creates: [[], [], [], [], [], ...]
 
-    for num, count in freq.items():
-        bucket[count].append(num)
+    # buckets = [[] for _ in range(len(nums) + 1)] means same thing, but hard to remember
+    # buckets = [[]] * (len(nums) + 1) <--- WRONG!!!
 
-    res = []
-    # Loop backwards, from highest to lowest count
-    for vals in reversed(bucket):
-        res += vals  # concatenates lists
-        if len(res) >= k:
-            # returns first k elements
-            return res[:k]
+    for n, count in freq.items():
+        buckets[count].append(n)
 
+    # from highest to lowest number count
+    for count in range(len(nums), 0, -1):
+        for n in buckets[count]:
+            ans.append(n)
+            if len(ans) == k:
+                return ans
 
-# for i in range(len(bucket) - 1, -1, -1):
-#     for num in bucket[i]:
-#         res.append(num)
-#         if (len(res)) == k:
-#             return res
+    # for vals in reversed(buckets):
+    #     ans += vals  # concatenates lists
+    #     if len(ans) >= k:
+    #         # returns first k elements
+    #         return ans[:k]
 
 
 # Tests
 if __name__ == "__main__":
     assert topKFrequent([1, 1, 1, 2, 2, 3], 2) == [1, 2]
     # freq = {1: 3, 2: 2, 3: 1}
-    # bucket = [[], [3], [2], [1], [], [], []]
+    # buckets = [[], [3], [2], [1], [], [], []]
 
     assert topKFrequent([1, 2, 1, 2, 1, 2, 3, 1, 3, 2], 2) == [1, 2]
     # freq = {1: 4, 2: 4, 3: 2}
-    # bucket = [[], [], [3], [], [1, 2], [], [], [], [], [], []]
+    # buckets = [[], [], [3], [], [1, 2], [], [], [], [], [], []]
 
     assert topKFrequent([1], 1) == [1]
     assert topKFrequent([7, 7], 1) == [7]
 
     print("All tests passed!")
 
-# WRONG!
-# for n in nums.reverse():
-#     print(n)
-
-# nums.reverse() returns None. Can't loop over it!
-
-# RIGHT:
-# for n in reversed(nums):
-#     print(n)
-
-# reversed() and reverse() are used to reverse the order of elements, but differ in their application, return value, and whether they modify the original object.
-
-# 1. list.reverse() Method:
-# Applicability: Only for Python lists. Can't with with other iterables like strings or tuples.
-# Changes list in-place. Directly changes the order of elements in original list object.
-# Returns None. It does not create new list or return reversed version; it simply changes existing list.
-
-# 2. reversed():
+# reversed():
 # Built-in function for any iterable object: lists, tuples, strings, range, etc.
 # Non-destructive: reversed() doesn't change original iterable. Instead, returns a reversed iterator object.
 # Returns an iterator that yields the elements of the original iterable in reverse order. To get a new list or tuple, you need to explicitly convert iterator (e.g., using list() or tuple()).
