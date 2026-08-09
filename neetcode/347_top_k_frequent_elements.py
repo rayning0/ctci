@@ -35,7 +35,7 @@ def topKFrequent(nums: list[int], k: int) -> list[int]:
 
     # Total time: O(log k) runs m times = O(m log k)
     for n, count in freq.items():
-        heapq.heappush(min_heap, [count, n]) # Time: O(log k)
+        heapq.heappush(min_heap, (count, n)) # Time: O(log k)
         if len(min_heap) > k:
             # delete all lower freq nums from heap
             heapq.heappop(min_heap) # Time: O(log k)
@@ -47,8 +47,8 @@ def topKFrequent(nums: list[int], k: int) -> list[int]:
 # Ex:
 # nums = [1, 2, 1, 2, 1, 2, 3, 1, 3, 2]
 # freq = {1: 4, 2: 4, 3: 2}
-# after heappush of [count, n], min_heap = [[2, 3], [4, 2], [4, 1]]
-# after heappop, min_heap = [[4, 1], [4, 2]]
+# after heappush of [count, n], min_heap = [(2, 3), (4, 2), (4, 1)]
+# after heappop, min_heap = [(4, 1), (4, 2)]
 # [n for count, n in min_heap] = [1, 2]
 
 

@@ -64,14 +64,14 @@ def topKFrequentHeap(words: list[str], k: int) -> list[str]:
 #    "word": For equal counts, Python sorts words alphabetically.
 
 # 3. max_heap:
-#    [[-4, 'the'], [-2, 'sunny'], [-3, 'is'], [-1, 'day']]
+#    [(-4, 'the'), (-2, 'sunny'), (-3, 'is'), (-1, 'day')]
 
 # 4. heapq.heappop(heap) removes smallest tuple + rearranges heap:
-#    [-4, 'the'] -> append 'the' to ans
-# max_heap = [[-3, 'is'], [-2, 'sunny'], [-1, 'day']]
-#    [-3, 'is'] -> append 'is' to ans
-# max_heap = [[-2, 'sunny'], [-1, 'day']]
-#    [-2, 'sunny'] -> append 'sunny' to ans
+#    (-4, 'the') -> append 'the' to ans
+# max_heap = [(-3, 'is'), (-2, 'sunny'), (-1, 'day')]
+#    (-3, 'is') -> append 'is' to ans
+# max_heap = [(-2, 'sunny'), (-1, 'day')]
+#    (-2, 'sunny') -> append 'sunny' to ans
 
 # 5. After k times, it returns words:
 #    ["the", "is", "sunny", "day"]
