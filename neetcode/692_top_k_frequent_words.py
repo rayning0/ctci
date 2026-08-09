@@ -12,7 +12,7 @@ def topKFrequent(words: list[str], k: int) -> list[str]:
 
     # Sort by frequency (descending), then by word (ascending/lexicographical)
     # Use -count for descending order, word for ascending lexicographical order
-    sorted_freq = sorted(freq.items(), key=lambda x: (-x[1], x[0]))
+    sorted_freq = sorted(freq.items(), key=lambda item: (-item[1], item[0]))
 
     # ...OR...
     # def sort_key(item):
@@ -24,50 +24,57 @@ def topKFrequent(words: list[str], k: int) -> list[str]:
     return [word for word, count in sorted_freq[:k]]
 
 
-# Min heap gets better Big O time!
+# Max heap gets better Big O time!
 # Because this pushes every unique word on heap, its Big-O time is
-# Time: O(n + m log m + k log m) → O(n + m log m). m = # of unique words
+# Time: O(n + m log m + k log m) → O(n + m log m)
 # Space: O(n)
+# n = len(words). n >= m.
+# m = # of unique words
+# k = desired result size
 def topKFrequentHeap(words: list[str], k: int) -> list[str]:
-    """
-    Simplest heap approach:
-    """
-    freq = Counter(words) # O(n)
-    heap = []
+    # freq = Counter(words) # O(n)
+    freq = {}
+    for w in words:
+        freq[w] = freq.get(w, 0) + 1
+
+    max_heap = []
     ans = []
 
-    for word, count in freq.items():
-        heapq.heappush(heap, (-count, word)) # O(m log m)
+    for w, count in freq.items():
+        heapq.heappush(max_heap, (-count, w)) # O(m log m)
 
     for _ in range(k):
-        count, word = heapq.heappop(heap) # O(k log m)
-        ans.append(word)
+        count, w = heapq.heappop(max_heap) # O(k log m)
+        ans.append(w)
 
     return ans
 
 
-# Breakdown of heap approach:
+# Max Heap example:
+# words = ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"]
 
-# 1. Counter(words) creates word/count pairs:
-#    {'i': 2, 'love': 2, 'leetcode': 1, 'coding': 1}
+# 1. word freq:
+#    {'the': 4, 'day': 1, 'is': 3, 'sunny': 2}
 
-# 2. Push each word as (-count, word).
-#    Negative count makes higher-frequency words come out first:
-#    Frequency 2 becomes -2. Since -2 is smaller, it pops out first.
-#    Technically it's a min heap, but it simulates like a max heap by frequency.
+# 2. Push each word to heap as (-count, word).
+#    "-count": makes higher frequency words pop out first.
+#    Frequency 4 becomes -4. Since -4 is smaller, it pops out first.
+#    Technically it's a min heap, but it simulates a max heap by frequency.
 
-#    For equal counts, Python compares words alphabetically.
+#    "word": For equal counts, Python sorts words alphabetically.
 
+# 3. max_heap:
+#    [[-4, 'the'], [-2, 'sunny'], [-3, 'is'], [-1, 'day']]
 
-# 3. The heap contains:
-#    (-2, 'i'), (-2, 'love'), (-1, 'leetcode'), (-1, 'coding')
+# 4. heapq.heappop(heap) removes smallest tuple + rearranges heap:
+#    [-4, 'the'] -> append 'the' to ans
+# max_heap = [[-3, 'is'], [-2, 'sunny'], [-1, 'day']]
+#    [-3, 'is'] -> append 'is' to ans
+# max_heap = [[-2, 'sunny'], [-1, 'day']]
+#    [-2, 'sunny'] -> append 'sunny' to ans
 
-# 4. heapq.heappop(heap) removes the smallest tuple:
-#    (-2, 'i') -> append 'i'
-#    (-2, 'love') -> append 'love'
-
-# 5. Repeat k times and return the words:
-#    ['i', 'love']
+# 5. After k times, it returns words:
+#    ["the", "is", "sunny", "day"]
 
 
 
