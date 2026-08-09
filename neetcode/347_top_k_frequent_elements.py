@@ -21,28 +21,41 @@
 
 # 2. Better: MinHeap with size limit
 # Delete all lower freq nums from heap. Only max freq nums remain.
-# Time: O(n log k), Space: O(n + k)
-# import heapq
+# Time: O(n + m log k) -> O(n log k), Space: O(n + k)
+# n = len(nums). n >= m.
+# m = # of unique nums
+# k = desired result size
+import heapq
 
-# def topKFrequent(nums: list[int], k: int) -> list[int]:
-#     freq = {}
-#     minHeap = []
-#     for n in nums:
-#         freq[n] = freq.get(n, 0) + 1
+def topKFrequent(nums: list[int], k: int) -> list[int]:
+    freq = {} # Space: O(m)
+    min_heap = [] # Space: O(k)
+    for n in nums:
+        freq[n] = freq.get(n, 0) + 1 # Time: O(n)
 
-#     for n, count in freq.items():
-#         heapq.heappush(minHeap, [count, n])
-#         if len(minHeap) > k:
-#             heapq.heappop(minHeap)  # delete all lower freq nums from heap
-#     return [n for count, n in minHeap]
-# OR  return [item[1] for item in minHeap]
+    # Total time: O(log k) runs m times = O(m log k)
+    for n, count in freq.items():
+        heapq.heappush(min_heap, [count, n]) # Time: O(log k)
+        if len(min_heap) > k:
+            # delete all lower freq nums from heap
+            heapq.heappop(min_heap) # Time: O(log k)
+
+    # now only highest freq nums remain in heap
+    return [n for count, n in min_heap]
+# OR  return [item[1] for item in min_heap]
+
+# Ex:
+# nums = [1, 2, 1, 2, 1, 2, 3, 1, 3, 2]
+# freq = {1: 4, 2: 4, 3: 2}
+# after heappush of [count, n], min_heap = [[2, 3], [4, 2], [4, 1]]
+# after heappop, min_heap = [[4, 1], [4, 2]]
+# [n for count, n in min_heap] = [1, 2]
 
 
 # 3. Best! Bucket Sort
 # Time: O(n), Space: O(n)
 def topKFrequent(nums: list[int], k: int) -> list[int]:
     freq = {}
-    buckets = [] # Never say buckets = ans = []!
     ans = []
 
     for n in nums:
@@ -51,12 +64,18 @@ def topKFrequent(nums: list[int], k: int) -> list[int]:
     # buckets is list of lists by frequency:
     # buckets[4] = [1, 2] = all nums with freq of 4
     # buckets has length len(nums) + 1, since nums could be all 1 number with frequency len(nums)
-    for _ in range(len(nums) + 1):
-        buckets.append([])
+
+    buckets = [[] for _ in range(len(nums) + 1)]
+    # buckets = [[]] * (len(nums) + 1) <--- WRONG!!!
+
+    # OR
+
+    # buckets = [] # Never say buckets = ans = []!
+    # for _ in range(len(nums) + 1):
+    #     buckets.append([])
+
     # creates: [[], [], [], [], [], ...]
 
-    # buckets = [[] for _ in range(len(nums) + 1)] means same thing, but hard to remember
-    # buckets = [[]] * (len(nums) + 1) <--- WRONG!!!
 
     for n, count in freq.items():
         buckets[count].append(n)
