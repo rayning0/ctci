@@ -51,7 +51,7 @@ def frequencySort(s: str) -> str:
         ans.append(c * count)
     return ''.join(ans)
 
-# 3. Frequency Buckets. Hardest to remember.
+# 3. Bucket Sort, by Frequency. Hardest to remember.
 # Time: O(n) <--- since NO SORTING used, Space: O(n)
 def frequencySort(s: str) -> str:
     freq = {}
@@ -66,12 +66,13 @@ def frequencySort(s: str) -> str:
     # buckets has length len(s) + 1, since s could be all 1 letter with frequency len(s)
     for _ in range(len(s) + 1):
         buckets.append([])
+    # creates: [[], [], [], [], [], ...]
     # buckets = [[] for _ in range(len(s) + 1)] means same thing, but hard to remember
 
     for c, count in freq.items():
         buckets[count].append(c)
 
-    # from highest to lowest letter freq
+    # from highest to lowest letter count
     for count in range(len(s), 0, -1):
         for c in buckets[count]:
             ans.append(c * count)

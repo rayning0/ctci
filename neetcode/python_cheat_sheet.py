@@ -297,9 +297,20 @@ for i in range(len(nums) - 1, -1, -1):
 # Changes list in-place. Directly changes order of elements in original list object.
 # Returns "None". It does not create new list or return reversed version; it simply changes existing list.
 
+# WRONG!
+# for n in nums.reverse():
+#     print(n)
+
+# nums.reverse() returns None. Can't loop over it!
+
 # 2. reversed():
 # Built-in function for any iterable (lists, tuples, strings, range, etc.).
 # Non-destructive: reversed() doesn't change original iterable. Instead, returns a reversed iterator object.
+
+# RIGHT:
+# for n in reversed(nums):
+#     print(n)
+
 # Returns an iterator that yields the elements of original iterable in reverse order. To get a new list or tuple, you must explicitly convert iterator (e.g., using list() or tuple()).
 
 Use list.reverse() when you must reverse a list and no longer need its original order, and you want to save memory by modifying the list directly.
