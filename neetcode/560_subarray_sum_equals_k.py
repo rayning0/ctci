@@ -43,16 +43,16 @@ if __name__ == "__main__":
 # prefix:      1  1  5  6  8 11
 # prefix - k: -4 -4  0  1  3  6
 
-# prefix_sums {
+# prefix_sums = {
 #     0: 1 <-- at index 0, prefix = 1. 1 - k = -4. We've not seen this before. Skip.
 #     1: 2 <-- at index 1, prefix = 1. Skip.
 #     5: 1 <-- at index 2, prefix = 5. 5 - k = 0, a past_prefix we saw before.
 # Thus [1, 0, 4], from past_prefix to prefix, is desired subarray! Add prefix_sums[0] = 1 to ans.
 #     6: 1 <-- at index 3, prefix = 6. 6 - k = 1, a past_prefix we saw twice before (at indices 0, 1).
-# Thus 2 subarrays [0, 4, 1] and [4, 1] both sum to k. Add prefix_sums[1] = 2 to ans.
+# Thus 2 subarrays [0, 4, 1] and [4, 1] both sum to k.             Add prefix_sums[1] = 2 to ans.
 #     8: 1 <-- at index 4, prefix = 8. 8 - k = 3, which we've not seen before. Skip.
 #    11: 1 <-- at index 5, prefix = 11. 11 - k = 6, a past_prefix we once before (at index 3).
-# Thus 1 subarray [2, 3] sums to k. Add prefix_sums[6] = 1 to ans.
+# Thus 1 subarray [2, 3] sums to k.                                Add prefix_sums[6] = 1 to ans.
 # }
 
 # ans: 4 subarrays all sum to k
