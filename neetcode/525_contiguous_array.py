@@ -5,7 +5,7 @@
 def findMaxLength(nums: list[int]) -> int:
     count = 0
     max_length = 0
-    counts = {0: -1}
+    counts = {0: -1} # use -1 as start index to calculate subarray length
 
     for i, n in enumerate(nums):
         if n == 1:

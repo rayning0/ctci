@@ -8,8 +8,8 @@
 # subarray from index i+1 to j is a target subarray!
 # (prefixSum[j] - prefixSum[i]) % k == 0.
 
-# Thus: If 2 prefix sums have the same "mod k" value (or REMAINDER when divided by k)
-# their difference is divisible by k! <--- KEY INSIGHT
+# Thus: If 2 prefix sums have the same "mod k" value (or REMAINDER when divided by k),
+# their difference is divisible by k! <-- KEY INSIGHT
 
 # Time: O(n), Space: O(k)
 def subarraysDivByK(nums: list[int], k: int) -> int:
