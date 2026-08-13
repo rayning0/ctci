@@ -1,20 +1,46 @@
+# 1. Brute force. getProduct() runs too slowly for LeetCode if k = 4 * 10^4
+
+# class ProductOfNumbers:
+
+#     def __init__(self):
+#         self.nums = []
+
+#     # Time: O(1), Space: O(n)
+#     def add(self, num: int) -> None:
+#         self.nums.append(num)
+
+#     # Time: O(k), Space: O(1) auxiliary (if ignore nums)
+#     def getProduct(self, k: int) -> int:
+#         prod = 1
+
+#         for i in range(-1, -1 - k, -1):
+#             prod *= self.nums[i]
+
+#         return prod
+
+# 2. Prefix product:
+
 class ProductOfNumbers:
 
     def __init__(self):
-        self.nums = []
+        self.prefix = [1]
 
+    # Time: O(1), Space: O(n)
     def add(self, num: int) -> None:
-        self.nums.append(num)
-        print(self.nums)
+        if num == 0:
+            self.prefix = [1]
+        else:
+            # self.prefix[-1] is latest prefix product
+            self.prefix.append(self.prefix[-1] * num)
 
+    # Time: O(1), Space: O(1) auxiliary
     def getProduct(self, k: int) -> int:
-        prod = 1
-        last = len(self.nums) - 1
+        # product (if k includes a past added 0) is 0
+        if k >= len(self.prefix):
+            return 0
+        else:
+            return self.prefix[-1] //  self.prefix[-1 - k]
 
-        for i in range(last, last - k, -1):
-            prod *= self.nums[i]
-
-        return prod
 
 def test_example_sequence():
     obj = ProductOfNumbers()
@@ -22,13 +48,23 @@ def test_example_sequence():
     for num in [3, 0, 2, 5, 4]:
         obj.add(num)
 
+# add(3): prefix = [3]
+# add(0): prefix = [1]
+# add(2): prefix = [1, 2]
+# add(5): prefix = [1, 2, 10]
+# add(4): prefix = [1, 2, 10, 40]
+
     assert obj.getProduct(2) == 20
+# k = 2: product = prefix[-1] // prefix[-1-k] = 40 // prefix[-3] = 40 // 2 = 20
+
     assert obj.getProduct(3) == 40
+# k = 3: product = prefix[-1] // prefix[-1-3] = 40 // 1 = 40
+
     assert obj.getProduct(4) == 0
+# k = 4: Since k >= len(prefix) = 4, we hit a past 0. So product = 0
 
     obj.add(8)
     assert obj.getProduct(2) == 32
-
 
 def test_product_of_last_one_number():
     obj = ProductOfNumbers()
@@ -55,15 +91,27 @@ def test_zero_only_affects_products_that_include_it():
     assert obj.getProduct(4) == 0
 
 
-def test_products_after_zero_are_based_on_the_new_segment():
+def test_multiple_zeros_reset_prefix_segment():
     obj = ProductOfNumbers()
 
-    for num in [0, 6, 2, 3]:
-        obj.add(num)
+    obj.add(3)
+    assert obj.prefix == [1, 3]
 
-    assert obj.getProduct(1) == 3
-    assert obj.getProduct(2) == 6
-    assert obj.getProduct(3) == 36
+    obj.add(0)
+    assert obj.prefix == [1]
+
+    obj.add(0)
+    assert obj.prefix == [1]
+
+    obj.add(2)
+    assert obj.prefix == [1, 2]
+
+    obj.add(5)
+    assert obj.prefix == [1, 2, 10]
+
+    assert obj.getProduct(1) == 5
+    assert obj.getProduct(2) == 10
+    assert obj.getProduct(3) == 0
     assert obj.getProduct(4) == 0
 
 
@@ -79,11 +127,11 @@ def test_repeated_queries_do_not_change_the_stream():
 
 def run_tests():
     tests = [
-        test_example_sequence
-        # test_product_of_last_one_number,
-        # test_zero_only_affects_products_that_include_it,
-        # test_products_after_zero_are_based_on_the_new_segment,
-        # test_repeated_queries_do_not_change_the_stream,
+        test_example_sequence,
+        test_product_of_last_one_number,
+        test_zero_only_affects_products_that_include_it,
+        test_multiple_zeros_reset_prefix_segment,
+        test_repeated_queries_do_not_change_the_stream,
     ]
 
     failures = 0
@@ -102,17 +150,3 @@ def run_tests():
     print(f"{len(tests)} tests passed")
 
 run_tests()
-
-# if __name__ == "__main__":
-#     obj = ProductOfNumbers()
-
-#     for num in [3, 0, 2, 5, 4]:
-#         obj.add(num)
-
-#     assert obj.getProduct(2) == 20
-#     assert obj.getProduct(3) == 40
-#     assert obj.getProduct(4) == 0
-
-#     obj.add(8)
-#     assert obj.getProduct(2) == 32
-#     print("All tests passed!")
