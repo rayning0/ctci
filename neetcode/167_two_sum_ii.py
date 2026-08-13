@@ -1,7 +1,12 @@
 # https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/problems/two-integer-sum-ii/solution
 # Like twoSum, but integer array is SORTED. "1-indexed" array: first index is 1, not 0.
-# Use 2 pointers for indices, left and right.
+
+# Use 2 pointers for indices left and right. Sum nums[left] + nums[right].
+# while left < right:
+# If sum < target, add 1 to left pointer. sum must be higher!
+# If sum > target, subtract 1 from right pointer. sum must be lower!
+# Else sum == target, so return [left + 1, right + 1]. We add 1 to each since this is "1-indexed" array.
 
 # Time: O(n), Space: O(1)
 def twoSum(numbers: list[int], target: int) -> list[int]:
@@ -15,7 +20,6 @@ def twoSum(numbers: list[int], target: int) -> list[int]:
             r -= 1
         else:
             return [l + 1, r + 1]
-
 
 if __name__ == "__main__":
     assert twoSum([2, 7, 11, 15], 9) == [1, 2]
