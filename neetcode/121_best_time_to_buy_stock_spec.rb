@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=problem-list-v2&envId=plakya4j
-# use sliding window
+# use variable sliding window
 
 # Time: O(n), Space: O(1)
 def max_profit(prices)

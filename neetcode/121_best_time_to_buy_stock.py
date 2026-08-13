@@ -1,13 +1,13 @@
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/problems/buy-and-sell-crypto/question
-# Use sliding window
+# Use variable sliding window
 
 # Time: O(n), Space: O(1)
 def maxProfit(prices: list[int]) -> int:
-    l, max_profit = 0, 0
+    l = max_profit = 0
 
-    for r in range(1, len(prices)):
-        if prices[l] > prices[r]:
+    for r in range(len(prices)):
+        if prices[r] <= prices[l]:
             l = r
         else:
             profit = prices[r] - prices[l]
