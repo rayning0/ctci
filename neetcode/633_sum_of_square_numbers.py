@@ -2,11 +2,10 @@
 # https://algo.monster/liteproblems/633
 # 2 pointers
 
-# Given a non-negative integer c, decide whether there're two integers a and b such that a^2 + b^2 = c.
+# Given non-negative integer c, find if there are 2 integers a and b so a^2 + b^2 = c.
 # Possible answers: a == b, a or b == 0
 
 import math
-
 
 # Time: O(sqrt c), Space: O(1)
 def judgeSquareSum(c: int) -> bool:
