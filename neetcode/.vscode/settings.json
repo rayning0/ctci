@@ -1,0 +1,8 @@
+{
+  "python.analysis.exclude": [
+    "python_cheat_sheet.py"
+  ],
+  "basedpyright.analysis.exclude": [
+    "python_cheat_sheet.py"
+  ]
+}
