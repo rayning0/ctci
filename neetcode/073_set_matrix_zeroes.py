@@ -38,7 +38,7 @@ def setZeroes(matrix: list[list[int]]) -> None:
     # pp(matrix)
     # print()
 
-# 2. Iteration (HARD TO REMEMBER, but only O(1) space). Use input matrix ITSELF to store location of original 0s.
+# 2. Iteration (HARD TO REMEMBER, but only O(1) space). Use input matrix ITSELF to store location of original 0s. Best answer!
 
 # Pass 1: Loop through all cells to find all 0's.
 # Use matrix row 0 to mark which columns should be 0
@@ -55,18 +55,17 @@ def setZeroes(matrix: list[list[int]]) -> None:
     print("Before:")
     pp(matrix)
 
-    row_zero = False
     ROWS, COLS = len(matrix), len(matrix[0])
-    rows, cols = [False] * ROWS, [False] * COLS
+    row_zero = False
 
     # Pass 1:
     for r in range(ROWS):
         for c in range(COLS):
             if matrix[r][c] == 0:
-                matrix[0][c] = 0        # mark col that should be 0
+                matrix[0][c] = 0        # mark all cols that should be 0
 
                 if r > 0:
-                    matrix[r][0] = 0    # mark row that should be 0
+                    matrix[r][0] = 0    # mark all rows that should be 0
                 else:
                     row_zero = True     # row 0 should be 0.
     # Since we using matrix[0] to track which cols should be 0, we must use
@@ -79,21 +78,26 @@ def setZeroes(matrix: list[list[int]]) -> None:
     # ]
 
     # matrix = [
-    #     [1,0,3],
-    #     [0,0,5], <-- r = 1
-    #     [6,7,8]
-    # ]      c = 1
+    #    [ 1 ,*0*,3], <=== row 0 tracks all cols that should be 0. We mark col 1.
+    #    [*0*, 0,5],
+    #    [ 6 , 7,8]
+    # ]    ^
+    #      |
+    # col 0 tracks all rows that should be 0. We mark row 1.
 
-    # Pass 2:
+    # Pass 2: Translate marked row 0 and col 0 spots into full 0's.
+    # But start with index 1, since row 0 and col 0 were used for tracking.
     for r in range(1, ROWS):
         for c in range(1, COLS):
             if matrix[0][c] == 0 or matrix[r][0] == 0:
                 matrix[r][c] = 0
 
+    # Zero out col 0 FIRST.
     if matrix[0][0] == 0:
         for r in range(ROWS):
-            matrix[r][0] = 0
+            matrix[r][0] = 0 # set all col 0 to 0
 
+    # Zero out row 0 SECOND. Order matters! If you reverse these last 2 steps, it fails.
     if row_zero:
         for c in range(COLS):
             matrix[0][c] = 0  # set all row 0 to 0
@@ -131,4 +135,8 @@ if __name__ == "__main__":
     matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
     setZeroes(matrix)
     assert matrix == [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+
+    matrix = [[-4,-2147483648,6,-7,0],[-8,6,-8,-6,0],[2147483647,2,-9,-6,-10]]
+    setZeroes(matrix)
+    assert matrix == [[0,0,0,0,0],[0,0,0,0,0],[2147483647,2,-9,-6,0]]
     print("All tests passed!")
