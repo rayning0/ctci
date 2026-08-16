@@ -215,20 +215,67 @@ arr[-1]
 # Indexing -2 is second to last value, etc.
 arr[-2]
 >>> 2
+______________________
+SLICE a list:
 
 # Sublists (aka slicing)
-arr = [1, 2, 3, 4]
-arr[1:3]
->>> [2, 3]
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+numbers[2:6]
+>>> [2, 3, 4, 5]
+
+# Slice from the start
+numbers[:4]
+>>> [0, 1, 2, 3]
+
+# Slice to the end
+numbers[6:]
+>>> [6, 7, 8, 9]
+
+# Get whole list, keeping same memory address
+numbers[:]
+>>> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Like for-loop ranges, last index is not included
-arr[0:4]
->>> [1, 2, 3, 4]
+numbers[0:11]
+>>> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # But no out of bounds error if last index > list length
-arr[0:10]
->>> [1, 2, 3, 4]
+numbers[0:20]
+>>> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+# Using step value
+numbers[1:8:2]
+>>> [1, 3, 5, 7] (Every second item from index 1-7)
+
+# Negative indexing. Count backward from end of list.
+numbers[-3:]
+>>> [7, 8, 9] (last 3 items)
+numbers[:-3]
+>>> [0, 1, 2, 3, 4, 5, 6] (All except last 3 items)
+
+# Reverse a list
+numbers[::-1]
+>>> [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+for n in numbers[::-1]: # Loops directly over VALUES of list in reverse order. But it makes a separate copy of whole list in memory!
+    print(n)
+>>> [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+BETTER:
+for n in reversed(numbers): # Uses O(1) memory. Returns iterator that moves backward through original list without making a copy.
+    print(n)
+
+numbers[::-1] and numbers.reverse() are not the same, though both reverse the order of elements.
+numbers[::-1] (Slicing): Creates and returns a new list containing the reversed elements. The original numbers list remains unchanged.
+numbers.reverse() (In-place method): Modifies (mutates) the original numbers list in place and returns None.
+
+Comparison:
+
+- Return Value: numbers[::-1] evaluates to a new list object ([9, 8, ...]); numbers.reverse() returns None.
+- Memory & Performance: numbers[::-1] uses additional memory to allocate a new list. numbers.reverse() uses O(1) extra space since it mutates the existing list directly.
+- Syntax Flexibility: Slicing can be used directly inside expressions or function calls (ex: for n in numbers[::-1]:). numbers.reverse() must be called as separate statement beforehand.
+- Compatibility: [::-1] works on any sequence type (strings, tuples, lists), whereas .reverse() is a method exclusive to mutable sequences like lists.
+______________________
 # Unpacking
 a, b, c = [1, 2, 3] # pattern matching
 print(a, b, c)
