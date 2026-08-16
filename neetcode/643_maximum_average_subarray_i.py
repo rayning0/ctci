@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/maximum-average-subarray-i/description/
 # https://algo.monster/liteproblems/643
-# Sliding Window
+# Fixed Sliding Window
 
 # Find subarray with max sum:
 # - Don't loop through sum(nums[i:i + k]). Too slow!
