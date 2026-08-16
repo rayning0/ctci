@@ -1,6 +1,9 @@
-# Python Cheat Sheet: quick Python review
-# https://neetcode.io/courses/lessons/python-for-coding-interviews
-# Even better: https://static.realpython.com/python-cheatsheet.pdf
+# pyright: reportUndefinedVariable=false
+# pylint: disable-all
+
+Python Cheat Sheet: quick Python review
+https://neetcode.io/courses/lessons/python-for-coding-interviews
+Even better: https://static.realpython.com/python-cheatsheet.pdf
 
 # VARIABLES
 
@@ -163,7 +166,7 @@ math.pow(2, 200)
 
 2.0**1024
 >>> OverflowError: (34, 'Result too large')
-
+______________________
 # ARRAYS (or "LISTS" in python)
 
 # Python lists don't auto-expand on index assignment. You must either initialize list with its required size or use append() to add!
@@ -279,7 +282,7 @@ nums.reverse() # same as nums.reverse! in Ruby
 for n in nums.reverse():
     print(n)
 
-nums.reverse() returns None. Can't loop over it!
+nums.reverse() returns None. You can't loop over it!
 
 # RIGHT: "reversed()" returns an iterator, so we CAN loop over it
 for n in reversed(nums):
@@ -466,21 +469,69 @@ for num in nums:
     if num % 2 == 0:
         evens.append(num)
 >>> [2, 4, 6, 8, 10]
-
+__________________________
 # 2D lists
 
-# Make 2D list, all 0's, with rows x cols
-arr = [[0] * rows for i in range(cols)]
+# Make empty 2D matrix (all 0's) with cols and rows
+arr = [[0] * cols for _ in range(rows)]
 
-arr = [[0] * 4 for i in range(2)] # 4 = cols, 2 = rows
+arr = [[0] * 4 for _ in range(2)] # 4 = cols, 2 = rows
 >>> [[0, 0, 0, 0], [0, 0, 0, 0]]
 
-arr[1][2] = 3 # arr[r][c]
+arr[1][2] = 3 # arr[row][col]
 >>> [[0, 0, 0, 0], [0, 0, 3, 0]]
 
-# This won't work
+# Wrong:
 # arr = [[0] * 4] * 4 <---- each of these 4 rows will be same! Changing 1 col in 1 row changes same col in all 4 rows!
 
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+
+# Pretty Print 2D Matrix
+def pp(matrix: list[list[int]]) -> None:
+    for row in matrix:
+        print(*row) <--- * unpacks elements from an iterable
+
+1 2 3
+4 5 6
+7 8 9
+
+Loop through rows, cols of matrix:
+
+matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+ROWS, COLS = len(matrix), len(matrix[0])
+
+or
+
+height = len(matrix) = 3
+width = len(matrix[0]) = 4
+
+for r in range(height):
+    for c in range(width):
+        print(matrix[r][c])
+
+for r in range(len(matrix)):
+    for c in range(len(matrix[0])):
+        print(f"Matrix[{r}][{c}] = {matrix[r][c]}")
+
+for r, row in enumerate(matrix):
+    for c, element in enumerate(row):
+        print(f"Element at row {r}, col {c} is: {element}")
+
+Transpose 2D matrix for [[1, 2, 3], [4, 0, 5], [6, 7, 8]]:
+
+list(zip(*matrix))
+
+1 4 7
+2 5 8
+3 6 9
+
+# * unpacks outer list into 3 separate arguments
+# zip([1, 2, 3], [4, 5, 6], [7, 8, 9])
+# zip() takes ith element from each argument, then groups them together in tuple:
+#     1st iteration takes 1st element of each list: (1, 4, 7)
+#     2nd iteration takes 2nd element of each list: (2, 5, 8)
+#     3rd iteration takes 3rd element of each list: (3, 6, 9)
+# list wraps output in final list: [(1, 4, 7), (2, 5, 8), (3, 6, 9)]
 __________________________
 # STRINGS are like arrays, but they are IMMUTABLE!
 
