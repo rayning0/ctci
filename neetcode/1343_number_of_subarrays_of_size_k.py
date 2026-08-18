@@ -4,7 +4,7 @@
 
 # Same answer as https://github.com/rayning0/ctci/blob/master/neetcode/643_maximum_average_subarray_i.py
 
-# Time: O(n), Space:
+# Time: O(n), Space: O(1)
 def numOfSubarrays(arr: list[int], k: int, threshold: int) -> int:
     ans = 0
     window_sum = sum(arr[:k])
