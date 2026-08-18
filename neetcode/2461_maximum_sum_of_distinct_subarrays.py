@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/
 # https://algo.monster/liteproblems/2461
+# Fixed Sliding Window
 
 # Time: O(n), Space: O(k)
 def maximumSubarraySum(nums: list[int], k: int) -> int:
