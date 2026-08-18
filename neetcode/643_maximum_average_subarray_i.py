@@ -8,6 +8,8 @@
 #   - Add new element that just entered window: nums[i]
 #   - Subtract element that just left sliding window: nums[i - k]
 
+# Same answer as https://github.com/rayning0/ctci/blob/master/neetcode/1343_number_of_subarrays_of_size_k.py
+
 # Time: O(n), Space: O(1)
 def findMaxAverage(nums: list[int], k: int) -> float:
     window_sum = sum(nums[:k])
