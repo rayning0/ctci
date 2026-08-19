@@ -1,25 +1,23 @@
 # https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=problem-list-v2&envId=ebdgnf5s
-# https://neetcode.io/problems/longest-substring-without-duplicates/question?list=neetcode150
-# Use sliding window
+# https://neetcode.io/problems/longest-substring-without-duplicates/solution
+# Variable Sliding Window
 
 # Time: O(n), Space: O(m). n = string length, m = # of unique characters in string
 def lengthOfLongestSubstring(s: str) -> int:
-    charSet = set()
-    l = 0
-    max_length = 0
+    seen = set()
+    l = max_length = 0
 
     for r in range(len(s)):
         # Delete all duplicates of current char from set.
-        # Shrink sliding window till all duplicates gone.
-        while s[r] in charSet:
+        # Shrink sliding window from left, till all duplicates gone.
+        while s[r] in seen:
             # delete left-most char from set to move sliding window forward 1
-            charSet.remove(s[l])
+            seen.remove(s[l])
             l += 1
-        charSet.add(s[r])
-        max_length = max(max_length, len(charSet))
-        # print(l, r)
-        # print(charSet)
-        # print(max_length)
+
+        seen.add(s[r])
+        length = r - l + 1
+        max_length = max(max_length, length)
 
     return max_length
 

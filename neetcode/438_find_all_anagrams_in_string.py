@@ -2,6 +2,8 @@
 # https://neetcode.io/solutions/find-all-anagrams-in-a-string
 # Fixed Sliding Window
 
+# Same answer as https://github.com/rayning0/ctci/blob/master/neetcode/567_permutation_in_string.py
+
 # Time: O(n + m), Space: O(1)
 # It's O(1) space since p, s may only be lowercase English letters.
 # freqP, freqS are O(26) = O(1)
