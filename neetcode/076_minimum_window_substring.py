@@ -17,17 +17,22 @@ def minWindow(s: str, t: str) -> str:
     for c in t:
         freqT[c] = freqT.get(c, 0) + 1
 
-    required = len(freqT) # sliding window must match this many UNIQUE characters from t
+# required = # of UNIQUE characters in t. It's a fixed target. s sliding window must have all these.
+    required = len(freqT)
+# matched = # of these unique s sliding window chars that fully meet their t frequency requirement.
     matched = 0
+
+# matched counts characters, not occurrences.
+# Each unique character in t can contribute at most 1 to matched — and only when its frequency in the window exactly hits the target.
 
     for r in range(len(s)):
         freqS[s[r]] = freqS.get(s[r], 0) + 1
 
-        # when a char's freq count in sliding window exactly matches t's count
+        # s char's freq count in sliding window exactly matches t's count
         if s[r] in freqT and freqS[s[r]] == freqT[s[r]]:
             matched += 1
 
-        # when all of t's characters are in sliding window
+        # ALL t's characters are in s's sliding window. This window now FULLY meets t's requirements.
         while matched == required:
             length = r - l + 1
             if length < min_length:
@@ -57,4 +62,3 @@ if __name__ == "__main__":
     assert minWindow("xyz", "xyz") == "xyz"
     assert minWindow("x", "xy") == ""
     print("All tests passed!")
-
