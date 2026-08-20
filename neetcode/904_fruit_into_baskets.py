@@ -1,32 +1,27 @@
 # https://leetcode.com/problems/fruit-into-baskets/description/?envType=company&envId=netflix&favoriteSlug=netflix-all
 # https://neetcode.io/solutions/fruit-into-baskets
-# Sliding Window
-# "Longest subarray with at most 2 distinct values"
+# Variable Sliding Window
+# Basically: "Find longest subarray with at most 2 distinct values"
 
-# Time: O(n), Space: O(1)
+# Time: O(n), Space: O(1) <--- since freq only has max of 2 keys
 def totalFruit(fruits: list[int]) -> int:
-    l = 0
+    l = max_length = 0
     freq = {}
-    max_length = 0
 
     for r in range(len(fruits)):
         freq[fruits[r]] = freq.get(fruits[r], 0) + 1
-        # print(f"freq: {freq}, l: {l}, r: {r}")
 
         # Shrink window from left till we have at most 2 distinct types
-        while len(freq) > 2:
+        while len(freq.keys()) > 2:
             freq[fruits[l]] -= 1
             if freq[fruits[l]] == 0:
-                freq.pop(fruits[l])
+                del freq[fruits[l]]
             l += 1
-            # print(f"freq: {freq}, l: {l}, r: {r}")
 
         length = r - l + 1
-        # print(f"length: {length}, max length: {max_length}")
         max_length = max(max_length, length)
 
     return max_length
-
 
 if __name__ == "__main__":
     assert totalFruit([1, 2, 1]) == 3
