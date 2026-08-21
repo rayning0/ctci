@@ -53,6 +53,9 @@ else:
 
 Output for n: 3
 
+# Variable equals output of if-statement:
+status = "Big" if x > 5 else "Small"
+
 # LOGICAL OPERATORS: and, or, not.
 # Python runs operations in this order: not, and, or.
 # Parentheses needed for multi-line conditions.
