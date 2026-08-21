@@ -3,7 +3,7 @@
 
 # When we hit sum >= target, shrink left window
 # Time: O(n), Space: O(1)
-def minSubArrayLen(target: int, nums: List[int]) -> int:
+def minSubArrayLen(target: int, nums: list[int]) -> int:
     l = sum = 0
     min_length = float("inf")
 
