@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/minimum-size-subarray-sum/description/
 # https://neetcode.io/solutions/minimum-size-subarray-sum
+# Variable Sliding Window
 
 # When we hit sum >= target, shrink left window
 # Time: O(n), Space: O(1)

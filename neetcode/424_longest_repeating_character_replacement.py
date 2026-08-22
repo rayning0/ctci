@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/longest-repeating-character-replacement/description/
 # https://neetcode.io/solutions/longest-repeating-character-replacement
+# Variable Sliding Window
 
 # We want longest window where we can make all characters same, with max k replacements.
 
