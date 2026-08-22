@@ -49,3 +49,29 @@ if __name__ == "__main__":
 #         r = mid
 
 # return l                    <--- when l == r
+
+# ---------------------------------------------------
+# Related problem, but exact same answer!
+
+# "First Insertion Position (with Duplicates)":
+# Given sorted array of integers (may contain duplicates) and target value,
+# return the first index where nums[i] >= target.
+
+def firstInsert(nums: list[int], target: int) -> int:
+    l, r = 0, len(nums)
+
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] < target:
+            l = mid + 1
+        else:
+            r = mid
+
+    return l
+
+if __name__ == "__main__":
+    assert firstInsert([1, 2, 2, 2, 3, 5, 6], 2) == 1
+    assert firstInsert([1, 2, 2, 2, 3, 5, 6], 4) == 5
+    assert firstInsert([1, 2, 2, 2, 3, 5, 6], 7) == 7
+    assert firstInsert([2, 2, 2, 2], 2) == 0
+    print("All tests passed!")
