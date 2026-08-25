@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/binary-search/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/problems/binary-search/question?list=neetcode150
-# Binary Search: Exact Match
+# Binary Search: Exact Match. Search array indices.
 # (Data structure must be SORTED (or monotonic).)
 
 # Time: O(log n), Space: O(1)
@@ -52,3 +52,35 @@ if __name__ == "__main__":
 #         r = mid
 
 # return l                    <--- when l == r
+#______________________
+
+# We have 3 search spaces:
+
+# 1. Search array indices <=== Can answer be 1 past the array? NO
+# Examples:
+# - LC 704
+# - LC 33
+# - LC 153
+# Search space:
+# 0 ... len(nums)-1
+# Answer must be real element.
+
+# 2. Search insertion positions <=== Can answer be 1 past the array? YES
+# Examples:
+# - LC 35
+# - LC 34
+# Search space:
+# 0 ... len(nums)
+# Answer is a boundary.
+
+# 3. Search answer values
+# Examples:
+# - LC 875
+# - LC 1011
+# Search space:
+# min_possible_answer
+# ...
+# max_possible_answer
+# Examples:
+# l = max(weights)
+# r = sum(weights)

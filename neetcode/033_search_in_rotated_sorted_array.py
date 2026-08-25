@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/search-in-rotated-sorted-array/
 # https://neetcode.io/solutions/search-in-rotated-sorted-array
-# Binary Search: Exact Match
+# Binary Search: Exact Match. Search array indices.
 
 # Ex: [4,5,6,7,0,1,2] # nums[mid] > nums[-1]. pivot = 4. It's really
 # [0,1,2,4,5,6,7] rotated left by pivot - 1 = 3
@@ -49,3 +49,36 @@ if __name__ == "__main__":
     assert search([3,4,5,6,1,2], 1) == 4
     assert search([3,5,6,0,1,2], 4) == -1
     print("All tests passed!")
+
+#______________________
+
+# We have 3 search spaces:
+
+# 1. Search array indices <=== Can answer be 1 past the array? NO
+# Examples:
+# - LC 704
+# - LC 33
+# - LC 153
+# Search space:
+# 0 ... len(nums)-1
+# Answer must be real element.
+
+# 2. Search insertion positions <=== Can answer be 1 past the array? YES
+# Examples:
+# - LC 35
+# - LC 34
+# Search space:
+# 0 ... len(nums)
+# Answer is a boundary.
+
+# 3. Search answer values
+# Examples:
+# - LC 875
+# - LC 1011
+# Search space:
+# min_possible_answer
+# ...
+# max_possible_answer
+# Examples:
+# l = max(weights)
+# r = sum(weights)

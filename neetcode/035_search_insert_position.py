@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/search-insert-position/
 # https://neetcode.io/solutions/search-insert-position
-# Binary Search: Lower Bound
+# Binary Search: Lower Bound. Search insertion positions.
 
 # "return index if target found. If not, return index where it would be if INSERTED in order."
 
@@ -75,3 +75,36 @@ if __name__ == "__main__":
     assert firstInsert([1, 2, 2, 2, 3, 5, 6], 7) == 7
     assert firstInsert([2, 2, 2, 2], 2) == 0
     print("All tests passed!")
+
+#______________________
+
+# We have 3 search spaces:
+
+# 1. Search array indices <=== Can answer be 1 past the array? NO
+# Examples:
+# - LC 704
+# - LC 33
+# - LC 153
+# Search space:
+# 0 ... len(nums)-1
+# Answer must be real element.
+
+# 2. Search insertion positions <=== Can answer be 1 past the array? YES
+# Examples:
+# - LC 35
+# - LC 34
+# Search space:
+# 0 ... len(nums)
+# Answer is a boundary.
+
+# 3. Search answer values
+# Examples:
+# - LC 875
+# - LC 1011
+# Search space:
+# min_possible_answer
+# ...
+# max_possible_answer
+# Examples:
+# l = max(weights)
+# r = sum(weights)
