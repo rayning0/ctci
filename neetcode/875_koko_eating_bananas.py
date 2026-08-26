@@ -1,60 +1,80 @@
 # https://leetcode.com/problems/koko-eating-bananas/?envType=company&envId=netflix&favoriteSlug=netflix-all
 # https://neetcode.io/problems/eating-bananas/question?list=neetcode250
+# Lower Bound on Answer
 
-# You eat k bananas/hour. Each hour, you may pick a pile of bananas and eats k bananas from that pile.
-# If pile < k bananas, you may finish eating the pile, but you can not eat from another pile in same hour.
+# We eat k bananas/hour. Each hour, we may pick a pile of bananas and eat k bananas from that pile.
+# If pile < k bananas, we finish eating that pile but may not eat from another pile in same hour.
+# Find min integer k so we can eat ALL bananas in h hours.
 
-# Each pile of x bananas takes math.ceil(x/k) hours to eat.
-# Since h >= len(piles), top limit of k = max(list) = m, since for THAT k, you can clearly eat all piles in len(piles) hours.
+# INSIGHT: Each pile of p bananas takes math.ceil(p/k) hours to eat!
+# Since h >= len(piles), top limit of k = max(piles) = m, since for that k,
+# we can clearly eat all piles in len(piles) = n hours.
 
-# Brute force:
-# for k = 1 to max(list)
-# find how long it takes to eat all bananas. Return k if time <= h.
+# Ex: piles = [3,6,7,11], h = 8
 
-# Optimize: Use Binary Search.
+# k = 11 bananas/hr. It takes 4 hrs = len(piles) to eat all bananas. k is too high.
+# We won't ever try k > max(piles) = 11.
+# hour    bananas left
+# ----    ------------
+# 0       [3,6,7,11]
+# 1       [3,6,7, 0]
+# 2       [3,6,0, 0]
+# 3       [3,0,0, 0]
+# 4       [0,0,0, 0]
+
+# k = 4 bananas/hr.
+# hour    bananas left
+# ----    ------------
+# 0       [3,6,7,11] <-- takes math.ceil(3/4) = 1  hour to eat  3 bananas
+# 1       [0,6,7,11] <-- takes math.ceil(6/4) = 2 hours to eat  6 bananas
+# 2       [0,2,7,11]
+# 3       [0,0,7,11] <-- takes math.ceil(7/4) = 2 hours to eat  7 bananas
+# 4       [0,0,3,11]
+# 5       [0,0,0,11] <-- takes math.ceil(11/4) = 3 hours to eat 11 bananas
+# 6       [0,0,0, 7]
+# 7       [0,0,0, 3]
+# 8       [0,0,0, 0] <== total = 1 + 2 + 2 + 3 = 8 hours
 
 
 import math
 
-
-# Time: O(n log m), Space: O(1). n = len(list), m = max(list)
+# Time: O(n log m). n = len(piles), m = max(piles)
+# Space: O(1)
 def minEatingSpeed(piles: list[int], h: int) -> int:
-    # Brute Force:
-    # for k in range(1, max(piles) + 1):
-    #     total_time = 0
-    #     for pile in piles:
-    #         total_time += math.ceil(pile / k)
-    #     if total_time <= h:
-    #         return k
-
-    # Binary Search: Find minimum k where total_time <= h
+    # slowest speed must be at least 1 banana/hour.
+    # fastest speed must be max(piles) bananas/hour. No point to eat faster.
     l, r = 1, max(piles)
-    res = l
 
-    while l <= r:
-        mid = (l + r) // 2
-        total_time = 0
-        for pile in piles:
-            total_time += math.ceil(pile / mid)
+    while l < r:
+        k = (l + r) // 2
 
-        if total_time > h:
-            # k is too slow, need faster (higher k)
-            l = mid + 1
-        else:
-            res = mid
-            # k is valid (total_time <= h), but search left for smaller valid k
-            r = mid - 1
+        hours = 0
+        for p in piles:
+            hours += math.ceil(p / k)
 
-    # After loop, l points to minimum valid k, so you could "return l"
-    return res
+        if hours > h:   # Too slow. Must raise speed (k bananas/hour).
+            l = k + 1
+        else:           # Valid, but keep searching if SLOWER speed k works.
+                        # Seek LOWER BOUND!
+            r = k
 
+    return l
 
-# Simplified version:
-# No need for result variable
-# No need to initialize result = l
-# Just return l at the end
-# This is a standard binary search pattern for "find minimum valid value.""
-# After binary search, l points to answer.
+# Brute Force:
+
+# for k = 1 to max(list)
+# find how long it takes to eat all bananas. Return k if time <= h.
+
+# import math
+
+# Time: O(n * m), Space: O(1). n = len(piles), m = max(piles)
+# def minEatingSpeed(piles: list[int], h: int) -> int:
+    # for k in range(1, max(piles) + 1):
+    #     hours = 0
+    #     for p in piles:
+    #         hours += math.ceil(p / k)
+    #     if hours <= h:
+    #         return k
 
 if __name__ == "__main__":
     assert minEatingSpeed([3, 6, 7, 11], 8) == 4
