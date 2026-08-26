@@ -54,7 +54,7 @@ def minEatingSpeed(piles: list[int], h: int) -> int:
 
         if hours > h:   # Too slow. Must raise speed (k bananas/hour).
             l = k + 1
-        else:           # Valid, but keep searching if SLOWER speed k works.
+        else:           # Valid, but keep checking if SLOWER speed k works.
                         # Seek LOWER BOUND!
             r = k
 
