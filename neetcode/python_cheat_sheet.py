@@ -667,7 +667,7 @@ set([1, 2, 3])
 mySet = { i for i in range(5) }
 >>> {0, 1, 2, 3, 4}
 _____________________
-# HASHMAPS (dicts): key-value pairs. Keys are unique and unordered
+# HASHMAPS (dict or dictionary): key-value pairs. Keys are unique and unordered
 
 myMap = {}
 myMap['alice'] = 88
@@ -723,6 +723,47 @@ for val in myMap.values():
 
 >>> 90
 >>> 70
+
+# dict.setdefault(key, default_value) returns value of item with specified key.
+# If key does not exist, insert key with specified value.
+
+user_roles = {"Alice": "Admin"}
+
+# Key exists: returns existing value
+alice_role = user_roles.setdefault("Alice", "Guest")
+print(alice_role)   # Output: Admin
+
+# Key is missing: inserts key and returns default
+bob_role = user_roles.setdefault("Bob", "Guest")
+print(bob_role)     # Output: Guest
+print(user_roles)   # Output: {'Alice': 'Admin', 'Bob': 'Guest'}
+
+# Create empty dictionary
+user_hobbies = {}
+
+# 1. Handle first key ('Alice')
+# setdefault() creates empty list for 'Alice' and returns it, allowing immediate appending
+user_hobbies.setdefault("Alice", []).append("Reading")
+user_hobbies.setdefault("Alice", []).append("Cycling")
+
+print(user_hobbies.setdefault('Alice', []))
+['Reading', 'Cycling']
+
+# 2. Handle second key ('Bob')
+# setdefault() creates different empty list for 'Bob' and returns it
+user_hobbies.setdefault("Bob", []).append("Cooking")
+user_hobbies.setdefault("Bob", []).append("Swimming")
+
+# Print final dictionary
+print(user_hobbies)
+{'Alice': ['Reading', 'Cycling'], 'Bob': ['Cooking', 'Swimming']}
+______
+OR after creating user_hobbies = {'Alice': ['Reading', 'Cycling']}, this does same thing:
+
+if 'Bob' not in user_hobbies:
+    user_hobbies['Bob'] = []
+
+user_hobbies['Bob'].append('Cooking')
 _____________________
 # TUPLES: like arrays, but immutable
 
