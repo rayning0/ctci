@@ -473,6 +473,34 @@ sort_by_score_desc_then_name = sorted(scores.items(), key=sort_key)
 >>> [('David', 92), ('Eve', 92), ('Bob', 85), ('Charlie', 85), ('Alice', 78)]
 
 __________________________
+# bisect: keep a sorted list and search it efficiently
+
+from bisect import bisect_right, insort
+
+# insort() inserts item into correct position in already-sorted list.
+# Combines binary search with list.insert(), so list stays sorted.
+timestamps = [1, 4, 7]
+insort(timestamps, 5)
+timestamps
+>>> [1, 4, 5, 7]
+
+# insort() finds position in O(log n), but shifting list items costs O(n).
+# Overall time: O(n). It changes list in place and returns None.
+
+# bisect_right() gives insertion index to RIGHT of equal items.
+# It does not modify list.
+timestamps = [1, 4, 4, 7]
+index = bisect_right(timestamps, 4)
+index
+>>> 3
+
+# The returned index is useful to find latest timestamp <= target:
+timestamps = [1, 4, 7]
+target = 6
+index = bisect_right(timestamps, target) - 1  # subtract 1 to get actual element
+timestamps[index]
+>>> 4
+__________________________
 # List Comprehension
 
 [i for i in range(5)]

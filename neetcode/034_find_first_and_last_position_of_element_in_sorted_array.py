@@ -27,9 +27,9 @@ def searchRange(nums: list[int], target: int) -> list[int]:
     l, r = 0, len(nums)
     while l < r:
         mid = (l + r) // 2
-        if nums[mid] < target + 1:
+        if nums[mid] < target + 1:  # or "nums[mid] <= target"
             l = mid + 1
-        else:             # nums[mid] >= target + 1
+        else:                       # nums[mid] > target
             r = mid
     last = l - 1
 
