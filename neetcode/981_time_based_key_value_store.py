@@ -246,3 +246,58 @@ Range	Examples
 127	    DEL — the last/highest ASCII code
 
 chr(127) is guaranteed upper bound for the string tiebreaker, ensuring bisect_right always lands AFTER any real value at the same timestamp.
+
+_________________
+Algorithmic Decision Challenge
+
+You are building a distributed configuration versioning service. Each service instance pushes configuration updates by appending new versions with monotonically increasing timestamps — historical versions are never modified or deleted, only new ones are added. Other services query the configuration state at a specific point in time to retrieve the most recent version that was active at that moment.
+
+System characteristics:
+
+- 100 million total operations per day, with a 95% read / 5% write ratio.
+- Configuration versions are always appended in non-decreasing timestamp order per key.
+- Average 1,000 historical versions per key, with some high-traffic keys reaching 100,000 versions.
+- Read latency p99 must stay under 10μs.
+- The service must correctly return the configuration value associated with the largest timestamp ≤ the queried timestamp.
+
+Which data structure and query strategy would you recommend?
+
+[Options]
+
+A. Hash map mapping each key to an append-only list of (timestamp, value) pairs; use lower-bound binary search on the timestamp array for reads
+
+B. Hash map mapping each key to a list of (timestamp, value) pairs; use linear backward scan from the most recent entry for reads
+
+C. Hash map mapping each key to a balanced binary search tree (e.g., red-black tree) keyed by timestamp; use tree search for reads
+
+D. Hash map mapping each key to only the latest (timestamp, value) pair; return it if its timestamp ≤ the queried timestamp, otherwise return empty
+
+[Option Analysis]
+
+Option A (Correct): Append-only list is O(1) per write. Binary search is O(log n) per read — for 100K versions, that's ~17 comparisons on a contiguous array, well within 10μs. The sorted-timestamp guarantee means no sorting overhead is needed. Simple to implement and debug.
+
+Option B (Suboptimal): Linear backward scan is O(n) per read. With 1,000 versions on average (and up to 100K), this regularly exceeds the 10μs p99 budget. The 95% read ratio means this penalty is paid on the vast majority of operations.
+
+Option C (Contextually suboptimal): Also O(log n) reads, but a balanced BST introduces pointer chasing (cache-unfriendly), per-node memory allocation overhead, and significantly more complex implementation (rotations, rebalancing). Since timestamps are already sorted on insertion, the BST's ability to handle arbitrary insertion order provides no benefit — you'd be paying engineering and runtime cost for a capability you never use.
+
+Option D (Incorrect): Stores only latest version. The requirement is to return the value with the largest timestamp ≤ queried timestamp. If queried timestamp is older than latest version, Option D returns empty, losing all historical data. Fundamentally incompatible with the versioning requirement.
+
+[What-If Challenge]
+
+Suppose the constraint "timestamps are always appended in non-decreasing order" is removed — versions could arrive out of order due to network delays or clock skew. Would your choice change, and why?
+
+The max heap + sorted() solution has issues worth unpacking:
+
+- A max heap gives you the maximum timestamp efficiently, but this problem asks for the largest timestamp ≤ target — not the global maximum. A heap can't answer that query without extracting elements one by one, which is O(n) in the worst case.
+- Using sorted() to re-sort on each read is O(n log n) per query — far worse than the 10μs budget.
+- Even inserting into a sorted list to maintain order is O(n) per write (shifting elements).
+
+Why the balanced BST wins here:
+
+Operation	                Balanced BST
+Insert (unsorted)	        O(log n) — tree handles ordering automatically
+Query (floor/predecessor)	O(log n) — standard tree search
+
+The BST's floor query directly solves "largest timestamp ≤ target" even with arbitrary insertion order — at the cost of higher constant factors (pointer chasing, node allocation) compared to Option A's array-based binary search.
+
+The sorted-timestamp guarantee is what makes Option A's simple array approach viable. Without it, you pay for a more complex data structure (BST) to maintain order dynamically. This is a classic engineering trade-off: simpler data structure + data guarantees vs. more complex data structure + no guarantees.
