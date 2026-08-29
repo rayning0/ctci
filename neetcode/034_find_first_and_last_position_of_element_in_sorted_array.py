@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/
 # https://neetcode.io/solutions/find-first-and-last-position-of-element-in-sorted-array
-# Binary Search: Lower Bound (Twice). Search insertion positions.
+# Binary Search: Lower + Upper Bound. Search insertion positions.
 
 # Time: O(log n), Space: O(1)
 def searchRange(nums: list[int], target: int) -> list[int]:

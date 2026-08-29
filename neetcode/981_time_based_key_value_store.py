@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/time-based-key-value-store/description/
 # https://neetcode.io/solutions/time-based-key-value-store
 # Binary Search: Versioned Data
+# UPPER BOUND on timestamp
 
 # set(): Stores a key, value, and timestamp. Timestamps for any key arrive in strictly increasing order.
 # get(): Finds value linked to largest timestamp <= target timestamp. If no matching timestamp exists, returns "".
@@ -28,7 +29,7 @@ class TimeMap:
         self.map[key].append((timestamp, value))
 
     # Since all timestamps already sorted, use binary search on timestamps!
-    # Seek LOWER BOUND on timestamp.
+    # Seek UPPER BOUND on timestamp.
     # See https://github.com/rayning0/ctci/blob/master/neetcode/034_find_first_and_last_position_of_element_in_sorted_array.py
     # Time: O(log n), Space: O(1) auxiliary
     def get(self, key: str, timestamp: int) -> str:
