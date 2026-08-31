@@ -429,12 +429,28 @@ intervals.sort(key = lambda x: x[1]) # sort by 2nd element in array
 >>> [[2, 4], [7, 10], [1, 11]]
 
 # 1. Use list.sort() when:
-# You are working with a list.
+# You do NOT try to loop through list.sort() directly.
+
+>>> for i in ints.sort():
+...     print(i)
+TypeError: 'NoneType' object is not iterable
+
 # You don't need to preserve the original order of the list.
 # Memory efficiency is a critical concern, especially with large lists.
 # For in-place modification of lists when you don't need the original order
 
 # 2. Use sorted() when:
+# You want to loop through sorted(list) directly:
+
+>>> for i in sorted(ints):
+...     print(i)
+...
+0
+2
+5
+7
+10
+
 # You need to sort any iterable (not just lists).
 # You need to preserve the original iterable's order.
 # You prefer a more functional approach that produces new data rather than modifying existing data.
