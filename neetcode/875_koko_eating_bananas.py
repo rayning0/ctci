@@ -52,13 +52,16 @@ def minEatingSpeed(piles: list[int], h: int) -> int:
         for p in piles:
             hours += math.ceil(p / k)
 
-        if hours > h:   # Too slow. Must raise speed (k bananas/hour).
-            l = k + 1
-        else:           # Valid, but keep checking if SLOWER speed k works.
-                        # Seek LOWER BOUND!
+        if hours <= h:  # k works, but keep checking if SLOWER speed k also works.
             r = k
+        else:           # Too slow. Raise speed (k bananas/hour).
+            l = k + 1
 
     return l
+
+# LOWER BOUND does not always mean “check hours >= target.”
+# More general meaning: Find first candidate for which a monotonic condition becomes true.
+# Find lower bound, the smallest speed k that works.
 
 # Brute Force:
 

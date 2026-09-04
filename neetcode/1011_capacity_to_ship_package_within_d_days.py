@@ -30,12 +30,13 @@ def shipWithinDays(weights: list[int], days: int) -> int:
 
         # print(f"Day: {days_used}, wsum: {wsum}, warr: {warr}")
 
-        if days_used > days:
+        if days_used <= days:
+            # print(f"Capacity {cap} valid. Checking if smaller capacity works.")
+            # This finds LOWER BOUND, the smallest capacity that works.
+            r = cap
+        else:
             # print(f"Capacity {cap} too small. Raising it.")
             l = cap + 1
-        else:                  # Seek LOWER BOUND
-            # print(f"Capacity {cap} valid. Checking if smaller capacity works.")
-            r = cap
 
     # print(f"\nFinal ship capacity: {l}")
     return l

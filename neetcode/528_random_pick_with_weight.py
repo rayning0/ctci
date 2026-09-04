@@ -26,10 +26,10 @@ class Solution:
         l, r = 0, len(self.prefix)
         while l < r:
             mid = (l + r) // 2
-            if self.prefix[mid] < target:
-                l = mid + 1
-            else:
+            if self.prefix[mid] >= target:
                 r = mid
+            else:
+                l = mid + 1
 
         return l
 ______________________

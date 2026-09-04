@@ -3,6 +3,8 @@
 # Binary Search: Versioned Data
 # UPPER BOUND on snap_id
 
+# Why UPPER BOUND binary search on snap_id? See https://github.com/rayning0/ctci/blob/master/neetcode/981_time_based_key_value_store.py
+
 # Option B: Per-index version history with binary search
 # For each index, keep list of (snap_id, value) tuples, recording only when that index changed.
 # In get(), use binary search on snap_id.
@@ -41,15 +43,18 @@ class SnapshotArray:
     def get(self, index: int, snap_id: int) -> int:
         history = self.history[index]
 
+        # UPPER BOUND(id) =  First index for id > snap_id = l
+        # Desired value (largest id <= snap_id) is one index before it.
+        # So last = l - 1
         l, r = 0, len(history)
         while l < r:
             mid = (l + r) // 2
             id, val = history[mid]
 
-            if id <= snap_id:
-                l = mid + 1
-            else:
+            if id > snap_id:
                 r = mid
+            else:
+                l = mid + 1
 
         # If all entries are > target snap_id
         # Ex: history[3] = [(3, 42)]. get(3, 2). No entry has snap_id <= 2.

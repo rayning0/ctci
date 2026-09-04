@@ -6,6 +6,13 @@
 # set(): Stores a key, value, and timestamp. Timestamps for any key arrive in strictly increasing order.
 # get(): Finds value linked to largest timestamp <= target timestamp. If no matching timestamp exists, returns "".
 
+# Ex: timestamps = [1, 4, 6, 8, 10]
+# target = 7. We want timestamp 6.
+# upper_bound(7) = first timestamp > 7 = index 3
+# timestamps: [1, 4, 6, | 8, 10]
+# desired timestamp 6 is 1 before this boundary.
+# index = upper_bound(target) - 1
+
 # "All timestamps of set() are strictly increasing." <--- KEY! We don't need to sort input by timestamp!
 
 # 1. Binary search on list. BEST ANSWER for interview!
@@ -38,17 +45,18 @@ class TimeMap:
 
         entries = self.map[key]
 
-        # UPPER BOUND(target) =  First index whose value > target = LOWER BOUND(target + 1) = l
-        # But since we want last position of target, last = l - 1
+        # UPPER BOUND(target) =  First index for timestamp > target = l
+        # Desired value (largest timestamp <= target) is one index before it.
+        # So last = l - 1
         l, r = 0, len(entries)
         while l < r:
             mid = (l + r) // 2
             ts, value = entries[mid]
 
-            if ts <= timestamp: # or "ts < timestamp + 1"
-                l = mid + 1
-            else:               # ts > timestamp
+            if ts > timestamp:
                 r = mid
+            else:
+                l = mid + 1
 
         # If all timestamps > target timestamp.
         # Ex: entries = [(5, "a"), (7, "b")]. get("foo", 3)

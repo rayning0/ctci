@@ -2,6 +2,36 @@
 # https://neetcode.io/solutions/find-first-and-last-position-of-element-in-sorted-array
 # Binary Search: Lower + Upper Bound. Search insertion positions.
 
+# Lower bound(target): first index whose value is >= target
+# Upper bound(target): first index whose value is > target
+
+# lower_bound(x) = first value >= x
+#                = count of values < x
+# upper_bound(x) = first value > x
+#                = count of values <= x
+
+# Remember, any index in list = # of items that come before it.
+
+# EXAMPLE:
+# nums   = [1, 2, 2, 2, 4]
+# index     0  1  2  3  4
+
+# For target = 2:
+# lower_bound(2) = 1   # first value >= 2
+# upper_bound(2) = 4   # first value > 2
+
+# # Lower bound(target): first nums[mid] >= target
+# if nums[mid] >= target:
+#     r = mid
+# else:
+#     l = mid + 1
+
+# # Upper bound(target): first nums[mid] > target
+# if nums[mid] > target:
+#     r = mid
+# else:
+#     l = mid + 1
+
 # Time: O(log n), Space: O(1)
 def searchRange(nums: list[int], target: int) -> list[int]:
     # LOWER BOUND(target)
@@ -10,10 +40,10 @@ def searchRange(nums: list[int], target: int) -> list[int]:
 
     while l < r:
         mid = (l + r) // 2
-        if nums[mid] < target:
-            l = mid + 1
-        else:             # nums[mid] >= target
+        if nums[mid] >= target:
             r = mid
+        else:
+            l = mid + 1
     first = l
 
     # If target NOT in array. Either:
@@ -23,14 +53,14 @@ def searchRange(nums: list[int], target: int) -> list[int]:
         return [-1, -1]
 
     # UPPER BOUND(target) =  First index whose value > target = LOWER BOUND(target + 1) = l
-    # But since we want last position of target, last = l - 1
+    # Since upper bound points to first value > target, last target is 1 index before it, so last = l - 1.
     l, r = 0, len(nums)
     while l < r:
         mid = (l + r) // 2
-        if nums[mid] < target + 1:  # or "nums[mid] <= target"
-            l = mid + 1
-        else:                       # nums[mid] > target
+        if nums[mid] > target:  # OR nums[mid] >= target + 1
             r = mid
+        else:
+            l = mid + 1
     last = l - 1
 
     return [first, last]

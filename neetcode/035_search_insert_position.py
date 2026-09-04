@@ -10,10 +10,10 @@ def searchInsert(nums: list[int], target: int) -> int:
 
     while l < r:
         mid = (l + r) // 2
-        if nums[mid] < target:
-            l = mid + 1
-        else:             # <--- nums[mid] >= target
+        if nums[mid] >= target:
             r = mid
+        else:
+            l = mid + 1
 
     return l              # <--- when l == r
 
@@ -43,10 +43,10 @@ if __name__ == "__main__":
 
 # while l < r:
 #     mid = (l + r) // 2
-#     if nums[mid] < target:
-#         l = mid + 1
-#     else:                   <---- nums[mid] >= target
+#     if nums[mid] >= target:
 #         r = mid
+#     else:
+#         l = mid + 1
 
 # return l                    <--- when l == r
 
@@ -62,10 +62,10 @@ def firstInsert(nums: list[int], target: int) -> int:
 
     while l < r:
         mid = (l + r) // 2
-        if nums[mid] < target:
-            l = mid + 1
-        else:
+        if nums[mid] >= target:
             r = mid
+        else:
+            l = mid + 1
 
     return l
 
