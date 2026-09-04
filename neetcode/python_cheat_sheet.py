@@ -491,7 +491,49 @@ sort_by_score_desc_then_name = sorted(scores.items(), key=sort_key)
 __________________________
 # bisect: keep a sorted list and search it efficiently
 
-from bisect import bisect_right, insort
+from bisect import bisect_right, bisect_left, insort
+
+LOWER BOUND(x): first index whose value is >= x
+UPPER BOUND(x): first index whose value is > x
+
+lower_bound(x) binary search = first value >= x
+                             = count of values < x
+                             = bisect_left(nums, x) ("LOWER bound" = "LEFT")
+                             = inserts BEFORE equal x's (to LEFT)
+
+l, r = 0, len(nums)
+while l < r:
+    mid = (l + r) // 2
+    if nums[mid] >= x:
+        r = mid
+    else:
+        l = mid + 1
+answer = l
+
+upper_bound(x) binary search = first value > x
+                             = count of values <= x
+                             = bisect_right(nums, x)
+                             = inserts AFTER equal x's (to RIGHT)
+
+l, r = 0, len(nums)
+while l < r:
+    mid = (l + r) // 2
+    if nums[mid] > x:
+        r = mid
+    else:
+        l = mid + 1
+answer = l
+
+Remember, any index = number of items before it!
+Binary search counts number of items on left side of an insertion point.
+
+# EXAMPLE:
+# nums   = [1, 2, 2, 2, 4]
+# index     0  1  2  3  4
+
+# For target = 2:
+# lower_bound(2) = 1   # first value >= 2
+# upper_bound(2) = 4   # first value > 2
 
 # insort() inserts item into correct position in already-sorted list.
 # Combines binary search with list.insert(), so list stays sorted.

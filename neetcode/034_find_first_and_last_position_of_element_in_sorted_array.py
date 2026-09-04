@@ -2,15 +2,23 @@
 # https://neetcode.io/solutions/find-first-and-last-position-of-element-in-sorted-array
 # Binary Search: Lower + Upper Bound. Search insertion positions.
 
-# Lower bound(target): first index whose value is >= target
-# Upper bound(target): first index whose value is > target
+from bisect import bisect_left, bisect_right
 
-# lower_bound(x) = first value >= x
-#                = count of values < x
-# upper_bound(x) = first value > x
-#                = count of values <= x
+LOWER BOUND(x): first index whose value is >= x
+UPPER BOUND(x): first index whose value is > x
 
-# Remember, any index in list = # of items that come before it.
+lower_bound(x) = first value >= x
+               = count of values < x
+               = bisect_left(nums, x) ("LOWER bound" = "LEFT")
+               = inserts BEFORE equal x's (to LEFT)
+
+upper_bound(x) = first value > x
+               = count of values <= x
+               = bisect_right(nums, x)
+               = inserts AFTER equal x's (to RIGHT)
+
+Remember, any index = number of items before it!
+Binary search counts number of items on left side of an insertion point.
 
 # EXAMPLE:
 # nums   = [1, 2, 2, 2, 4]
@@ -45,6 +53,7 @@ def searchRange(nums: list[int], target: int) -> list[int]:
         else:
             l = mid + 1
     first = l
+    # first = bisect_left(nums, target)
 
     # If target NOT in array. Either:
     # 1. We ran past end of array: first == len(nums)
@@ -62,6 +71,7 @@ def searchRange(nums: list[int], target: int) -> list[int]:
         else:
             l = mid + 1
     last = l - 1
+    # last = bisect_right(nums, target) - 1
 
     return [first, last]
 
