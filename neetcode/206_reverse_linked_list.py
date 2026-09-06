@@ -6,15 +6,11 @@
 # Move all 3 pointers forward to right 1 step.
 # Repeat.
 
-# Singly-linked list
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+from list_helper import ListNode, makeList, printList
 
 # 1. Iterative with 3 pointers. Reverse in place.
 # Time: O(n), Space: O(1)
-def reverseList(head: [ListNode]) -> [ListNode]:
+def reverseList(head: ListNode | None) -> ListNode | None:
     prev = None
     curr = head
 
@@ -28,24 +24,6 @@ def reverseList(head: [ListNode]) -> [ListNode]:
         curr = next
 
     return prev
-
-def printList(head):
-    curr = head
-    output = ''
-    while curr:
-        output += str(curr.val) + ' -> '
-        curr = curr.next
-    output += 'None'
-
-    return output
-
-def makeList(vals: list[int]) -> [ListNode]:
-    node = next = None
-    for val in reversed(vals):
-        node = ListNode(val, next)
-        next = node
-
-    return node
 
 # Use 3 pointers: Prev, Curr, Next
 
@@ -90,7 +68,7 @@ def makeList(vals: list[int]) -> [ListNode]:
 # 2. Recursive
 # "Ask rest of list (after head) to reverse itself. Then attach head to end of this reversed list."
 # Time: O(n), Space: O(n) <-- because 1 recursive call per node
-def reverseList(head: [ListNode]) -> [ListNode]:
+def reverseList(head: ListNode | None) -> ListNode | None:
     # base case: "Stop when we have nothing left to reverse"
     if head is None or head.next is None:
         return head
