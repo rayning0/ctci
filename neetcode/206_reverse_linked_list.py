@@ -6,15 +6,15 @@
 # Move all 3 pointers forward to right 1 step.
 # Repeat.
 
-# Singly-linked list.
+# Singly-linked list
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
-# Iterative with 3 pointers
+# 1. Iterative with 3 pointers. Reverse in place.
 # Time: O(n), Space: O(1)
-def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
+def reverseList(head: [ListNode]) -> [ListNode]:
     prev = None
     curr = head
 
@@ -86,6 +86,49 @@ def makeList(vals: list[int]) -> [ListNode]:
 # None <- 1   <-  2    <- 3       None
 
 # New head is at Prev, which we return.
+
+# 2. Recursive
+# "Ask rest of list (after head) to reverse itself. Then attach head to end of this reversed list."
+# Time: O(n), Space: O(n) <-- because 1 recursive call per node
+def reverseList(head: [ListNode]) -> [ListNode]:
+    # base case: "Stop when we have nothing left to reverse"
+    if head is None or head.next is None:
+        return head
+
+    new_head = reverseList(head.next) # imagine this magically reverses rest of list
+    head.next.next = head             # my child (head.next) points back to me (head)
+    head.next = None
+
+    return new_head
+
+# Example: head = 1 → 2 → 3 → 4 → None
+
+# Don't reverse whole list. Say "Hey 2, reverse everything after head."
+# head = 1 | recurse(2 -> 3 -> 4 -> None)
+
+# After recursion, both head (1) points to 2 and reversed rest of list also points to 2.
+# 1 -> 2 <- 3 <- 4
+
+### new_head = reverseList(head.next) = 4 -> 3 -> 2 -> None
+
+# How to point 2 backwards to 1? We want "2.next = 1"
+
+### head.next.next = head means "my child (head.next) points back to me (head)"
+# 1 <- 2 <- 3 <- 4
+
+# Point original head to None, then return new_head:
+### head.next = None
+# None <- 1 <- 2 <- 3 <- 4 = new_head
+
+# What's base case? "Stop when we have nothing left to reverse"
+# 1. Empty list: None
+# 2. List with 1 node: head.next = None
+
+# How does recursion unwind?
+# reverse(4) returns 4 -> None
+# reverse(3) gets 4 -> None, makes + returns 4 -> 3 -> None
+# reverse(2) gets 4 -> 3 -> None, makes + returns 4 -> 3 -> 2 -> None
+# reverse(1) get 4 -> 3 -> 2 -> None, makes + returns 4 -> 3 -> 2 -> 1 -> None
 
 if __name__ == "__main__":
     ex1 = makeList([1,2,3,4,5])
