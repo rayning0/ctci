@@ -16,16 +16,17 @@ from list_helper import ListNode, makeList, printList
 def mergeTwoLists(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     head = curr = ListNode()
 
-    while list1 and list2:
+    while list1 and list2:          # while not yet at end of either list
         if list1.val < list2.val:
-            curr.next = list1
-            list1 = list1.next
+            curr.next = list1       # point next node to list1
+            list1 = list1.next      # move list1 pointer forward
         else:
-            curr.next = list2
-            list2 = list2.next
+            curr.next = list2       # point next node to list2
+            list2 = list2.next      # move list2 pointer forward
         curr = curr.next
 
-    curr.next = list1 or list2
+    curr.next = list1 or list2  # We just hit end of list1, so point next node to rest of list2.
+                                # Or vice versa: We just hit end of list2, so point next node to rest of list1.
 
     return head.next
 
@@ -38,11 +39,11 @@ def mergeTwoLists(list1: ListNode | None, list2: ListNode | None) -> ListNode | 
     if list2 is None:
         return list1
 
-    if list1.val < list2.val:
-        list1.next = mergeTwoLists(list1.next, list2)
+    if list1.val < list2.val: # list1 is main node now
+        list1.next = mergeTwoLists(list1.next, list2)   # point list1 to result of merging next list1 node with list2
         return list1
     else:
-        list2.next = mergeTwoLists(list1, list2.next)
+        list2.next = mergeTwoLists(list1, list2.next)   # point list2 to result of merging next list2 node with list1
         return list2
 
 if __name__ == "__main__":
@@ -154,7 +155,7 @@ list1 ➔ (4) ➔ None
 list2 ───────────────────────────────────────► None (Empty!)
 
 
-The while list1 and list2: loop terminates here because list2 is empty (None).
+while list1 and list2: loop terminates here because list2 is empty (None).
 The Remainder Line: curr.next = list1 or list2
 The pointer list1 still points to its remaining Node (4). This line stitches the
 remaining node right onto the end of our working sequence in one final move.
