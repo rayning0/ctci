@@ -1,12 +1,27 @@
 # https://leetcode.com/problems/linked-list-cycle/
 # https://neetcode.io/solutions/linked-list-cycle
+# Linked List: Fast + Slow Pointers
+
+# fast pointer moves 2 steps each time
+# slow pointer moves 1 step each time
 
 from list_helper import ListNode, makeCycleList
 
 # 1. Fast + Slow Pointers (Floyd's Cycle Detection)
 # Time: O(n), Space: O(1)
+def hasCycle(head: ListNode | None) -> bool:
+    fast = slow = head
 
-# 2. Hashset
+    # only check fast pointer is not None, since it's ahead of slow
+    while fast and fast.next:
+        fast = fast.next.next
+        slow = slow.next
+        if fast == slow:
+            return True
+
+    return False
+
+# 2. Hashset: Easy to remember.
 # Time: O(n), Space: O(n)
 def hasCycle(head: ListNode | None) -> bool:
     seen = set()
@@ -42,34 +57,3 @@ if __name__ == "__main__":
     assert hasCycle(makeCycleList([1, 2, 3, 4, 3], -1)) is False
 
     print("All tests passed!")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # slow = fast = head
-    # while fast is not None and fast.next is not None:
-    #     slow = slow.next
-    #     fast = fast.next.next
-    #     if slow is fast:
-    #         return True
-    # return False

@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/merge-two-sorted-lists/description/
 # Best video animation: https://www.youtube.com/watch?v=E5XXiY6QnAs
 # https://neetcode.io/solutions/merge-two-sorted-lists
-# 2 Pointers. Modify list in place.
+# Linked List: 2 Pointers. Modify list in place.
 
 from list_helper import ListNode, makeList, printList
 
