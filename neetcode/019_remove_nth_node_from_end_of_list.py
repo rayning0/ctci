@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
 # https://neetcode.io/solutions/remove-nth-node-from-end-of-list
+# Linked List: 2 Pointers / 2-Pass
 
 from list_helper import ListNode, makeList, printList
 
