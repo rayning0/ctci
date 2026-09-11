@@ -3,6 +3,12 @@ class ListNode:
         self.val = val
         self.next = next
 
+class Node:
+    def __init__(self, x: int, next=None, random=None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+
 def printList(head: ListNode | None) -> str:
     """Converts linked list into a readable string format."""
     curr = head
