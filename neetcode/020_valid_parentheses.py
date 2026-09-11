@@ -1,21 +1,20 @@
-# https://leetcode.com/problems/valid-parentheses/description/?envType=problem-list-v2&envId=plakya4j
-# https://neetcode.io/problems/validate-parentheses/question?list=neetcode150
+# https://leetcode.com/problems/valid-parentheses/description/
+# https://neetcode.io/solutions/valid-parentheses
+# Stack
 
 # Time: O(n), Space: O(n)
 def isValid(s: str) -> bool:
-    rparen = {")": "(", "]": "[", "}": "{"}
+    rparen = {')':'(', ']':'[', '}':'{'}
     stack = []
 
     for c in s:
-        # c is right paren
         if c in rparen:
-            # 1. if stack length > 0 and last stack item is matching left paren, pop it off
+            # 1. if stack length > 0 and top stack item is matching left paren, pop it off
             # Ex: stack = "[]{(" and c = ")"
-            if len(stack) > 0 and rparen[c] == stack[-1]:
-                # "if stack" also means "if len(stack) > 0"
+            if stack and rparen[c] == stack[-1]:
                 stack.pop()
 
-            # 2. if stack empty or last stack item is wrong left paren
+            # 2. stack is empty or top stack item is wrong left paren
             # Ex: stack = "" and c = ")"
             # Ex: stack = "[]{(" and c = "}"
             else:
@@ -28,8 +27,6 @@ def isValid(s: str) -> bool:
 
     return stack == []
 
-
-# Tests
 if __name__ == "__main__":
     assert isValid("[") == False
     assert isValid("()") == True
