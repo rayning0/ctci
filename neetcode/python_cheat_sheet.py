@@ -705,7 +705,7 @@ strings = ['ab', 'cd', 'ef']
 _____________________
 # QUEUES
 
-# This is "double-ended." Items may be added/removed from either front/rear
+# deque = "double-ended" queue. Items may be added/removed from either front/rear
 from collections import deque
 
 queue = deque()
