@@ -321,6 +321,17 @@ for n1, n2 in zip(nums1, nums2):
 1 2
 3 4
 5 6
+
+# Loop through multiple arrays, sorted in reverse order by 1st value:
+position = [10,8,0,5,3], speed = [2,4,1,1,3]
+for p, s in sorted(zip(position, speed), reverse=True):
+    print(p, s)
+
+10 2
+8 4
+5 1
+3 3
+0 1
 ____________________
 # reverse() and reversed()
 
