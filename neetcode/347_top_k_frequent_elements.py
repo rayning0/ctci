@@ -45,7 +45,7 @@ def topKFrequent(nums: list[int], k: int) -> list[int]:
 # OR  return [item[1] for item in min_heap]
 
 # Ex:
-# nums = [1, 2, 1, 2, 1, 2, 3, 1, 3, 2]
+# nums = [1, 2, 1, 2, 1, 2, 3, 1, 3, 2], k = 2
 # freq = {1: 4, 2: 4, 3: 2}
 # after heappush of [count, n], min_heap = [(2, 3), (4, 2), (4, 1)]
 # after heappop, min_heap = [(4, 1), (4, 2)]
