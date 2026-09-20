@@ -25,8 +25,7 @@ def mergeTwoLists(list1: ListNode | None, list2: ListNode | None) -> ListNode | 
             list2 = list2.next      # move list2 pointer forward
         curr = curr.next
 
-    curr.next = list1 or list2  # We just hit end of list1, so point next node to rest of list2.
-                                # Or vice versa: We just hit end of list2, so point next node to rest of list1.
+    curr.next = list1 or list2  # We just hit end of list1 (or list2), so point next node to rest of list2 (or list1).
 
     return head.next
 

@@ -22,12 +22,12 @@ def printList(head: ListNode | None) -> str:
 
 def makeList(vals: list[int]) -> ListNode | None:
     """Creates linked list from list of integers and returns its head."""
-    node = next = None
-    for val in reversed(vals):
-        node = ListNode(val, next)
-        next = node
+    head = curr = ListNode()
+    for v in vals:
+        curr.next = ListNode(v)
+        curr = curr.next
 
-    return node
+    return head.next
 
 def makeCycleList(vals: list[int], pos: int) -> ListNode | None:
     """Creates linked list whose tail points to node at index `pos`.
