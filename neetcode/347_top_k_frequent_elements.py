@@ -21,7 +21,7 @@
 
 # 2. Better: MinHeap with size limit
 # Delete all lower freq nums from heap. Only max freq nums remain.
-# Time: O(n + m log k) -> O(n log k), Space: O(n + k)
+# Time: O(n + m log k) -> O(n log k), Space: O(m + k) -> O(m)
 # n = len(nums). n >= m.
 # m = # of unique nums
 # k = desired result size
