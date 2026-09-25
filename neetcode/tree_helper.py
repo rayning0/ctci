@@ -57,10 +57,9 @@ def makeTree(vals: list[int | None]) -> TreeNode | None:
     # return root
 
 def printTree(root: TreeNode | None) -> None:
-    """Print a binary tree as a trimmed level-order list."""
+    """Return binary tree as a trimmed level-order list."""
     if root is None:
-        print([])
-        return
+        return []
 
     values = []
     nodes = deque([root])
@@ -78,4 +77,4 @@ def printTree(root: TreeNode | None) -> None:
     while values and values[-1] is None:
         values.pop()
 
-    print(values)
+    return values

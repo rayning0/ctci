@@ -2,6 +2,10 @@
 # https://neetcode.io/solutions/maximum-depth-of-binary-tree
 # DFS (Depth-First Search)
 
+# For each node:
+# 1. Find depth of its left and right children.
+# 2. Return 1 + max(left depth, right depth)
+
 from tree_helper import TreeNode, printTree, makeTree
 from collections import deque
 
@@ -20,6 +24,11 @@ def maxDepth(root: TreeNode | None) -> int:
     return 1 + max(left, right)
 
 # 2. BFS: process 1 tree level at a time
+# While queue exists:
+#   Loop through len(queue) = size of each tree level
+#       For each node, append its child to queue
+#   Depth += 1
+
 # Time: O(n), Space: O(n)
 def maxDepth(root: TreeNode | None) -> int:
     if not root:
