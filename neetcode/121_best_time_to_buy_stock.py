@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=problem-list-v2&envId=plakya4j
 # https://neetcode.io/problems/buy-and-sell-crypto/question
-# Use variable sliding window
+# Greedy 1-Pass: Track Minimum Buy Price
 
 # Time: O(n), Space: O(1)
 def maxProfit(prices: list[int]) -> int:
