@@ -1379,7 +1379,12 @@ def dfs(node):
 
 ### Use when
 
-Do I need nodes in SORTED order? (BST)
+Do I need nodes in SORTED order? (Binary Search Tree)
+
+A binary search tree (BST) satisfies these constraints:
+- Left subtree of every node contains only nodes with keys < the node's key.
+- Right subtree of every node contains only nodes with keys > the node's key.
+- Both left and right subtrees are also binary search trees.
 
 Examples:
 
