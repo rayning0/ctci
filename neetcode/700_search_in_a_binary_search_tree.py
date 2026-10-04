@@ -16,7 +16,7 @@ def searchBST(root: TreeNode | None, val: int) -> TreeNode | None:
             return node
 
         if val < node.val:
-            return dfs(node.left) # must RETURN result of dfs(node.left). don't just traverse it.
+            return dfs(node.left)   # must RETURN result of dfs(). don't just traverse it.
         else:
             return dfs(node.right)
 
