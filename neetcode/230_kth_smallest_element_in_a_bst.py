@@ -60,7 +60,8 @@ def kthSmallest(root: TreeNode | None, k: int) -> int:
         left = dfs(node.left)
 # If left subtree already found answer, return it immediately.
 # Unlike Solution 1, this propagates answer upward so recursion stops early.
-        if left:
+# Use "if left is not None", not "if left", in case expected output is 0. "if left:"" evaluates 0 as falsy
+        if left is not None:
             return left
 
         count += 1
@@ -69,7 +70,7 @@ def kthSmallest(root: TreeNode | None, k: int) -> int:
 
         right = dfs(node.right)
 # Unlike Solution 1, this propagates answer upward so recursion stops early.
-        if right:
+        if right is not None:
             return right
 
     return dfs(root)
@@ -79,4 +80,6 @@ if __name__ == "__main__":
     assert kthSmallest(makeTree([2,1,3]), 1) == 1
     assert kthSmallest(makeTree([5,3,6,2,4,None,None,1]), 4) == 4
     assert kthSmallest(makeTree([4,3,5,2,None]), 4) == 5
+
+    assert kthSmallest(makeTree([31,30,48,3,None,38,49,0,16,35,47,None,None,None,2,15,27,33,37,39,None,1,None,5,None,22,28,32,34,36,None,None,43,None,None,4,11,19,23,None,29,None,None,None,None,None,None,40,46,None,None,7,14,17,21,None,26,None,None,None,41,44,None,6,10,13,None,None,18,20,None,25,None,None,42,None,45,None,None,8,None,12,None,None,None,None,None,24,None,None,None,None,None,None,9]), 1) == 0
     print("All tests passed!")
