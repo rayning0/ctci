@@ -1308,3 +1308,187 @@ Each "plate" on the stack is a stack frame. It's a small block of memory that st
 └──────────────────────────────┘
 
 When maxDepth(2) calls maxDepth(4), it pauses and a new frame for maxDepth(4) is pushed on top. When maxDepth(4) returns, its frame is popped, and maxDepth(2) resumes exactly where it left off, using the values saved in its frame.
+______________
+4 TREE TRAVERSALS:
+
+**Preorder, inorder, and postorder are all DFS traversals.** The only difference is **when you "process" the current node**.
+
+These 4 templates cover almost every tree traversal problem.
+
+---
+
+# 1. Preorder DFS
+
+**Order: Root → Left → Right**
+
+```python
+def dfs(node):
+    if not node:
+        return
+
+    # Process current node
+
+    dfs(node.left)
+    dfs(node.right)
+```
+
+### Use when
+
+- Do I need to process current node before children?
+- Pass information downward.
+
+Examples:
+
+- LC 226 Invert Binary Tree
+- LC 98 Validate BST (your range-validation solution)
+- Pruning with constraints
+
+---
+
+# 2. Inorder DFS
+
+**Order: Left → Root → Right**
+
+```python
+def dfs(node):
+    if not node:
+        return
+
+    dfs(node.left)
+
+    # Process current node
+
+    dfs(node.right)
+```
+
+### Use when
+
+Do I need nodes in SORTED order? (BST)
+
+Examples:
+
+- LC 230 Kth Smallest in BST
+- Validate BST by ordering
+- BST iterator
+
+---
+
+# 3. Postorder DFS
+
+**Order: Left → Right → Root**
+
+```python
+def dfs(node):
+    if not node:
+        return
+
+    left = dfs(node.left)
+    right = dfs(node.right)
+
+    # Process current node using left/right results
+
+    return ...
+```
+
+### Use when
+
+Do I need information from my children before I can solve this node?
+
+Examples:
+
+- LC 104 DFS (Max Depth/Height)
+- LC 543 Diameter
+- LC 110 Balanced Tree
+- LC 124 Maximum Path Sum
+
+------------------------------
+
+# 4. BFS (Level Order)
+
+from collections import deque
+
+def bfs(root):
+    if not root:
+        return
+
+    q = deque([root])
+
+    while q:
+        level_size = len(q)
+
+        for _ in range(level_size):
+            node = q.popleft()
+
+            # Process current node
+
+            if node.left:
+                q.append(node.left)
+
+            if node.right:
+                q.append(node.right)
+
+        # Process entire level (optional)
+
+### Use when
+
+Do I need info LEVEL BY LEVEL?
+
+Examples:
+
+- LC 102 Level Order
+- LC 104 BFS
+- LC 199 Right Side View
+- LC 637 Average of Levels
+
+---
+
+# Simplest way to remember them
+
+The only thing that changes is where **"Process current node"** line goes.
+
+### Preorder
+
+```text
+Process
+Left
+Right
+```
+
+### Inorder
+
+```text
+Left
+Process
+Right
+```
+
+### Postorder
+
+```text
+Left
+Right
+Process
+```
+
+### BFS
+
+```text
+Process one level
+↓
+Next level
+↓
+Next level
+```
+
+---
+
+These are the only traversal templates you must memorize:
+
+| Traversal     | Template                 | Think of it as
+|---------------|--------------------------|---------------------------------------|
+| Preorder DFS  | Process → Left → Right   | "Pass information **down** the tree."
+| Inorder DFS   | Left → Process → Right   | "Visit BST in **sorted order**."
+| Postorder DFS | Left → Right → Process   | "Gather information **up** from children."
+| BFS           | Queue, 1 level at a time | "Process tree **level by level**."
+
+Everything else—LC 104, 226, 543, 98, 230, 102, 199, etc.—is really just one of these four templates with different code in the **"Process current node"** section. I think that's the smallest set of patterns you need to remember.
