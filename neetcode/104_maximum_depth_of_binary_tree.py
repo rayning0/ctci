@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
 # https://neetcode.io/solutions/maximum-depth-of-binary-tree
-# DFS (Depth-First Search)
+# DFS (Depth-First Search): Postorder
 
 # For each node:
 # 1. Find depth of its left and right children.

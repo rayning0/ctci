@@ -1313,11 +1313,27 @@ ______________
 
 **Preorder, inorder, and postorder are all DFS traversals.** The only difference is **when you "process" the current node**.
 
+Where is main work of the algorithm?
+
+- Before recursion → Preorder
+- Between left and right recursion → Inorder
+- After recursion → Postorder
+
 These 4 templates cover almost every tree traversal problem.
 
+Ex:        1
+          / \
+         2    3
+        / \  / \
+       4   5 6  7
+
+Preorder:    [1, 2, 4, 5, 3, 6, 7]
+Inorder:     [4, 2, 5, 1, 6, 3, 7]
+Postorder:   [4, 5, 2, 6, 7, 3, 1]
+Level order: [1, 2, 3, 4, 5, 6, 7]
 ---
 
-# 1. Preorder DFS
+# 1. Preorder DFS:
 
 **Order: Root → Left → Right**
 

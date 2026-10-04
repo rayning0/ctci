@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/same-tree/description/
 # https://neetcode.io/solutions/same-tree
+# DFS: Preorder
 
 from tree_helper import TreeNode, makeTree
 from collections import deque

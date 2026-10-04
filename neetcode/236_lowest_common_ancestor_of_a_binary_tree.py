@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
 # https://neetcode.io/solutions/lowest-common-ancestor-of-a-binary-tree
-# DFS
+# DFS: Preorder + MOSTLY Postorder
 
 # Rules:
 # “The lowest common ancestor of nodes p and q in tree is lowest node in the tree

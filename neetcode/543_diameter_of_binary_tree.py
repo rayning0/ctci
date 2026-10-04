@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/diameter-of-binary-tree/description/
 # https://neetcode.io/solutions/diameter-of-binary-tree
-# DFS
+# DFS: Postorder
 
 # Longest path through any node = height of its left subtree + height of its right subtree.
 

@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/validate-binary-search-tree/description/
 # https://neetcode.io/solutions/validate-binary-search-tree
-# DFS
+# DFS: Preorder
 
 # Instead of only comparing a node with its direct children,
 # pass down a valid range (lower_bound, upper_bound) as you recurse.

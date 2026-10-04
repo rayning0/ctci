@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/invert-binary-tree/description/
 # https://neetcode.io/solutions/invert-binary-tree
-# DFS
+# DFS: Preorder
 
 # For each node:
 # 1. Swap children.
