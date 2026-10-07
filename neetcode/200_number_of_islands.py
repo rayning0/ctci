@@ -22,7 +22,7 @@
 # - DFS destroys an island.
 # - Neither does the other's job.
 
-# 1. DFS
+# 1. DFS. Easier and shorter to remember. Use for interviews!
 # Time: O(m * n)
 # Space: O(m * n) worst case, since recursion for DFS keeps big # of calls on a stack before unwinding.
 # m, n = # of rows, # of cols
@@ -69,11 +69,14 @@ def numIslands(grid: list[list[str]]) -> int:
 
                 q = deque([(r, c)])
                 grid[r][c] = '0'    # mark cell as visited
+
                 while q:
-                    r, c = q.popleft()
+                    # Do NOT use "r, c = q.popleft()" because they'll change outer r, c values!
+                    # This bug is called "variable shadowing"
+                    cr, cc = q.popleft()
 
                     for dr, dc in moves:        # for each neighbor
-                        nr, nc = r + dr, c + dc
+                        nr, nc = cr + dr, cc + dc
 
                         #       if neighbor is on grid       and    unvisited
                         if 0 <= nr < ROWS and 0 <= nc < COLS and grid[nr][nc] == '1':
@@ -119,6 +122,12 @@ if __name__ == "__main__":
         ["0","0","0","1","1"]
     ]
     assert numIslands(grid) == 4
+
+    grid = [
+        ["1","1","0","1"],
+        ["0","1","0","0"]
+    ]
+    assert numIslands(grid) == 2
     print("All tests passed!")
 
 # BFS Pattern:
