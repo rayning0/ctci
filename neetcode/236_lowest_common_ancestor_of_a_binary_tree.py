@@ -5,7 +5,7 @@
 # Rules:
 # “The lowest common ancestor of nodes p and q in tree is lowest node in the tree
 # that has both p and q as descendants. We let a node be a descendant of itself.”
-# - The number of nodes in tree is in range [2, 105].
+# - The number of nodes in tree is in range [2, 10^5].
 # - All Node.val are unique.
 # - p != q
 # - p and q will exist in the tree.
