@@ -1461,6 +1461,44 @@ Examples:
 - LC 199 Right Side View
 - LC 637 Average of Levels
 
+<2 types of BFS problems>
+
+Does problem care which BFS level a node belongs to?
+
+No: Use ordinary BFS with "while q".
+Yes: Use "size = len(q)" and a for loop, unless you're tracking distance separately.
+
+1. BFS without levels: Use when you only must visit/process each node and don't care about levels.
+
+while q:
+    node = q.popleft()
+
+    for neighbor in neighbors(node):
+        if neighbor not in visited:
+            visited.add(neighbor)
+            q.append(neighbor)
+
+2. BFS with levels: Use when you must know where each distance layer ends and the next begins.
+
+while q:
+    size = len(q)
+
+    for _ in range(size):
+        node = q.popleft()
+
+        for neighbor in neighbors(node):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                q.append(neighbor)
+
+    # One entire BFS level completed
+
+Problem	                                    Level loop?	  Reason
+LC 102 — Binary Tree Level Order Traversal	Yes	          Group nodes by tree depth
+LC 200 — Number of Islands	                No	          Just explore each island
+LC 133 — Clone Graph (BFS)	                No	          Just clone reachable nodes
+LC 994 — Rotting Oranges	                Yes	          Each level represents 1 minute
+LC 797 — All Paths (BFS alternative)	    No	          Track complete paths, not levels
 ---
 
 # Simplest way to remember them
