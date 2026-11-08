@@ -820,9 +820,45 @@ for val in myMap.values():
 
 >>> 90
 >>> 70
+_____________________
+# dict.setdefault(key, default_value) returns value of map with specified key.
+# If key does not exist, inserts key with specified value.
 
-# dict.setdefault(key, default_value) returns value of item with specified key.
-# If key does not exist, insert key with specified value.
+emap.setdefault(key, set()).add(value) <-- add value to map, where value is in set().
+emap.setdefault(key, []).append(value) <-- add value to map, where value is in list.
+
+# map each edge in both directions, start -> end, end -> start
+edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]
+emap = {}
+for edge in edges:
+    start, end = edge
+    emap.setdefault(start, set()).add(end)
+    emap.setdefault(end, set()).add(start)
+
+emap is {1: {2, 4, 5}, 2: {1, 3}, 3: {2, 4}, 4: {1, 3}, 5: {1}}
+
+emap = {}
+for edge in edges:
+    start, end = edge
+    emap.setdefault(start, []).append(end)
+    emap.setdefault(end, []).append(start)
+
+emap is {1: [2, 4, 5], 2: [1, 3], 3: [2, 4], 4: [3, 1], 5: [1]}
+
+>>> car = {
+...   "brand": "Ford",
+...   "model": "Mustang",
+...   "year": 1964
+... }
+>>> car.setdefault('brand', 'Toyota')
+'Ford'
+>>> car
+{'brand': 'Ford', 'model': 'Mustang', 'year': 1964}
+>>> car.setdefault('color', 'white')
+'white'
+>>> car
+{'brand': 'Ford', 'model': 'Mustang', 'year': 1964, 'color': 'white'}
+
 
 user_roles = {"Alice": "Admin"}
 
