@@ -22,9 +22,9 @@
 # In checking prereqs, how do we distinguish between course we already
 # finished checking vs. a course still being explored in current DFS path?
 
+# DFS
 # Time: O(V + E), Space: O(V + E)
 # V = # of courses (nodes), E = # of prerequisites (edges)
-# DFS
 def canFinish(numCourses: int, prerequisites: list[list[int]]) -> bool:
     visited = set()     # courses on current DFS path
     no_cycles = set()   # courses whose whole prerequisite paths have no cycles
