@@ -1,4 +1,4 @@
-// https://www.educative.io/courses/grokking-the-coding-interview/YMzBx1gE5EO
+// https://www.designgurus.io/course/grokking-the-coding-interview
 // Find length of longest substring with no repeating characters.
 
 // Time complexity: O(n). Space complexity: O(1) -- limited by 256 unique characters

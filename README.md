@@ -2,7 +2,7 @@
 
 See all my **[NeetCode solutions](https://github.com/rayning0/ctci/tree/master/neetcode)**, **[LeetCode solutions](https://github.com/rayning0/ctci/tree/master/leetcode)**, **[Codility solutions](https://github.com/rayning0/codility)**, **[Project Euler solutions](https://github.com/rayning0/ProjectEuler-and-Algorithms/tree/master/euler)**, and **[HackerRank solutions](https://github.com/rayning0/ctci/tree/master/hackerrank)**.
 
-In January 2020, we began solving the 150 coding questions from this course: **[Grokking the Coding Interview](https://www.educative.io/courses/grokking-the-coding-interview)**, as I explain [here](https://www.linkedin.com/posts/raymond-gan-0ba8011_grokking-the-coding-interview-patterns-for-activity-6630206560280944641-HO8Q). Buy the course for $79 to see it all. It's optional to buy the course. **[See all my coding answers for it](https://github.com/rayning0/ctci/tree/master/gtci)**.
+In January 2020, we began solving the 150 coding questions from this course: **[Grokking the Coding Interview](https://www.designgurus.io/course/grokking-the-coding-interview)**, as I explain [here](https://www.linkedin.com/posts/raymond-gan-0ba8011_grokking-the-coding-interview-patterns-for-activity-6630206560280944641-HO8Q). Buy the course for $79 to see it all. It's optional to buy the course. **[See all my coding answers for it](https://github.com/rayning0/ctci/tree/master/gtci)**.
 
 ---------------
 See [our YouTube channel](https://www.youtube.com/channel/UCXd8p77ZB0sQbtk6mDyeqkw/about) for video of our group meetings. I don't update this much.

@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/k-closest-points-to-origin/
-# https://www.educative.io/courses/grokking-the-coding-interview/3YxNVYwNR5p
+# https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/k-closest-points-to-the-origin-easy
 # https://medium.com/basecs/learning-to-love-heaps-cef2b273a238
 # https://www.hackerearth.com/practice/data-structures/trees/heapspriority-queues/tutorial/
 # https://www.youtube.com/watch?v=t0Cq6tVNRBA
