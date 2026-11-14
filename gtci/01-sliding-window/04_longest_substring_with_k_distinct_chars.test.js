@@ -1,4 +1,4 @@
-// https://www.educative.io/courses/grokking-the-coding-interview/YQQwQMWLx80
+// https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/longest-substring-with-k-distinct-characters-medium
 // Find length of longest substring in string with <= k distinct characters.
 
 // Time complexity: O(n) where ‘n’ is the number of characters in input string. The outer for loop runs for all characters and inner while loop processes each character only once, thus time complexity = O(n + n), or O(n).
