@@ -1587,3 +1587,46 @@ These are the only traversal templates you must memorize:
 | BFS           | Queue, 1 level at a time | "Process tree **level by level**."
 
 Everything else—LC 104, 226, 543, 98, 230, 102, 199, etc.—is really just one of these four templates with different code in the **"Process current node"** section. I think that's the smallest set of patterns you need to remember.
+
+-------------- <Dijkstra shortest path algorithm> --------------
+
+Dijkstra's algorithm solves the single-source shortest-path problem:
+Given a weighted graph and starting node, find minimum total edge weight required to reach every other reachable node. It works for directed/undirected graphs, but requires all edge weights >= 0.
+
+Central idea: GREEDY selection + relaxation
+Dijkstra repeatedly selects the node with the smallest tentative distance.
+
+Once that node is selected with its current best distance, that distance is guaranteed to be optimal (assuming all edge weights >= 0).
+
+Then it explores outgoing edges to see if it can improve distances to neighboring nodes.
+
+Make weighted adjacency list:
+graph = {start: [(end1, weight1), (end2, weight2), ...]}
+
+dist = [float('inf')] * (n + 1)   # set initial dist from k to all nodes to infinity
+dist[k] = 0                       # starting node (k) dist is 0
+
+heap = [(0, k)]                   # start path from node k.
+while heap:                       # use min-heap to auto-sort by nodes by shortest weights
+    dist, node = heapq.heappop(heap)
+
+    if dist > dist[node]:         # skip stale entries
+        continue
+
+    for neighbor, weight in graph[node]:
+        new_dist = dist + weight
+
+        if new_dist < dist[neighbor]:   # relax outgoing edges
+            dist[neighbor] = new_dist
+            heapq.heappush(heap, (new_dist, neighbor))
+
+Dijkstra vs. your previous BFS algorithms
+
+Algorithm	        What determines processing order?	            Typical purpose
+Ordinary BFS	    FIFO queue	                                    Shortest paths in unweighted graphs
+Multi-source BFS	FIFO queue initialized with multiple sources	Minimum propagation steps
+Kahn's BFS	        Queue of nodes with indegree zero	            Topological ordering
+Dijkstra	        Min-heap ordered by total distance	            Shortest paths in nonnegative weighted graphs
+
+Ordinary BFS is basically a special case of Dijkstra, when every edge has same positive weight.
+In that case, processing nodes by BFS level is equivalent to processing them by increasing shortest distance.
